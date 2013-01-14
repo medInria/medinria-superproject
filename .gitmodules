@@ -1,0 +1,24 @@
+[submodule "dcmtk"]
+	path = dcmtk
+	url = git@dev-med.inria.fr:dcmtk/dcmtk.git
+[submodule "developer-doc"]
+	path = developer-doc
+	url = git@dev-med.inria.fr:developer-doc/developer-doc.git
+[submodule "dtk"]
+	path = dtk
+	url = git@dtk.inria.fr:+medinria/dtk/dtk-clone-medinria.git
+[submodule "medInria"]
+	path = medInria
+	url = git@dev-med.inria.fr:medinria/medinria.git
+[submodule "medInria-plugins"]
+	path = medInria-plugins
+	url = git@dev-med.inria.fr:medinria/medinria-plugins.git
+[submodule "qtdcm"]
+	path = qtdcm
+	url = git://scm.gforge.inria.fr/qtdcm/qtdcm.git
+[submodule "VTK-6.0"]
+	path = VTK-6.0
+	url = git://vtk.org/VTK.git
+[submodule "vtkinria3d"]
+	path = vtkinria3d
+	url = git@dev-med.inria.fr:vtkinria3d/vtkinria3d.git
