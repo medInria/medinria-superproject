@@ -4,7 +4,7 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
 project(medinria-full)
 
-# include(FindPackage)
+include(FindPackage)
 
 set(MEDINRIA_TEST_DATA_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/medInria-testdata)
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/medInria/cmake" ${CMAKE_MODULE_PATH})
@@ -56,16 +56,20 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/medInria/cmake" ${CMAKE_MODUL
 
 include(ExternalProject)
 
-set(dependencies
+set(packages
   VTK
-  ITK
-  DMCTK
-  TTK
-  vtkinria3d
-  QtDcm
-  Dtk
-  medInria
-  medInria-plugins
+#  ITK
+#  DMCTK
+#  TTK
+#  vtkinria3d
+#  QtDcm
+#  DTK
+#  medInria
+#  medInria-plugins
 )
+
+foreach(p ${packages})
+  include(externals/${p}.cmake)
+endforeach()
 
 
