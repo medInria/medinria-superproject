@@ -11,7 +11,7 @@ endif()
 set(VTK_enabling_variable VTK_LIBRARIES)
 
 set(proj VTK)
-# set(proj_DEPENDENCIES)
+set(proj_DEPENDENCIES)
 
 find_package(Qt4 REQUIRED)
 
@@ -62,13 +62,7 @@ CMAKE_CACHE_ARGS
     -DVTK_INSTALL_NO_DEVELOPMENT:BOOL=ON
     -DQT_QMAKE_EXECUTABLE:FILEPATH=${QT_QMAKE_EXECUTABLE}
 DEPENDS
-#     ${proj_DEPENDENCIES}
+     ${proj_DEPENDENCIES}
 )
 set(VTK_DIR ${CMAKE_BINARY_DIR}/${proj}-build)
-
-# Since the link directories associated with VTK is used, it makes sens to
-# update CTK_EXTERNAL_LIBRARY_DIRS with its associated library output directory
-# list(APPEND CTK_EXTERNAL_LIBRARY_DIRS ${VTK_DIR}/bin)
-
-# list(APPEND CTK_SUPERBUILD_EP_VARS VTK_DIR:PATH)
 

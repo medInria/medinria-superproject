@@ -2,7 +2,7 @@
 # DTK
 #
 
-if(DEFINED DTK_DIR AND NOT EXISTS ${DTK_DIR})
+if(DEFINED dtk_DIR AND NOT EXISTS ${dtk_DIR})
   message(FATAL_ERROR "DTK_DIR variable is defined but corresponds to non-existing directory")
 endif()
 
@@ -32,4 +32,4 @@ ExternalProject_Add(${proj}
      ${proj_DEPENDENCIES}
 )
 
-set(DTK_DIR ${CMAKE_BINARY_DIR}/${proj}-build)
+set(dtk_DIR ${CMAKE_BINARY_DIR}/${proj}-build)

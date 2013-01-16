@@ -17,8 +17,6 @@ if(QT4_FOUND)
   include(${QT_USE_FILE})
 endif(QT4_FOUND)
 
-# list(APPEND CTK_DEPENDENCIES ${proj})
-
 set(${QTDCM_enabling_variable}_LIBRARY_DIRS QTDCM_LIBRARY_DIRS)
 set(${QTDCM_enabling_variable}_INCLUDE_DIRS QTDCM_INCLUDE_DIRS)
 set(${QTDCM_enabling_variable}_FIND_PACKAGE_CMD QTDCM)

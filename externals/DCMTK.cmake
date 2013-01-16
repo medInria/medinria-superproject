@@ -65,6 +65,8 @@ ExternalProject_Add(${proj}
       -DDCMTK_WITH_ICONV:BOOL=OFF  # see github issue #178
       -DDCMTK_FORCE_FPIC_ON_UNIX:BOOL=ON
       -DDCMTK_OVERWRITE_WIN32_COMPILER_FLAGS:BOOL=OFF
+     DEPENDS
+       ${proj_DEPENDENCIES}
     )
     
 set(DCMTK_DIR ${CMAKE_BINARY_DIR}/${proj}-build)
