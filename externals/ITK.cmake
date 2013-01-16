@@ -50,6 +50,7 @@ UPDATE_COMMAND ""
 INSTALL_COMMAND ""
 #CMAKE_GENERATOR ${gen}
 CMAKE_CACHE_ARGS
+    ${ep_common_cache_args}
     ${ep_project_include_arg}
     -DBUILD_EXAMPLES:BOOL=OFF
     -DBUILD_TESTING:BOOL=OFF
