@@ -65,9 +65,9 @@ set(packages
   TTK
   vtkinria3d
   QtDcm
-#  DTK
-#  medInria
-#  medInria-plugins
+  DTK
+  #medInria
+  #medInria-plugins
 )
 
 set(ep_common_c_flags "${CMAKE_C_FLAGS_INIT} ${ADDITIONAL_C_FLAGS}")
