@@ -58,7 +58,7 @@ include(ExternalProject)
 
 set(packages
   VTK
-#  ITK
+  ITK
 #  DMCTK
 #  TTK
 #  vtkinria3d

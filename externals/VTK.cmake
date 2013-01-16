@@ -47,7 +47,7 @@ ExternalProject_Add(${proj}
 SOURCE_DIR ${CMAKE_BINARY_DIR}/${proj}
 BINARY_DIR ${proj}-build
 # PREFIX ${proj}${ep_suffix}
-# ${location_args}
+${location_args}
 UPDATE_COMMAND ""
 INSTALL_COMMAND ""
 CMAKE_GENERATOR ${gen}
