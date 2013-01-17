@@ -53,6 +53,14 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/medInria/cmake" ${CMAKE_MODUL
 # subdirs(medInria medInria-plugins)
 
 
+option(BUILD_ON_CI "Option that should be set to on if it's a continuous integration build" OFF)
+
+
+set(VTK_USE_NVCONTROL ON)
+if (${BUILD_ON_CI})
+  set(VTK_USE_NVCONTROL OFF)
+endif()
+
 
 include(ExternalProject)
 
