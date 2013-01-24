@@ -1,6 +1,0 @@
-macro(find_package name)
-    if (EXISTS ${CMAKE_SOURCE_DIR}/${name})
-        set(${name}_DIR ${CMAKE_BINARY_DIR}/${name})
-    endif()
-    _find_package(${name} ${ARGN})
-endmacro()
