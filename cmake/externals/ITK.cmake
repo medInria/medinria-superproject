@@ -10,8 +10,10 @@ set(ITK_enabling_variable ITK_LIBRARIES)
 set(proj ITK)
 set(proj_DEPENDENCIES)
 
-set(${proj}_URL "http://sourceforge.net/projects/itk/files/itk/3.20/InsightToolkit-3.20.1.tar.gz")
-set(${proj}_URL_MD5 "90342ffa78bd88ae48b3f62866fbf050")
+#set(${proj}_URL "http://sourceforge.net/projects/itk/files/itk/3.20/InsightToolkit-3.20.1.tar.gz")
+#set(${proj}_URL_MD5 "90342ffa78bd88ae48b3f62866fbf050")
+
+set(${proj}_URL "http://sourceforge.net/projects/itk/files/itk/4.3/InsightToolkit-4.3.1.tar.gz")
 
 set(git_protocol http)
 
@@ -46,7 +48,7 @@ SOURCE_DIR ${CMAKE_BINARY_DIR}/${proj}
 BINARY_DIR ${proj}-build
 #PREFIX ${proj}${ep_suffix}
 ${location_args}
-URL_MD5 ${${proj}_URL_MD5}
+#URL_MD5 ${${proj}_URL_MD5}
 UPDATE_COMMAND ""
 INSTALL_COMMAND ""
 #CMAKE_GENERATOR ${gen}

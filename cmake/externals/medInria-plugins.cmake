@@ -15,7 +15,7 @@ set(${medInria-plugins_enabling_variable}_LIBRARY_DIRS medInria-plugins_LIBRARY_
 set(${medInria-plugins_enabling_variable}_INCLUDE_DIRS medInria-plugins_INCLUDE_DIRS)
 set(${medInria-plugins_enabling_variable}_FIND_PACKAGE_CMD medInria-plugins)
 
-set(location_args GIT_REPOSITORY "git@dev-med.inria.fr:medinria/medinria-plugins.git" )
+set(location_args GIT_REPOSITORY "git://dev-med.inria.fr/medinria/medinria-plugins.git" )
 
 #     message(STATUS "Adding project:${proj}")
 ExternalProject_Add(${proj}
