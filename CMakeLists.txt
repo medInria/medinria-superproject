@@ -16,11 +16,10 @@ set(CMAKE_MODULE_PATH
 
 project(medinria-full)
 
-include(ExternalProject)
-include(ExternalProjectConfig)
+include(ExternalProjects)
 
 set(MEDINRIA_TEST_DATA_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/medInria-testdata)
-set(packages VTK ITK DCMTK TTK vtkinria3d QtDcm DTK RPI medInria medInria-plugins)
+set(packages dtk VTK ITK DCMTK TTK vtkINRIA3D QtDcm RPI medInria medInria-plugins)
 
 #   There are three possibilities:
 #       - there is a subdir with the package name, in which case this subdir is used directly
@@ -29,14 +28,12 @@ set(packages VTK ITK DCMTK TTK vtkinria3d QtDcm DTK RPI medInria medInria-plugin
 #           o otherwise use download and compile locally the package as an external module.
 
 foreach (package ${packages})
-    if (NOT IS_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/${package})
-        option(USE_SYSTEM_${package} "Use system installed version of ${package}" OFF)
-        if (NOT USE_SYSTEM_${package})
-            include(${package})
-        endif()
-    else()
-        subdirs(${package})
+    option(USE_SYSTEM_${package} "Use system installed version of ${package}" OFF)
+    set(${package}_SOURCE_DIR)
+    if (IS_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/${package})
+        set(${package}_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/${package})
+    endif()
+    if (NOT USE_SYSTEM_${package})
+        call(${package}_project "${${package}_SOURCE_DIR}")
     endif()
 endforeach()
-
-

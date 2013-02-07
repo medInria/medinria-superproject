@@ -1,35 +1,32 @@
-#
-# medInria
-#
+function(medInria_project)
 
-if(DEFINED medInria_DIR AND NOT EXISTS ${medInria_DIR})
-  message(FATAL_ERROR "medInria_DIR variable is defined but corresponds to non-existing directory")
-endif()
+    if (DEFINED medInria_DIR AND NOT EXISTS ${medInria_DIR})
+        message(FATAL_ERROR "medInria_DIR variable is defined but corresponds to non-existing directory")
+    endif()
 
-set(medInria_enabling_variable medInria_LIBRARIES)
+    ParseProjectArguments(medInria medInriap "" "" ${ARGN})
 
-set(proj medInria)
-set(proj_DEPENDENCIES DTK)
+    set(medInria_enabling_variable medInria_LIBRARIES)
 
-set(${medInria_enabling_variable}_LIBRARY_DIRS medInria_LIBRARY_DIRS)
-set(${medInria_enabling_variable}_INCLUDE_DIRS medInria_INCLUDE_DIRS)
-set(${medInria_enabling_variable}_FIND_PACKAGE_CMD medInria)
+    set(${medInria_enabling_variable}_LIBRARY_DIRS medInria_LIBRARY_DIRS)
+    set(${medInria_enabling_variable}_INCLUDE_DIRS medInria_INCLUDE_DIRS)
+    set(${medInria_enabling_variable}_FIND_PACKAGE_CMD medInria)
 
-set(location_args GIT_REPOSITORY "git://dev-med.inria.fr/medinria/medinria.git" )
+    if (NOT DEFINED location)
+        set(location GIT_REPOSITORY "git://dev-med.inria.fr/medinria/medinria.git")
+    endif()
 
-#     message(STATUS "Adding project:${proj}")
-ExternalProject_Add(${proj}
-  SOURCE_DIR ${CMAKE_BINARY_DIR}/${proj}
-  BINARY_DIR ${proj}-build
-  # PREFIX ${proj}${ep_suffix}
-  ${location_args}
-  UPDATE_COMMAND ""
-  INSTALL_COMMAND ""
-  CMAKE_GENERATOR ${gen}
-  CMAKE_CACHE_ARGS
-    -Ddtk_DIR:FILEPATH=${dtk_DIR}
-  DEPENDS
-     ${proj_DEPENDENCIES}
-)
+    ExternalProject_Add(medInria
+        PREFIX medInria
+        ${location}
+        UPDATE_COMMAND ""
+        INSTALL_COMMAND ""
+        CMAKE_GENERATOR ${gen}
+        CMAKE_CACHE_ARGS
+            -Ddtk_DIR:FILEPATH=${dtk_DIR}
+        DEPENDS dtk
+    )
 
-set(medInria_DIR ${CMAKE_BINARY_DIR}/${proj}-build)
+    set(medInria_DIR ${CMAKE_BINARY_DIR}/medInria/src/medInria-build PARENT_SCOPE)
+
+endfunction()

@@ -1,0 +1,6 @@
+macro(call func_name)
+    string(REPLACE "-" "_" func ${func_name})
+    file(WRITE tmp_call.cmake "${func}(${ARGN})")
+    include(tmp_call.cmake OPTIONAL)
+    file(REMOVE tmp_call.cmake)
+endmacro()
