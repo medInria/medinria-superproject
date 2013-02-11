@@ -13,7 +13,7 @@ function(DCMTK_project)
 
     set(extproj_revision_tag GIT_TAG "${dcmtkp_REVISION}")
     if ("${dcmtkp_REVISION}" STREQUAL "") 
-        set(extproj_revision_tag GIT_TAG "ae3b946f6e6231")
+        #set(extproj_revision_tag GIT_TAG "ae3b946f6e6231")
     endif()
 
     set(ep_project_include_arg)
@@ -24,7 +24,11 @@ function(DCMTK_project)
 
     if (NOT DEFINED location)
         set(SRC_DIR ${CMAKE_BINARY_DIR}/dcmtk/src/DCMTK)
-        set(location GIT_REPOSITORY "git://dev-med.inria.fr/dcmtk/dcmtk.git" ${extproj_revision_tag})
+        if (NOT dcmtkp_UPSTREAM)
+            set(location GIT_REPOSITORY "git://dev-med.inria.fr/dcmtk/dcmtk.git" ${extproj_revision_tag})
+        else()
+            set(location GIT_REPOSITORY "git://git.dcmtk.org/dcmtk.git" ${extproj_revision_tag})
+        endif()
     endif()
 
     ExternalProject_Add(DCMTK
@@ -51,6 +55,5 @@ function(DCMTK_project)
         )
         
     set(DCMTK_DIR ${CMAKE_BINARY_DIR}/dcmtk/install PARENT_SCOPE)
-    #set(DCMTK_SOURCE_DIR ${SRC_DIR} PARENT_SCOPE)
 
 endfunction()
