@@ -23,7 +23,7 @@ function(dtk_project)
 
     include(CheckIncludeFileCXX)
     set(CMAKE_REQUIRED_INCLUDES ${QT_INCLUDES})
-    Check_Include_File_CXX(QtDeclarative/QtDeclarative HasQtDeclarative)
+    Check_Include_File_CXX(QtDeclarative HasQtDeclarative)
 
     set(DISABLE_DTK_COMPOSER)
     if (NOT HasQtDeclarative)
