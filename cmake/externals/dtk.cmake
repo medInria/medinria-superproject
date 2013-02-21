@@ -18,7 +18,11 @@ function(dtk_project)
 
     #   Old ubuntu/fedora do not have QtDeclarative, disable the dtk composer for them.
 
+    find_package(Qt4 4.6.0 REQUIRED)
+    include(${QT_USE_FILE})
+
     include(CheckIncludeFileCXX)
+    set(CMAKE_REQUIRED_INCLUDES ${QT_INCLUDES})
     Check_Include_File_CXX(QtDeclarative/QtDeclarative HasQtDeclarative)
 
     set(DISABLE_DTK_COMPOSER)
