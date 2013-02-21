@@ -16,6 +16,16 @@ function(dtk_project)
         set(location GIT_REPOSITORY "git://dtk.inria.fr/+medinria/dtk/dtk-clone-medinria.git")
     endif()
 
+    #   Old ubuntu/fedora do not have QtDeclarative, disable the dtk composer for them.
+
+    include(CheckIncludeFileCXX)
+    Check_Include_File_CXX(QtDeclarative/QtDeclarative HasQtDeclarative)
+
+    set(DISABLE_DTK_COMPOSER)
+    if (NOT HasQtDeclarative)
+        set(DISABLE_DTK_COMPOSER -DDTK_BUILD_COMPOSER:BOOL=OFF)
+    endif()
+
     ExternalProject_Add(dtk
       PREFIX dtk
       ${location}
@@ -24,6 +34,7 @@ function(dtk_project)
       CMAKE_GENERATOR ${gen}
       CMAKE_CACHE_ARGS
           -DDTK_HAVE_NITE:BOOL=OFF
+          ${DISABLE_DTK_COMPOSER}
     )
 
     set(dtk_DIR ${CMAKE_BINARY_DIR}/dtk/src/dtk-build PARENT_SCOPE)
