@@ -19,7 +19,7 @@ project(medinria-full)
 include(ExternalProjects)
 
 set(MEDINRIA_TEST_DATA_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/medInria-testdata)
-set(packages dtk VTK ITK DCMTK TTK vtkINRIA3D QtDcm RPI medInria medInria-plugins)
+set(packages dtk VTK ITK DCMTK TTK QtDcm RPI medInria medInria-plugins)
 
 #   There are three possibilities:
 #       - if the option USE_SYSTEM_${PACKAGE} is set, then the system version will be used (not yet tested)

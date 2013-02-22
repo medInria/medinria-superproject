@@ -13,7 +13,7 @@ function(medInria_project)
     set(${medInria_enabling_variable}_FIND_PACKAGE_CMD medInria)
 
     if (NOT DEFINED location)
-        set(location GIT_REPOSITORY "git://dev-med.inria.fr/medinria/medinria.git")
+        set(location GIT_REPOSITORY "git@github.com:medInria/medInria-public.git")
     endif()
 
     ExternalProject_Add(medInria

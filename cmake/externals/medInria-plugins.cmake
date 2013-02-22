@@ -18,7 +18,7 @@ function(medInria_plugins_project)
     set(${medInria-plugins_enabling_variable}_FIND_PACKAGE_CMD medInria-plugins)
 
     if (NOT DEFINED location)
-        set(location GIT_REPOSITORY "git://dev-med.inria.fr/medinria/medinria-plugins.git")
+        set(location GIT_REPOSITORY "git@github.com:medInria/medInria-plugins.git")
     endif()
 
     ExternalProject_Add(medInria-plugins
@@ -35,10 +35,9 @@ function(medInria_plugins_project)
             -DQTDCM_DIR:FILEPATH=${QTDCM_DIR}
             -DVTK_DIR:FILEPATH=${VTK_DIR}
             -DTTK_DIR:FILEPATH=${TTK_DIR}
-            -DvtkINRIA3D_DIR:FILEPATH=${vtkINRIA3D_DIR}
             -DmedInria_DIR:FILEPATH=${medInria_DIR}
             -DRPI_DIR:FILEPATH=${RPI_DIR}
-        DEPENDS dtk medInria DCMTK vtkINRIA3D ITK VTK TTK QtDcm RPI
+        DEPENDS dtk medInria DCMTK ITK VTK TTK QtDcm RPI
     )
 
     set(medInria-plugins_DIR ${CMAKE_BINARY_DIR}/medInria-plugins/src/medInria-plugins-build PARENT_SCOPE)
