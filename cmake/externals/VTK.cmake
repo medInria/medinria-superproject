@@ -14,8 +14,8 @@ function(VTK_project)
         set(location_args ${location_args} GIT_TAG ${revision})
     else()
         set(location_args 
-            URL "http://www.vtk.org/files/release/5.10/vtk-5.10.1.tar.gz"
-            URL_MD5 "264b0052e65bd6571a84727113508789")
+            URL "http://www.vtk.org/files/release/5.8/vtk-5.8.0.tar.gz"
+            URL_MD5 "37b7297d02d647cc6ca95b38174cb41f")
     endif()
 
     find_package(Qt4 REQUIRED)
