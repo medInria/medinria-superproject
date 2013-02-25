@@ -28,6 +28,7 @@ function(medInria_plugins_project)
         INSTALL_COMMAND ""
         CMAKE_GENERATOR ${gen}
         CMAKE_CACHE_ARGS
+            ${ep_common_cache_args}
             -Ddtk_DIR:FILEPATH=${dtk_DIR}
             -DDCMTK_DIR:FILEPATH=${DCMTK_DIR}
             -DDCMTK_SOURCE_DIR:FILEPATH=${DCMTK_SOURCE_DIR}
@@ -36,6 +37,7 @@ function(medInria_plugins_project)
             -DVTK_DIR:FILEPATH=${VTK_DIR}
             -DTTK_DIR:FILEPATH=${TTK_DIR}
             -DmedInria_DIR:FILEPATH=${medInria_DIR}
+            -DMEDINRIA_BUILD_TOOLS:BOOL=ON
             -DRPI_DIR:FILEPATH=${RPI_DIR}
         DEPENDS dtk medInria DCMTK ITK VTK TTK QtDcm RPI
     )

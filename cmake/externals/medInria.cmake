@@ -23,6 +23,7 @@ function(medInria_project)
         INSTALL_COMMAND ""
         CMAKE_GENERATOR ${gen}
         CMAKE_CACHE_ARGS
+            ${ep_common_cache_args}
             -Ddtk_DIR:FILEPATH=${dtk_DIR}
         DEPENDS dtk
     )

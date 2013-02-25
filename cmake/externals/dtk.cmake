@@ -37,6 +37,7 @@ function(dtk_project)
       INSTALL_COMMAND ""
       CMAKE_GENERATOR ${gen}
       CMAKE_CACHE_ARGS
+          ${ep_common_cache_args}
           -DDTK_HAVE_NITE:BOOL=OFF
           ${DISABLE_DTK_COMPOSER}
     )
