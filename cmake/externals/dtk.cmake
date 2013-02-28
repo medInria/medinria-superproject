@@ -22,12 +22,12 @@ function(dtk_project)
     set(DISABLE_DTK_COMPOSER)
     if (NOT HasQtDeclarative)
         set(DISABLE_DTK_COMPOSER -DDTK_BUILD_COMPOSER:BOOL=OFF)
+        set(location ${location} GIT_TAG MergeBranch)
     endif()
 
     ExternalProject_Add(dtk
       PREFIX dtk
       ${location}
-      GIT_TAG MergeBranch
       UPDATE_COMMAND ""
       INSTALL_COMMAND ""
       CMAKE_GENERATOR ${gen}
