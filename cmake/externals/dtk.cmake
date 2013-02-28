@@ -27,6 +27,7 @@ function(dtk_project)
     ExternalProject_Add(dtk
       PREFIX dtk
       ${location}
+      GIT_TAG MergeBranch
       UPDATE_COMMAND ""
       INSTALL_COMMAND ""
       CMAKE_GENERATOR ${gen}
