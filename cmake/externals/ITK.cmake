@@ -36,12 +36,6 @@ function(ITK_project)
         endif()
     endif()
 
-    set(ITK_enabling_variable ITK_LIBRARIES)
-
-    set(${ITK_enabling_variable}_LIBRARY_DIRS ITK_LIBRARY_DIRS)
-    set(${ITK_enabling_variable}_INCLUDE_DIRS ITK_INCLUDE_DIRS)
-    set(${ITK_enabling_variable}_FIND_PACKAGE_CMD ITK)
-
     set(ep_project_include_arg)
     if (CTEST_USE_LAUNCHERS)
         set(ep_project_include_arg

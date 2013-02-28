@@ -11,17 +11,11 @@ function(QtDcm_project)
         set(qtdcmp_TESTING ON)
     endif()
 
-    set(QTDCM_enabling_variable QTDCM_LIBRARIES)
-
     find_package(Qt4)
     if (QT4_FOUND)
         set(QT_USE_QTNETWORK true)
         include(${QT_USE_FILE})
     endif(QT4_FOUND)
-
-    set(${QTDCM_enabling_variable}_LIBRARY_DIRS QTDCM_LIBRARY_DIRS)
-    set(${QTDCM_enabling_variable}_INCLUDE_DIRS QTDCM_INCLUDE_DIRS)
-    set(${QTDCM_enabling_variable}_FIND_PACKAGE_CMD QTDCM)
 
     if (NOT DEFINED location)
         set(location GIT_REPOSITORY "git://scm.gforge.inria.fr/qtdcm/qtdcm.git")

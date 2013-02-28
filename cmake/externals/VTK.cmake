@@ -20,12 +20,6 @@ function(VTK_project)
 
     find_package(Qt4 REQUIRED)
 
-    set(VTK_enabling_variable VTK_LIBRARIES)
-
-    set(${VTK_enabling_variable}_LIBRARY_DIRS VTK_LIBRARY_DIRS)
-    set(${VTK_enabling_variable}_INCLUDE_DIRS VTK_INCLUDE_DIRS)
-    set(${VTK_enabling_variable}_FIND_PACKAGE_CMD VTK)
-
     set(additional_vtk_cmakevars )
     if (MINGW)
         list(APPEND additional_vtk_cmakevars -DCMAKE_USE_PTHREADS:BOOL=OFF)

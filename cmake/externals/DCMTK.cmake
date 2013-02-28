@@ -4,11 +4,6 @@ function(DCMTK_project)
         message(FATAL_ERROR "DCMTK_DIR variable is defined but corresponds to non-existing directory")
     endif()
 
-    set(DCMTK_enabling_variable DCMTK_LIBRARIES)
-
-    set(${DCMTK_enabling_variable}_INCLUDE_DIRS DCMTK_INCLUDE_DIR)
-    set(${DCMTK_enabling_variable}_FIND_PACKAGE_CMD DCMTK)
-
     ParseProjectArguments(dcmtk dcmtkp "" "" ${ARGN})
 
     set(extproj_revision_tag GIT_TAG "${dcmtkp_REVISION}")

@@ -6,12 +6,6 @@ function(dtk_project)
 
     ParseProjectArguments(dtk dtkp "" "" ${ARGN})
 
-    set(DTK_enabling_variable DTK_LIBRARIES)
-
-    set(${DTK_enabling_variable}_LIBRARY_DIRS DTK_LIBRARY_DIRS)
-    set(${DTK_enabling_variable}_INCLUDE_DIRS DTK_INCLUDE_DIRS)
-    set(${DTK_enabling_variable}_FIND_PACKAGE_CMD DTK)
-
     if (NOT DEFINED location)
         set(location GIT_REPOSITORY "git://dtk.inria.fr/+medinria/dtk/dtk-clone-medinria.git")
     endif()

@@ -6,12 +6,6 @@ function(medInria_project)
 
     ParseProjectArguments(medInria medInriap "" "" ${ARGN})
 
-    set(medInria_enabling_variable medInria_LIBRARIES)
-
-    set(${medInria_enabling_variable}_LIBRARY_DIRS medInria_LIBRARY_DIRS)
-    set(${medInria_enabling_variable}_INCLUDE_DIRS medInria_INCLUDE_DIRS)
-    set(${medInria_enabling_variable}_FIND_PACKAGE_CMD medInria)
-
     if (NOT DEFINED location)
         set(location GIT_REPOSITORY "git@github.com:medInria/medInria-public.git")
     endif()

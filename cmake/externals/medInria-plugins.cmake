@@ -4,18 +4,12 @@ function(medInria_plugins_project)
         message(FATAL_ERROR "medInria-plugins_DIR variable is defined but corresponds to non-existing directory")
     endif()
 
-    set(medInria-plugins_enabling_variable medInria-plugins_LIBRARIES)
-
     ParseProjectArguments(medInria-plugins medInriaPluginsp "TEST" "" ${ARGN})
 
     set(medInriaPluginsp_TESTING OFF)
     if (${medInriaPluginsp_TEST})
         set(medInriaPluginsp_TESTING ON)
     endif()
-
-    set(${medInria-plugins_enabling_variable}_LIBRARY_DIRS medInria-plugins_LIBRARY_DIRS)
-    set(${medInria-plugins_enabling_variable}_INCLUDE_DIRS medInria-plugins_INCLUDE_DIRS)
-    set(${medInria-plugins_enabling_variable}_FIND_PACKAGE_CMD medInria-plugins)
 
     if (NOT DEFINED location)
         set(location GIT_REPOSITORY "git@github.com:medInria/medInria-plugins.git")

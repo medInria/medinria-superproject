@@ -11,12 +11,6 @@ function(TTK_project)
         set(ttkp_TESTING ON)
     endif()
 
-    set(TTK_enabling_variable TTK_LIBRARIES)
-
-    set(${TTK_enabling_variable}_LIBRARY_DIRS TTK_LIBRARY_DIRS)
-    set(${TTK_enabling_variable}_INCLUDE_DIRS TTK_INCLUDE_DIRS)
-    set(${TTK_enabling_variable}_FIND_PACKAGE_CMD TTK)
-
     if (NOT DEFINED location)
         set(location SVN_REPOSITORY "svn://scm.gforge.inria.fr/svnroot/ttk/trunk")
     endif()
