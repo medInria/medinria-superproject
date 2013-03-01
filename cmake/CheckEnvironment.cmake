@@ -11,13 +11,13 @@ if (WIN32)
 	endif()
 
 	# Check for DirectX SDK (for VTK)
-	if ( NOT EXISTS "C:/Program Files (x86)/Microsoft DirectX SDK*" AND
-		 NOT EXISTS "C:/Program Files/Microsoft DirectX SDK*")
+	file(GLOB DIRECTX_SDK "C:/Program Files*/Microsoft DirectX SDK*")
+	if ( NOT DIRECTX_SDK)
 		message( SEND_ERROR "You need to install Microsoft DirectX SDK : http://www.microsoft.com/en-us/download/details.aspx?id=6812" )
 	endif()
 
 	# GitBash
-	find_program(BASH_BIN NAMES bash bash.exe)
+	find_program(BASH_BIN NAMES bash)
 	if (NOT BASH_BIN)
 		message( SEND_ERROR "You need to install GitBash and add it to the PATH environment variable." )
 	endif()
@@ -26,31 +26,32 @@ if (WIN32)
 endif()
 
 # Git
-find_program(GIT_BIN NAMES git git.exe)
+find_program(GIT_BIN NAMES git)
 if (NOT GIT_BIN)
 	message( SEND_ERROR "You need to install Git and add it to the PATH environment variable." )
 endif()
 
 # Subversion
-find_program(SVN_BIN NAMES svn svn.exe)
+find_program(SVN_BIN NAMES svn)
 if (NOT SVN_BIN)
 	message( SEND_ERROR "You need to install Subversion and add it to the PATH environment variable." )
 endif()
 
 # Python
-find_program(PYTHON_BIN NAMES python python.exe)
+find_program(PYTHON_BIN NAMES python)
 if (NOT PYTHON_BIN)
-	message( SEND_ERROR "You need to install Python and add it to the PATH environment variable." )
+	message( SEND_WARNING "You need to install Python and add it to the PATH environment variable if you want to be able to generate packages." )
 endif()
 
 # Perl
-find_program(PERL_BIN NAMES perl perl.exe)
+find_program(PERL_BIN NAMES perl)
 if (NOT PERL_BIN)
-	message( SEND_ERROR "You need to install Perl and add it to the PATH environment variable." )
+	message( SEND_WARNING "You need to install Perl and add it to the PATH environment variable if you want to be able to generate packages." )
 endif()
 
 # Add github.com's SSH signature to the .ssh/known_hosts file
 set(GITHUB_SIGN "github.com,207.97.227.239 ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAq2A7hRGmdnm9tUDbO9IDSwBK6TbQa+PXYPCPy6rbTrTtw7PHkccKrpp0yVhp5HdEIcKr6pLlVDBfOLX9QUsyCOV0wzfjIJNlGEYsdlLJizHhbn2mUjvSAHQqZETYP81eFzLQNnPHt4EVVUh7VfDESU84KezmD5QlWpXLmvU31/yMf+Se8xhHTvKSCZIFImWwoG6mbUoWf9nzpIoaSjB+weqqUUmpaaasXVal72J+UX2B+2RPW3RcT0eOzQgqlJL3RKrTJvdsjE3JEAvGq3lGHSZXy28G3skua2SmVi/w4yCE6gbODqnTWlg7+wC604ydGXA8VJiS5ap43JXiUFFAaQ==")
+file(TO_CMAKE_PATH ${HOME_PATH} HOME_PATH)
 set(SSH_KNOWN_HOSTS_PATH ${HOME_PATH}/.ssh/known_hosts)
 file(STRINGS ${SSH_KNOWN_HOSTS_PATH} KNOWN_HOSTS REGEX github\\.com)
 list(LENGTH KNOWN_HOSTS N)
