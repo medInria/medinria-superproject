@@ -26,6 +26,12 @@ function(DCMTK_project)
         endif()
     endif()
 
+    if (WIN32)
+        set(shared_libs_option "-DBUILD_SHARED_LIBS:BOOL=OFF")
+    else()
+        set(shared_libs_option "-DBUILD_SHARED_LIBS:BOOL=ON")
+    endif()
+
     ExternalProject_Add(DCMTK
         PREFIX dcmtk
         ${location}
@@ -37,7 +43,7 @@ function(DCMTK_project)
         CMAKE_CACHE_ARGS
             ${ep_common_cache_args}
             ${ep_project_include_arg}
-            -DBUILD_SHARED_LIBS:BOOL=ON
+            ${shared_libs_option}
             -DDCMTK_WITH_DOXYGEN:BOOL=OFF
             -DDCMTK_WITH_ZLIB:BOOL=OFF # see github issue #25
             -DDCMTK_WITH_OPENSSL:BOOL=OFF # see github issue #25
