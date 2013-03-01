@@ -46,8 +46,9 @@ function(ITK_project)
         set(location ${location_args} ${MD5_CHECK})
     endif()
 
+    SetExternalProjectsDirs(ITK ep_build_dirs)
     ExternalProject_Add(ITK
-        PREFIX ITK
+        ${ep_build_dirs}
         ${location}
         UPDATE_COMMAND ""
         INSTALL_COMMAND ""
@@ -62,6 +63,7 @@ function(ITK_project)
             -DITK_USE_REVIEW_STATISTICS:BOOL=ON
             -DITK_INSTALL_NO_DEVELOPMENT:BOOL=ON
     )
-    set(ITK_DIR ${CMAKE_BINARY_DIR}/ITK/src/ITK-build PARENT_SCOPE)
+
+    set(ITK_DIR ${CMAKE_BINARY_DIR}/ITK/build PARENT_SCOPE)
 
 endfunction()

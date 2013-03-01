@@ -10,8 +10,9 @@ function(medInria_project)
         set(location GIT_REPOSITORY "git@github.com:medInria/medInria-public.git")
     endif()
 
+    SetExternalProjectsDirs(medInria ep_build_dirs)
     ExternalProject_Add(medInria
-        PREFIX medInria
+        ${ep_build_dirs}
         ${location}
         UPDATE_COMMAND ""
         INSTALL_COMMAND ""
@@ -22,6 +23,6 @@ function(medInria_project)
         DEPENDS dtk
     )
 
-    set(medInria_DIR ${CMAKE_BINARY_DIR}/medInria/src/medInria-build PARENT_SCOPE)
+    set(medInria_DIR ${CMAKE_BINARY_DIR}/medInria/build PARENT_SCOPE)
 
 endfunction()

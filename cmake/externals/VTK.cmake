@@ -33,8 +33,9 @@ function(VTK_project)
         set(location ${location_args})
     endif()
 
+    SetExternalProjectsDirs(VTK ep_build_dirs)
     ExternalProject_Add(VTK
-        PREFIX VTK
+        ${ep_build_dirs}
         ${location}
         UPDATE_COMMAND ""
         INSTALL_COMMAND ""
@@ -50,6 +51,6 @@ function(VTK_project)
             -DQT_QMAKE_EXECUTABLE:FILEPATH=${QT_QMAKE_EXECUTABLE}
     )
 
-    set(VTK_DIR ${CMAKE_BINARY_DIR}/VTK/src/VTK-build PARENT_SCOPE)
+    set(VTK_DIR ${CMAKE_BINARY_DIR}/VTK/build PARENT_SCOPE)
 
 endfunction()

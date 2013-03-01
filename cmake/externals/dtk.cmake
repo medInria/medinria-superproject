@@ -25,9 +25,10 @@ function(dtk_project)
         set(location ${location} GIT_TAG MergeBranch)
     endif()
 
+    SetExternalProjectsDirs(dtk ep_build_dirs)
     ExternalProject_Add(dtk
-      PREFIX dtk
       ${location}
+      ${ep_build_dirs}
       UPDATE_COMMAND ""
       INSTALL_COMMAND ""
       CMAKE_GENERATOR ${gen}
@@ -37,6 +38,6 @@ function(dtk_project)
           ${DISABLE_DTK_COMPOSER}
     )
 
-    set(dtk_DIR ${CMAKE_BINARY_DIR}/dtk/src/dtk-build PARENT_SCOPE)
+    set(dtk_DIR ${CMAKE_BINARY_DIR}/dtk/build PARENT_SCOPE)
 
 endfunction()

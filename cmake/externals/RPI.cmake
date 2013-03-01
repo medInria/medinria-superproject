@@ -10,8 +10,9 @@ function(RPI_project)
         set(location GIT_REPOSITORY "git://scm.gforge.inria.fr/asclepiospublic/asclepiospublic.git")
     endif()
 
+    SetExternalProjectsDirs(RPI ep_build_dirs)
     ExternalProject_Add(RPI
-        PREFIX RPI
+        ${ep_build_dirs}
         ${location}
         UPDATE_COMMAND ""
         INSTALL_COMMAND ""
@@ -24,6 +25,6 @@ function(RPI_project)
         DEPENDS ITK
     )
 
-    set(RPI_DIR ${CMAKE_BINARY_DIR}/RPI/src/RPI-build PARENT_SCOPE)
+    set(RPI_DIR ${CMAKE_BINARY_DIR}/RPI/build PARENT_SCOPE)
 
 endfunction()

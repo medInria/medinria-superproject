@@ -15,11 +15,10 @@ function(TTK_project)
         set(location SVN_REPOSITORY "svn://scm.gforge.inria.fr/svnroot/ttk/trunk")
     endif()
 
+    SetExternalProjectsDirs(TTK ep_build_dirs)
     ExternalProject_Add(TTK
-        PREFIX     TTK
+        ${ep_build_dirs}
         ${location}
-        #SOURCE_DIR ${ttkp_SRC_DIR}
-        #SVN_REPOSITORY "svn://scm.gforge.inria.fr/svnroot/ttk/trunk"
         UPDATE_COMMAND ""
         INSTALL_COMMAND ""
         CMAKE_GENERATOR ${gen}
@@ -31,6 +30,6 @@ function(TTK_project)
         DEPENDS ITK VTK
     )
 
-    set(TTK_DIR ${CMAKE_BINARY_DIR}/TTK/src/TTK-build PARENT_SCOPE)
+    set(TTK_DIR ${CMAKE_BINARY_DIR}/TTK/build PARENT_SCOPE)
 
 endfunction()

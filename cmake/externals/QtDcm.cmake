@@ -21,8 +21,9 @@ function(QtDcm_project)
         set(location GIT_REPOSITORY "git://scm.gforge.inria.fr/qtdcm/qtdcm.git")
     endif()
 
+    SetExternalProjectsDirs(QtDcm ep_build_dirs)
     ExternalProject_Add(QtDcm
-        PREFIX QtDcm
+        ${ep_build_dirs}
         ${location}
         UPDATE_COMMAND ""
         INSTALL_COMMAND ""
@@ -36,6 +37,6 @@ function(QtDcm_project)
         DEPENDS ITK DCMTK
     )
 
-    set(QTDCM_DIR ${CMAKE_BINARY_DIR}/QtDcm/src/QtDcm-build PARENT_SCOPE)
+    set(QTDCM_DIR ${CMAKE_BINARY_DIR}/QtDcm/build PARENT_SCOPE)
 
 endfunction()

@@ -2,6 +2,7 @@ include(Call)
 include(ExternalProject)
 include(ExternalProjectConfig)
 include(ParseProjectArgs)
+include(SetProjectsDirs)
 
 file(GLOB projects RELATIVE ${CMAKE_SOURCE_DIR} "cmake/externals/*.cmake")
 foreach(proj ${projects})

@@ -9,11 +9,13 @@ macro(ParseProjectArguments PROJ prefix OPTIONS ONES)
         set(${prefix}_TESTING ON)
     endif()
 
+    set(USE_LOCAL_SOURCES FALSE)
     list(LENGTH ${prefix}_UNPARSED_ARGUMENTS posarglen)
     if (${posarglen} GREATER 0)
         list(GET ${prefix}_UNPARSED_ARGUMENTS 0 SRC_DIR)
         if (IS_DIRECTORY ${SRC_DIR})
             set(location SOURCE_DIR ${SRC_DIR})
+            set(USE_LOCAL_SOURCES   TRUE)
         endif()
 
         list(REMOVE_AT ${prefix}_UNPARSED_ARGUMENTS 0)

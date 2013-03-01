@@ -15,8 +15,9 @@ function(medInria_plugins_project)
         set(location GIT_REPOSITORY "git@github.com:medInria/medInria-plugins.git")
     endif()
 
+    SetExternalProjectsDirs(medInria-plugins ep_build_dirs)
     ExternalProject_Add(medInria-plugins
-        PREFIX medInria-plugins
+        ${ep_build_dirs}
         ${location}
         UPDATE_COMMAND ""
         INSTALL_COMMAND ""
@@ -36,6 +37,6 @@ function(medInria_plugins_project)
         DEPENDS dtk medInria DCMTK ITK VTK TTK QtDcm RPI
     )
 
-    set(medInria-plugins_DIR ${CMAKE_BINARY_DIR}/medInria-plugins/src/medInria-plugins-build PARENT_SCOPE)
+    set(medInria-plugins_DIR ${CMAKE_BINARY_DIR}/medInria-plugins/build PARENT_SCOPE)
 
 endfunction()
