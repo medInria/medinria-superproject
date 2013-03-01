@@ -26,18 +26,17 @@ function(DCMTK_project)
         endif()
     endif()
 
+    set(shared_libs_option "-DBUILD_SHARED_LIBS:BOOL=ON")
     if (WIN32)
         set(shared_libs_option "-DBUILD_SHARED_LIBS:BOOL=OFF")
-    else()
-        set(shared_libs_option "-DBUILD_SHARED_LIBS:BOOL=ON")
     endif()
 
+    SetExternalProjectsDirs(dcmtk ep_build_dirs)
     ExternalProject_Add(DCMTK
-        PREFIX dcmtk
+        ${ep_build_dirs}
         ${location}
         CMAKE_GENERATOR ${gen}
         UPDATE_COMMAND ""
-        INSTALL_DIR dcmtk/install
         CMAKE_ARGS
             -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
         CMAKE_CACHE_ARGS
