@@ -37,6 +37,7 @@ function(medInria_plugins_project)
         DEPENDS dtk medInria DCMTK ITK VTK TTK QtDcm RPI
     )
 
-    set(medInria-plugins_DIR ${CMAKE_BINARY_DIR}/medInria-plugins/build PARENT_SCOPE)
+    ExternalProject_Get_Property(medInria-plugins binary_dir)
+    set(medInria-plugins_DIR ${binary_dir} PARENT_SCOPE)
 
 endfunction()

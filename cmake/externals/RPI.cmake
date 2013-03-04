@@ -25,6 +25,7 @@ function(RPI_project)
         DEPENDS ITK
     )
 
-    set(RPI_DIR ${CMAKE_BINARY_DIR}/RPI/build PARENT_SCOPE)
+    ExternalProject_Get_Property(RPI binary_dir)
+    set(RPI_DIR ${binary_dir} PARENT_SCOPE)
 
 endfunction()

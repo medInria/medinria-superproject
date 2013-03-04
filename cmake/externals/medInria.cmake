@@ -23,6 +23,7 @@ function(medInria_project)
         DEPENDS dtk
     )
 
-    set(medInria_DIR ${CMAKE_BINARY_DIR}/medInria/build PARENT_SCOPE)
+    ExternalProject_Get_Property(medInria binary_dir)
+    set(medInria_DIR ${binary_dir} PARENT_SCOPE)
 
 endfunction()

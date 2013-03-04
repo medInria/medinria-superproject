@@ -51,6 +51,7 @@ function(VTK_project)
             -DQT_QMAKE_EXECUTABLE:FILEPATH=${QT_QMAKE_EXECUTABLE}
     )
 
-    set(VTK_DIR ${CMAKE_BINARY_DIR}/VTK/build PARENT_SCOPE)
+    ExternalProject_Get_Property(VTK binary_dir)
+    set(VTK_DIR ${binary_dir} PARENT_SCOPE)
 
 endfunction()

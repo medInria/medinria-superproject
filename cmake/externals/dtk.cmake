@@ -38,6 +38,7 @@ function(dtk_project)
           ${DISABLE_DTK_COMPOSER}
     )
 
-    set(dtk_DIR ${CMAKE_BINARY_DIR}/dtk/build PARENT_SCOPE)
+    ExternalProject_Get_Property(dtk binary_dir)
+    set(dtk_DIR ${binary_dir} PARENT_SCOPE)
 
 endfunction()

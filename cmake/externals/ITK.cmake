@@ -64,6 +64,7 @@ function(ITK_project)
             -DITK_INSTALL_NO_DEVELOPMENT:BOOL=ON
     )
 
-    set(ITK_DIR ${CMAKE_BINARY_DIR}/ITK/build PARENT_SCOPE)
+    ExternalProject_Get_Property(ITK binary_dir)
+    set(ITK_DIR ${binary_dir} PARENT_SCOPE)
 
 endfunction()

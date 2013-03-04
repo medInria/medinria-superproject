@@ -37,6 +37,7 @@ function(QtDcm_project)
         DEPENDS ITK DCMTK
     )
 
-    set(QTDCM_DIR ${CMAKE_BINARY_DIR}/QtDcm/build PARENT_SCOPE)
+    ExternalProject_Get_Property(QtDcm binary_dir)
+    set(QTDCM_DIR ${binary_dir} PARENT_SCOPE)
 
 endfunction()
