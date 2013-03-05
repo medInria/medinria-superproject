@@ -1,5 +1,8 @@
 function(dtk_project)
 
+    set(dtk-minvers 0.6.1)
+    set(dtk-package-name dtk)
+
     if (DEFINED dtk_DIR AND NOT EXISTS ${dtk_DIR})
         message(FATAL_ERROR "DTK_DIR variable is defined but corresponds to non-existing directory")
     endif()

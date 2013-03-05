@@ -1,5 +1,8 @@
 function(ITK_project)
 
+    set(ITK-minvers 3.20.1 PARENT_SCOPE)
+    set(ITK-package-name itk-inria PARENT_SCOPE)
+
     if (DEFINED ITK_DIR AND NOT EXISTS ${ITK_DIR})
         message(FATAL_ERROR "ITK_DIR variable is defined but corresponds to non-existing directory")
     endif()

@@ -1,5 +1,8 @@
 function(QtDcm_project)
 
+    set(QtDcm-minvers 2.0.2 PARENT_SCOPE)
+    set(QtDcm-package-name qtdcm PARENT_SCOPE)
+
     if (DEFINED QTDCM_DIR AND NOT EXISTS ${QTDCM_DIR})
         message(FATAL_ERROR "QTDCM_DIR variable is defined but corresponds to non-existing directory")
     endif()

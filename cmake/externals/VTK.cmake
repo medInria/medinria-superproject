@@ -1,5 +1,8 @@
 function(VTK_project)
 
+    set(DCMTK-minvers 3.6.1)
+    set(DCMTK-package-name dcmtk-inria)
+
     if (DEFINED VTK_DIR AND NOT EXISTS ${VTK_DIR})
         message(FATAL_ERROR "VTK_DIR variable is defined but corresponds to non-existing directory")
     endif()

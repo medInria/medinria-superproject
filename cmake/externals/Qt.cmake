@@ -1,5 +1,8 @@
 function(Qt_project)
 
+    set(Qt-minvers 4.8.4 PARENT_SCOPE)
+    set(Qt-package-name qt PARENT_SCOPE)
+
     if (DEFINED QT_DIR AND NOT EXISTS ${QT_DIR})
         message(FATAL_ERROR "QT_DIR variable is defined but corresponds to non-existing directory")
     endif()
