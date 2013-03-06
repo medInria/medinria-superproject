@@ -34,6 +34,7 @@ function(medInria_plugins_project)
             -DmedInria_DIR:FILEPATH=${medInria_DIR}
             -DMEDINRIA_BUILD_TOOLS:BOOL=ON
             -DRPI_DIR:FILEPATH=${RPI_DIR}
+            -DQT_QMAKE_EXECUTABLE:FILEPATH=${QT_QMAKE_EXECUTABLE}
         DEPENDS dtk medInria DCMTK ITK VTK TTK QtDcm RPI
     )
 

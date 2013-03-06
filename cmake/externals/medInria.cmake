@@ -21,6 +21,7 @@ function(medInria_project)
         CMAKE_CACHE_ARGS
             ${ep_common_cache_args}
             -Ddtk_DIR:FILEPATH=${dtk_DIR}
+            -DQT_QMAKE_EXECUTABLE:FILEPATH=${QT_QMAKE_EXECUTABLE}
         DEPENDS dtk
     )
 
