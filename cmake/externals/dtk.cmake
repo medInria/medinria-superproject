@@ -35,6 +35,7 @@ function(dtk_project)
       CMAKE_CACHE_ARGS
           ${ep_common_cache_args}
           -DDTK_HAVE_NITE:BOOL=OFF
+          -DQT_QMAKE_EXECUTABLE:FILEPATH=${QT_QMAKE_EXECUTABLE}
           ${DISABLE_DTK_COMPOSER}
     )
 

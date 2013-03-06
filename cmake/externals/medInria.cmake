@@ -9,6 +9,7 @@ function(medInria_project)
     if (NOT DEFINED location)
         set(location GIT_REPOSITORY "git@github.com:medInria/medInria-public.git")
     endif()
+    
 
     SetExternalProjectsDirs(medInria ep_build_dirs)
     ExternalProject_Add(medInria
