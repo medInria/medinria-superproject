@@ -32,6 +32,7 @@ function(TTK_project)
             -DVTK_DIR:FILEPATH=${VTK_DIR}
         DEPENDS ITK VTK
     )
+    ExternalForceBuild(TTK)
 
     ExternalProject_Get_Property(TTK binary_dir)
     set(TTK_DIR ${binary_dir} PARENT_SCOPE)

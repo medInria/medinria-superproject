@@ -27,6 +27,7 @@ function(RPI_project)
             -DITK_DIR:FILEPATH=${ITK_DIR}
         DEPENDS ITK
     )
+    ExternalForceBuild(RPI)
 
     ExternalProject_Get_Property(RPI binary_dir)
     set(RPI_DIR ${binary_dir} PARENT_SCOPE)

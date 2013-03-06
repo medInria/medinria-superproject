@@ -41,6 +41,7 @@ function(dtk_project)
           -DQT_QMAKE_EXECUTABLE:FILEPATH=${QT_QMAKE_EXECUTABLE}
           ${DISABLE_DTK_COMPOSER}
     )
+    ExternalForceBuild(dtk)
 
     ExternalProject_Get_Property(dtk binary_dir)
     set(dtk_DIR ${binary_dir} PARENT_SCOPE)

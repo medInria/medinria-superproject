@@ -40,6 +40,7 @@ function(medInria_plugins_project)
             -DQT_QMAKE_EXECUTABLE:FILEPATH=${QT_QMAKE_EXECUTABLE}
         DEPENDS dtk medInria DCMTK ITK VTK TTK QtDcm RPI
     )
+    ExternalForceBuild(medInria-plugins)
 
     ExternalProject_Get_Property(medInria-plugins binary_dir)
     set(medInria-plugins_DIR ${binary_dir} PARENT_SCOPE)

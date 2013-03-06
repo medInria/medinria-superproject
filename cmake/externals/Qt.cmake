@@ -60,6 +60,7 @@ function(Qt_project)
         UPDATE_COMMAND ""
         INSTALL_COMMAND ""
     )
+    ExternalForceBuild(QT)
 
     ExternalProject_Get_Property(QT binary_dir)
     set(QT_DIR ${binary_dir} PARENT_SCOPE)

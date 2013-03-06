@@ -56,6 +56,7 @@ function(DCMTK_project)
             -DDCMTK_FORCE_FPIC_ON_UNIX:BOOL=ON
             -DDCMTK_OVERWRITE_WIN32_COMPILER_FLAGS:BOOL=OFF
     )
+    ExternalForceBuild(DCMTK)
 
     ExternalProject_Get_Property(DCMTK install_dir)
     set(DCMTK_DIR ${install_dir} PARENT_SCOPE)

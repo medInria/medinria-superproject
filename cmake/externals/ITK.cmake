@@ -66,6 +66,7 @@ function(ITK_project)
             -DITK_USE_REVIEW_STATISTICS:BOOL=ON
             -DITK_INSTALL_NO_DEVELOPMENT:BOOL=ON
     )
+    ExternalForceBuild(ITK)
 
     ExternalProject_Get_Property(ITK binary_dir)
     set(ITK_DIR ${binary_dir} PARENT_SCOPE)

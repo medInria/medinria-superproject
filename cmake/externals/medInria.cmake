@@ -13,7 +13,6 @@ function(medInria_project)
         set(location GIT_REPOSITORY "git@github.com:medInria/medInria-public.git")
     endif()
     
-
     SetExternalProjectsDirs(medInria ep_build_dirs)
     ExternalProject_Add(medInria
         ${ep_build_dirs}
@@ -27,6 +26,7 @@ function(medInria_project)
             -DQT_QMAKE_EXECUTABLE:FILEPATH=${QT_QMAKE_EXECUTABLE}
         DEPENDS dtk
     )
+    ExternalForceBuild(medInria)
 
     ExternalProject_Get_Property(medInria binary_dir)
     set(medInria_DIR ${binary_dir} PARENT_SCOPE)

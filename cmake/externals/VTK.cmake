@@ -53,6 +53,7 @@ function(VTK_project)
             -DVTK_INSTALL_NO_DEVELOPMENT:BOOL=ON
             -DQT_QMAKE_EXECUTABLE:FILEPATH=${QT_QMAKE_EXECUTABLE}
     )
+    ExternalForceBuild(VTK)
 
     ExternalProject_Get_Property(VTK binary_dir)
     set(VTK_DIR ${binary_dir} PARENT_SCOPE)

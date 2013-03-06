@@ -40,6 +40,7 @@ function(QtDcm_project)
             -DQT_QMAKE_EXECUTABLE:FILEPATH=${QT_QMAKE_EXECUTABLE}
         DEPENDS ITK DCMTK
     )
+    ExternalForceBuild(QtDcm)
 
     ExternalProject_Get_Property(QtDcm binary_dir)
     set(QTDCM_DIR ${binary_dir} PARENT_SCOPE)
