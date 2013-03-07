@@ -9,7 +9,7 @@ function(Qt_project)
     endif()
 
     #PackageInit(Qt Qt4 QT ${default})
-    PackageInit(Qt Qt4 QT OFF)
+    PackageInit(Qt Qt4 QT ON)
     if (TARGET Qt)
         return()
     endif()
