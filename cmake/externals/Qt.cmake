@@ -5,11 +5,10 @@ function(Qt_project)
 
     set(default ON)
     if (WIN32)
-        set(defaulf OFF)
+        #set(defaulf OFF)
     endif()
 
-    #PackageInit(Qt Qt4 QT ${default})
-    PackageInit(Qt Qt4 QT ON)
+    PackageInit(Qt Qt4 QT ${default})
     if (TARGET Qt)
         return()
     endif()
