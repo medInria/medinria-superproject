@@ -3,8 +3,9 @@ function(DCMTK_project)
     set(DCMTK-minvers 3.6.1 PARENT_SCOPE)
     set(DCMTK-package-name dcmtk-inria PARENT_SCOPE)
 
-    if (DEFINED DCMTK_DIR AND NOT EXISTS ${DCMTK_DIR})
-        message(FATAL_ERROR "DCMTK_DIR variable is defined but corresponds to non-existing directory")
+    PackageInit(dcmtk DCMTK DCMTK OFF)
+    if (TARGET dcmtk)
+        return()
     endif()
 
     ParseProjectArguments(dcmtk dcmtkp "" "" ${ARGN})

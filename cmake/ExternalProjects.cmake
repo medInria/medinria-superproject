@@ -1,5 +1,6 @@
 include(Call)
 include(ExternalProject)
+include(PackageInit)
 include(ExternalProjectConfig)
 include(ParseProjectArgs)
 include(SetProjectsDirs)

@@ -3,8 +3,9 @@ function(TTK_project)
     set(TTK-minvers 1.4.0 PARENT_SCOPE)
     set(TTK-package-name ttk PARENT_SCOPE)
 
-    if (DEFINED TTK_DIR AND NOT EXISTS ${TTK_DIR})
-        message(FATAL_ERROR "TTK_DIR variable is defined but corresponds to non-existing directory")
+    PackageInit(TTK TTK TTK OFF)
+    if (TARGET TTK)
+        return()
     endif()
 
     ParseProjectArguments(TTK ttkp "TEST" "" ${ARGN})

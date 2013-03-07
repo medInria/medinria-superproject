@@ -3,8 +3,15 @@ function(Qt_project)
     set(Qt-minvers 4.8.4 PARENT_SCOPE)
     set(Qt-package-name qt PARENT_SCOPE)
 
-    if (DEFINED QT_DIR AND NOT EXISTS ${QT_DIR})
-        message(FATAL_ERROR "QT_DIR variable is defined but corresponds to non-existing directory")
+    set(default ON)
+    if (WIN32)
+        set(defaulf OFF)
+    endif()
+
+    #PackageInit(Qt Qt4 QT ${default})
+    PackageInit(Qt Qt4 QT OFF)
+    if (TARGET Qt)
+        return()
     endif()
 
     ParseProjectArguments(QT qtp "NV_CONTROL" "GIT" ${ARGN})

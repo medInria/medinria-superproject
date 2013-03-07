@@ -3,8 +3,9 @@ function(RPI_project)
     set(RPI-minvers 1.0.0 PARENT_SCOPE)
     set(RPI-package-name rpi PARENT_SCOPE)
 
-    if(DEFINED RPI_DIR AND NOT EXISTS ${RPI_DIR})
-        message(FATAL_ERROR "RPI_DIR variable is defined but corresponds to non-existing directory")
+    PackageInit(RPI RPI RPI OFF)
+    if (TARGET RPI)
+        return()
     endif()
 
     ParseProjectArguments(RPI rpip "" "" ${ARGN})

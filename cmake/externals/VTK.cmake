@@ -3,8 +3,9 @@ function(VTK_project)
     set(VTK-minvers 5.8.0 PARENT_SCOPE)
     set(VTK-package-name vtk-inria PARENT_SCOPE)
 
-    if (DEFINED VTK_DIR AND NOT EXISTS ${VTK_DIR})
-        message(FATAL_ERROR "VTK_DIR variable is defined but corresponds to non-existing directory")
+    PackageInit(VTK VTK VTK OFF)
+    if (TARGET VTK)
+        return()
     endif()
 
     ParseProjectArguments(VTK vtkp "NV_CONTROL" "GIT" ${ARGN})

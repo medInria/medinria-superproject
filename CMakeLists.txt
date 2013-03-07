@@ -17,11 +17,10 @@ set(CMAKE_MODULE_PATH
 project(medinria-full)
 
 include(ExternalProjects)
-
 include(CheckEnvironment)
 
 set(MEDINRIA_TEST_DATA_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/medInria-testdata)
-set(packages dtk VTK ITK DCMTK TTK QtDcm RPI medInria medInria-plugins)
+set(packages Qt dtk VTK ITK DCMTK TTK QtDcm RPI medInria medInria-plugins)
 
 #   There are three possibilities:
 #       - if the option USE_SYSTEM_${PACKAGE} is set, then the system version will be used (not yet tested)
@@ -30,18 +29,5 @@ set(packages dtk VTK ITK DCMTK TTK QtDcm RPI medInria medInria-plugins)
 #           o otherwise use download and compile locally the package as an external module.
 
 foreach (package ${packages})
-
-    option(USE_SYSTEM_${package} "Use system installed version of ${package}" OFF)
-    if (USE_SYSTEM_${package})
-        find_package(${package})
-    endif()
-    
-    if (NOT USE_SYSTEM_${package} OR NOT ${package}_FOUND)
-        set(${package}_SOURCE_DIR)
-        if (IS_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/${package})
-            set(${package}_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/${package})
-        endif()
-        call(${package}_project "${${package}_SOURCE_DIR}")
-    endif()
-
+    call(${package}_project)
 endforeach()

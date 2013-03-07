@@ -3,8 +3,9 @@ function(medInria_plugins_project)
     set(medInria-plugins-minvers ${MEDINRIA_VERSION} PARENT_SCOPE)
     set(medInria-plugins-package-name medinria-plugins PARENT_SCOPE)
 
-    if (DEFINED medInria-plugins_DIR AND NOT EXISTS ${medInria-plugins_DIR})
-        message(FATAL_ERROR "medInria-plugins_DIR variable is defined but corresponds to non-existing directory")
+    PackageInit(medInria-plugins medInria-plugins medInria-plugins OFF)
+    if (TARGET medInria-plugins)
+        return()
     endif()
 
     ParseProjectArguments(medInria-plugins medInriaPluginsp "TEST" "" ${ARGN})
