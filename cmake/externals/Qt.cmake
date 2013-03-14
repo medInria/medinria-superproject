@@ -5,7 +5,7 @@ function(Qt_project)
 
     set(default ON)
     if (WIN32)
-        #set(defaulf OFF)
+        #set(default OFF)
     endif()
 
     PackageInit(Qt Qt4 QT ${default})
