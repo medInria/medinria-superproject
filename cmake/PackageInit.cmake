@@ -4,7 +4,12 @@ macro(PackageInit package package_name var sys_def)
     if (USE_SYSTEM_${package})
         find_package(${package_name})
         if (${var}_FOUND)
+
+            #   Create a dummy external project just to satisfy dependencies.
+
+            SetExternalProjectsDirs(${package} ep_build_dirs)
             ExternalProject_Add(${package}
+                ${ep_build_dirs}
                 CONFIGURE_COMMAND ""
                 DOWNLOAD_COMMAND ""
                 UPDATE_COMMAND ""
