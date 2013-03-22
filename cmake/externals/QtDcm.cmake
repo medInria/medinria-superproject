@@ -21,7 +21,7 @@ function(QtDcm_project)
     endif(QT4_FOUND)
 
     if (NOT DEFINED location)
-        set(location GIT_REPOSITORY "git://scm.gforge.inria.fr/qtdcm/qtdcm.git")
+        set(location GIT_REPOSITORY "git@github.com:medInria/qtdcm.git")
     endif()
 
     SetExternalProjectsDirs(QtDcm ep_build_dirs)
