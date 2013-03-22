@@ -5,9 +5,9 @@
 set(HOME_PATH $ENV{HOME})
 
 if (WIN32)
-	# Check for Visual Studio 2010
-	if (NOT MSVC10)
-		message( SEND_ERROR "MedInria can only be compiled with Visual Studio 2010 at this time." )
+	# Check for Visual Studio 2008 or 2010
+	if (NOT MSVC9 AND NOT MSVC10)
+		message( SEND_ERROR "MedInria can only be compiled with Visual Studio 2008 or 2010 at this time." )
 	endif()
 
 	# Check for DirectX SDK (for VTK)
@@ -22,7 +22,7 @@ if (WIN32)
 		message( SEND_ERROR "You need to install GitBash and add it to the PATH environment variable." )
 	endif()
 	
-	set(HOME_PATH $ENV{HOMEPATH})
+	set(HOME_PATH $ENV{HOMEDRIVE}$ENV{HOMEPATH})
 endif()
 
 # Git
