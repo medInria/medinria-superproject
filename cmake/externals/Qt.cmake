@@ -8,12 +8,12 @@ function(Qt_project)
         #set(default OFF)
     endif()
 
-    PackageInit(Qt Qt4 QT ${default})
+    PackageInit(Qt Qt4 QT ${default} REQUIRED_FOR_PLUGINS)
     if (TARGET Qt)
         return()
     endif()
 
-    ParseProjectArguments(QT qtp "NV_CONTROL" "GIT" ${ARGN})
+    ParseProjectArguments(Qt qtp "NV_CONTROL" "GIT" ${ARGN})
 
     if (${qtp_GIT})
         set(location_args GIT_REPOSITORY "git://gitorious.org/qt/qt.git")
@@ -31,12 +31,10 @@ function(Qt_project)
         set(location ${location_args})
     endif()
 
-    if (NOT USE_LOCAL_SOURCES)
-        set(SRC_DIR ${CMAKE_CURRENT_BINARY_DIR}/Qt/src/)
-    endif()
+    SetExternalProjectsDirs(Qt ep_build_dirs) # Needed here for SOURCE_DIR
 
-    set(ConfigCommand CONFIGURE_COMMAND ${SRC_DIR}/configure)
-    set(ConfigCommonOptions --prefix=${CMAKE_CURRENT_BINARY_DIR}/QT/install
+    set(ConfigCommand CONFIGURE_COMMAND ${SOURCE_DIR}/configure)
+    set(ConfigCommonOptions --prefix=${CMAKE_CURRENT_BINARY_DIR}/Qt/install
         -confirm-license -opensource -optimized-qmake -release -largefile 
         -plugin-sql-mysql -plugin-sql-odbc -plugin-sql-psql -plugin-sql-sqlite
     )
@@ -57,18 +55,15 @@ function(Qt_project)
     endif()
     set(ConfigCommand ${ConfigCommand} ${ConfigCommonOptions} ${QtPlatformOptions})
 
-    SetExternalProjectsDirs(Qt ep_build_dirs)
-    #set_target_properties(QT PROPERTIES _EP_BUILD_ARGS "-j 8")
-    ExternalProject_Add(QT
+    ExternalProject_Add(Qt
         ${ep_build_dirs}
         ${location}
         ${ConfigCommand}
         UPDATE_COMMAND ""
-        INSTALL_COMMAND ""
     )
-    ExternalForceBuild(QT)
+    ExternalForceBuild(Qt)
 
-    ExternalProject_Get_Property(QT binary_dir)
+    ExternalProject_Get_Property(Qt binary_dir)
     set(QT_DIR ${binary_dir} PARENT_SCOPE)
 
 endfunction()

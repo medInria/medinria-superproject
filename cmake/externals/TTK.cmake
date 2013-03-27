@@ -3,7 +3,7 @@ function(TTK_project)
     set(TTK-minvers 1.4.0 PARENT_SCOPE)
     set(TTK-package-name ttk PARENT_SCOPE)
 
-    PackageInit(TTK TTK TTK OFF)
+    PackageInit(TTK TTK TTK OFF OPTIONALLY_REQUIRED_FOR_PLUGINS)
     if (TARGET TTK)
         return()
     endif()
@@ -24,8 +24,9 @@ function(TTK_project)
         ${ep_build_dirs}
         ${location}
         UPDATE_COMMAND ""
-        INSTALL_COMMAND ""
         CMAKE_GENERATOR ${gen}
+        CMAKE_ARGS
+            -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
         CMAKE_CACHE_ARGS
             ${ep_common_cache_args}
             -DBUILD_TESTING:BOOL=${ttkp_TESTING}

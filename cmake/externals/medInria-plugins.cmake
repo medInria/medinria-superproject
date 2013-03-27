@@ -24,8 +24,9 @@ function(medInria_plugins_project)
         ${ep_build_dirs}
         ${location}
         UPDATE_COMMAND ""
-        INSTALL_COMMAND ""
         CMAKE_GENERATOR ${gen}
+        CMAKE_ARGS
+            -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
         CMAKE_CACHE_ARGS
             ${ep_common_cache_args}
             -Ddtk_DIR:FILEPATH=${dtk_DIR}
@@ -39,7 +40,7 @@ function(medInria_plugins_project)
             -DMEDINRIA_BUILD_TOOLS:BOOL=ON
             -DRPI_DIR:FILEPATH=${RPI_DIR}
             -DQT_QMAKE_EXECUTABLE:FILEPATH=${QT_QMAKE_EXECUTABLE}
-        DEPENDS dtk medInria DCMTK ITK VTK TTK QtDcm RPI
+        DEPENDS dtk medInria dcmtk ITK VTK TTK QtDcm RPI
     )
     ExternalForceBuild(medInria-plugins)
 

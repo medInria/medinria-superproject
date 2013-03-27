@@ -3,7 +3,7 @@ function(RPI_project)
     set(RPI-minvers 1.0.0 PARENT_SCOPE)
     set(RPI-package-name rpi PARENT_SCOPE)
 
-    PackageInit(RPI RPI RPI OFF)
+    PackageInit(RPI RPI RPI OFF OPTIONALLY_REQUIRED_FOR_PLUGINS)
     if (TARGET RPI)
         return()
     endif()
@@ -19,8 +19,9 @@ function(RPI_project)
         ${ep_build_dirs}
         ${location}
         UPDATE_COMMAND ""
-        INSTALL_COMMAND ""
         CMAKE_GENERATOR ${gen}
+        CMAKE_ARGS
+            -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
         CMAKE_CACHE_ARGS
             ${ep_common_cache_args}
             -DRPI_BUILD_EXAMPLES:BOOL=OFF

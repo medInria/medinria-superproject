@@ -3,3 +3,15 @@ CMakeFiles
 Makefile
 cmake_install.cmake
 install_manifest.txt
+rules.ninja
+build.ninja
+Qt
+dtk
+dcmtk
+VTK
+ITK
+TTK
+QtDcm
+RPI
+medInria
+medInria-plugins

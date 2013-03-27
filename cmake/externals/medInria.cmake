@@ -3,7 +3,7 @@ function(medInria_project)
     set(medInria-minvers ${MEDINRIA_VERSION} PARENT_SCOPE)
     set(medInria-package-name medinria PARENT_SCOPE)
 
-    PackageInit(medInria medInria medInria OFF)
+    PackageInit(medInria medInria medInria OFF REQUIRED_FOR_PLUGINS)
     if (TARGET medInria)
         return()
     endif()
@@ -19,8 +19,9 @@ function(medInria_project)
         ${ep_build_dirs}
         ${location}
         UPDATE_COMMAND ""
-        INSTALL_COMMAND ""
         CMAKE_GENERATOR ${gen}
+        CMAKE_ARGS
+            -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
         CMAKE_CACHE_ARGS
             ${ep_common_cache_args}
             -Ddtk_DIR:FILEPATH=${dtk_DIR}

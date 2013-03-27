@@ -11,9 +11,9 @@ function(SetExternalProjectsDirs prefix varname)
         set(dirs ${dirs} ${var}_DIR ${prefix}/${dir})
     endforeach()
 
-    if (NOT ${USE_LOCAL_SOURCES})
-        set(dirs ${dirs} SOURCE_DIR ${prefix}/src)
-    endif()
+    set(SOURCE_DIR ${CMAKE_SOURCE_DIR}/${prefix})
+    set(dirs ${dirs} SOURCE_DIR ${SOURCE_DIR})
 
+    set(SOURCE_DIR ${SOURCE_DIR} PARENT_SCOPE)
     set(${varname} ${dirs} PARENT_SCOPE)
 endfunction()

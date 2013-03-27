@@ -3,7 +3,7 @@ function(VTK_project)
     set(VTK-minvers 5.8.0 PARENT_SCOPE)
     set(VTK-package-name vtk-inria PARENT_SCOPE)
 
-    PackageInit(VTK VTK VTK OFF)
+    PackageInit(VTK VTK VTK OFF OPTIONALLY_REQUIRED_FOR_PLUGINS)
     if (TARGET VTK)
         return()
     endif()
@@ -42,8 +42,9 @@ function(VTK_project)
         ${ep_build_dirs}
         ${location}
         UPDATE_COMMAND ""
-        INSTALL_COMMAND ""
         CMAKE_GENERATOR ${gen}
+        CMAKE_ARGS
+            -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
         CMAKE_CACHE_ARGS
             ${ep_common_cache_args}
              ${additional_vtk_cmakevars}
