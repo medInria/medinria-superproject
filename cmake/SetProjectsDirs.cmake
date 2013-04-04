@@ -1,7 +1,7 @@
 function(SetExternalProjectsDirs prefix varname)
 
-    set(DIR_VAR_NAMES DOWNLOAD BINARY STAMP INSTALL TMP)
-    set(DIR_NAMES     ""       build  stamp install tmp)
+    set(DIR_VAR_NAMES DOWNLOAD BINARY STAMP INSTALL                     TMP)
+    set(DIR_NAMES     ""       build  stamp install/${CMAKE_CFG_INTDIR} tmp)
 
     set(dirs PREFIX ${prefix})
     foreach(i RANGE 4)
