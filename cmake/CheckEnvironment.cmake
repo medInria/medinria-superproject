@@ -83,14 +83,6 @@ if (NOT ${SKIP_GITHUB_TESTS})
 		file(APPEND ${SSH_KNOWN_HOSTS_PATH} "\n${GITHUB_SIGN}\n")
 	endif()
 
-	# Test for a SSH key
-	set(SSH_PUB_KEY ${HOME_PATH}/.ssh/id_rsa.pub)
-	if (NOT EXISTS ${SSH_PUB_KEY})
-		message( FATAL_ERROR "Could not find a public SSH key, you need to generate one." )
-	else()
-		message( STATUS "Found the user's public SSH key..." )
-	endif()
-
 	# Make sure the user's key has been upload to GitHub
 	message( STATUS "Testing user's access to GitHub..." )
 	execute_process(COMMAND ${SSH_BIN} -T git@github.com
@@ -101,6 +93,14 @@ if (NOT ${SKIP_GITHUB_TESTS})
 		           )
 
 	if (SSH_TEST_RESULT EQUAL 255)
+		# Test for a SSH key
+		set(SSH_PUB_KEY ${HOME_PATH}/.ssh/id_rsa.pub)
+		if (NOT EXISTS ${SSH_PUB_KEY})
+			message( FATAL_ERROR "Could not find a public SSH key, you need to generate one." )
+		else()
+			message( STATUS "Found the user's public SSH key..." )
+		endif()
+
 		file(READ ${SSH_PUB_KEY} SSH_PUB_KEY_VALUE)
 		message( FATAL_ERROR "
 Could not connect to GitHub using SSH public key (found here : ${SSH_PUB_KEY})
