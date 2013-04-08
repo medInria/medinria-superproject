@@ -29,7 +29,6 @@ function(dtk_project)
     ExternalProject_Add(dtk
         ${location}
         ${ep_build_dirs}
-        UPDATE_COMMAND ""
         CMAKE_GENERATOR ${gen}
         CMAKE_ARGS
             -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>

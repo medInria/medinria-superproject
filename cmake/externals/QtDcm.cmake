@@ -28,7 +28,6 @@ function(QtDcm_project)
     ExternalProject_Add(QtDcm
         ${ep_build_dirs}
         ${location}
-        UPDATE_COMMAND ""
         CMAKE_GENERATOR ${gen}
         CMAKE_ARGS
             -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>

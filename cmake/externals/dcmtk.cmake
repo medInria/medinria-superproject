@@ -39,13 +39,11 @@ function(DCMTK_project)
         ${ep_build_dirs}
         ${location}
         CMAKE_GENERATOR ${gen}
-        UPDATE_COMMAND ""
         CMAKE_ARGS
             -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
         CMAKE_CACHE_ARGS
             ${ep_common_cache_args}
             ${ep_project_include_arg}
-            ${shared_libs_option}
             -DBUILD_SHARED_LIBS:BOOL=${shared_libs_option}
             -DDCMTK_WITH_DOXYGEN:BOOL=OFF
             -DDCMTK_WITH_ZLIB:BOOL=OFF    # see github issue #25

@@ -14,11 +14,13 @@ function(medInria_project)
         set(location GIT_REPOSITORY "git@github.com:medInria/medInria-public.git")
     endif()
     
+    set(custom_update_cmd git pull --ff-only ALWAYS 1)
+
     SetExternalProjectsDirs(medInria ep_build_dirs)
     ExternalProject_Add(medInria
         ${ep_build_dirs}
         ${location}
-        UPDATE_COMMAND ""
+        UPDATE_COMMAND ${custom_update_cmd}
         CMAKE_GENERATOR ${gen}
         CMAKE_ARGS
             -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
