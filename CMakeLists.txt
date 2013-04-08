@@ -22,6 +22,14 @@ include(CheckEnvironment)
 set(MEDINRIA_TEST_DATA_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/medInria-testdata)
 set(packages Qt dtk VTK ITK dcmtk TTK QtDcm RPI medInria)
 
+# This adds global targets that run this step in every subproject
+set(global_targets configure update build install)
+set_property(DIRECTORY PROPERTY EP_STEP_TARGETS ${global_targets})
+
+foreach (target ${global_targets})
+    add_custom_target(${target})
+endforeach()
+
 #   There are three possibilities:
 #       - if the option USE_SYSTEM_${PACKAGE} is set, then the system version will be used (not yet tested)
 #       - if the option USE_SYSTEM_${PACKAGE} is not set:
@@ -30,4 +38,7 @@ set(packages Qt dtk VTK ITK dcmtk TTK QtDcm RPI medInria)
 
 foreach (package ${packages})
     call(${package}_project)
+	foreach (target ${global_targets})
+		    add_dependencies(${target} ${package}-${target})
+	endforeach()
 endforeach()
