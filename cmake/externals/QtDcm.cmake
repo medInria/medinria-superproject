@@ -28,9 +28,9 @@ function(QtDcm_project)
     ExternalProject_Add(QtDcm
         ${ep_build_dirs}
         ${location}
-        UPDATE_COMMAND ""
-        INSTALL_COMMAND ""
         CMAKE_GENERATOR ${gen}
+        CMAKE_ARGS
+            -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
         CMAKE_CACHE_ARGS
              ${ep_common_cache_args}
             -DBUILD_SHARED_LIBS:BOOL=ON
@@ -38,7 +38,7 @@ function(QtDcm_project)
             -DDCMTK_DIR:FILEPATH=${DCMTK_DIR}
             -DDCMTK_SOURCE_DIR:FILEPATH=${DCMTK_SOURCE_DIR}
             -DQT_QMAKE_EXECUTABLE:FILEPATH=${QT_QMAKE_EXECUTABLE}
-        DEPENDS ITK DCMTK
+        DEPENDS ITK dcmtk
     )
     ExternalForceBuild(QtDcm)
 

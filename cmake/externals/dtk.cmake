@@ -3,7 +3,7 @@ function(dtk_project)
     set(dtk-minvers 0.6.1)
     set(dtk-package-name dtk)
 
-    PackageInit(dtk dtk dtk OFF)
+    PackageInit(dtk dtk dtk OFF REQUIRED_FOR_PLUGINS)
     if (TARGET dtk)
         return()
     endif()
@@ -29,9 +29,9 @@ function(dtk_project)
     ExternalProject_Add(dtk
         ${location}
         ${ep_build_dirs}
-        UPDATE_COMMAND ""
-        INSTALL_COMMAND ""
         CMAKE_GENERATOR ${gen}
+        CMAKE_ARGS
+            -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
         CMAKE_CACHE_ARGS
               ${ep_common_cache_args}
               -DDTK_HAVE_NITE:BOOL=OFF

@@ -3,7 +3,7 @@ function(ITK_project)
     set(ITK-minvers 3.20.1 PARENT_SCOPE)
     set(ITK-package-name itk-inria PARENT_SCOPE)
 
-    PackageInit(ITK ITK ITK OFF)
+    PackageInit(ITK ITK ITK OFF OPTIONALLY_REQUIRED_FOR_PLUGINS)
     if (TARGET ITK)
         return()
     endif()
@@ -55,8 +55,9 @@ function(ITK_project)
         ${ep_build_dirs}
         ${location}
         UPDATE_COMMAND ""
-        INSTALL_COMMAND ""
         CMAKE_GENERATOR ${gen}
+        CMAKE_ARGS
+            -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
         CMAKE_CACHE_ARGS
             ${ep_common_cache_args}
             ${ep_project_include_arg}

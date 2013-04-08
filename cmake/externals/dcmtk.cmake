@@ -22,7 +22,6 @@ function(DCMTK_project)
     endif()
 
     if (NOT DEFINED location)
-        set(SRC_DIR ${CMAKE_BINARY_DIR}/dcmtk/src/DCMTK)
         if (NOT dcmtkp_UPSTREAM)
             set(location GIT_REPOSITORY "git://github.com/medInria/dcmtk.git" ${extproj_revision_tag})
         else()
@@ -30,36 +29,35 @@ function(DCMTK_project)
         endif()
     endif()
 
-    set(shared_libs_option "-DBUILD_SHARED_LIBS:BOOL=ON")
+    set(shared_libs_option ON)
     if (WIN32)
-        set(shared_libs_option "-DBUILD_SHARED_LIBS:BOOL=OFF")
+        set(shared_libs_option OFF)
     endif()
 
     SetExternalProjectsDirs(dcmtk ep_build_dirs)
-    ExternalProject_Add(DCMTK
+    ExternalProject_Add(dcmtk
         ${ep_build_dirs}
         ${location}
         CMAKE_GENERATOR ${gen}
-        UPDATE_COMMAND ""
         CMAKE_ARGS
             -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
         CMAKE_CACHE_ARGS
             ${ep_common_cache_args}
             ${ep_project_include_arg}
-            ${shared_libs_option}
+            -DBUILD_SHARED_LIBS:BOOL=${shared_libs_option}
             -DDCMTK_WITH_DOXYGEN:BOOL=OFF
-            -DDCMTK_WITH_ZLIB:BOOL=OFF # see github issue #25
+            -DDCMTK_WITH_ZLIB:BOOL=OFF    # see github issue #25
             -DDCMTK_WITH_OPENSSL:BOOL=OFF # see github issue #25
-            -DDCMTK_WITH_PNG:BOOL=OFF # see github issue #25
-            -DDCMTK_WITH_TIFF:BOOL=OFF  # see github issue #25
-            -DDCMTK_WITH_XML:BOOL=OFF  # see github issue #25
-            -DDCMTK_WITH_ICONV:BOOL=OFF  # see github issue #178
+            -DDCMTK_WITH_PNG:BOOL=OFF     # see github issue #25
+            -DDCMTK_WITH_TIFF:BOOL=OFF    # see github issue #25
+            -DDCMTK_WITH_XML:BOOL=OFF     # see github issue #25
+            -DDCMTK_WITH_ICONV:BOOL=OFF   # see github issue #178
             -DDCMTK_FORCE_FPIC_ON_UNIX:BOOL=ON
             -DDCMTK_OVERWRITE_WIN32_COMPILER_FLAGS:BOOL=OFF
     )
-    ExternalForceBuild(DCMTK)
+    ExternalForceBuild(dcmtk)
 
-    ExternalProject_Get_Property(DCMTK install_dir)
+    ExternalProject_Get_Property(dcmtk install_dir)
     set(DCMTK_DIR ${install_dir} PARENT_SCOPE)
 
 endfunction()
