@@ -14,7 +14,7 @@ set(CMAKE_MODULE_PATH
     "${CMAKE_CURRENT_SOURCE_DIR}/medInria/cmake"
     ${CMAKE_MODULE_PATH})
 
-project(medinria-superProject)
+project(medInria-superProject)
 
 include(ExternalProjects)
 include(CheckEnvironment)
