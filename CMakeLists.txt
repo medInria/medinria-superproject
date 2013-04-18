@@ -14,7 +14,7 @@ set(CMAKE_MODULE_PATH
     "${CMAKE_CURRENT_SOURCE_DIR}/medInria/cmake"
     ${CMAKE_MODULE_PATH})
 
-project(medinria-full)
+project(medInria-superProject)
 
 include(ExternalProjects)
 include(CheckEnvironment)
@@ -42,3 +42,6 @@ foreach (package ${packages})
 		    add_dependencies(${target} ${package}-${target})
 	endforeach()
 endforeach()
+
+file(APPEND ${${PROJECT_NAME}_CONFIG_FILE}
+    "set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)\n")

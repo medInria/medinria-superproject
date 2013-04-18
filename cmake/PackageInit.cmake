@@ -30,7 +30,7 @@ macro(PackageInit package package_name var sys_def)
             ExternalForceBuild(${package})
             include(${${var}_USE_FILE})
             if (${NeededForPlugins})
-                file(APPEND ${MEDINRIA_SUPER_PROJECT_CONFIG_FILE}
+                file(APPEND ${${PROJECT_NAME}_CONFIG_FILE}
                      "find_package(${package_name}${required})\n")
             endif()
             return()
@@ -48,7 +48,7 @@ macro(PackageInit package package_name var sys_def)
     endif()
 
     if (${NeededForPlugins})
-        file(APPEND ${MEDINRIA_SUPER_PROJECT_CONFIG_FILE}
+        file(APPEND ${${PROJECT_NAME}_CONFIG_FILE}
              "find_package(${package_name}${required} PATHS \"${CMAKE_BINARY_DIR}/${package}\" PATH_SUFFIXES install build)\n")
     endif()
 
