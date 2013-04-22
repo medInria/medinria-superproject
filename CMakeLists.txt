@@ -21,6 +21,7 @@ include(CheckEnvironment)
 
 set(MEDINRIA_TEST_DATA_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/medInria-testdata)
 set(packages Qt dtk VTK ITK dcmtk TTK QtDcm RPI medInria)
+#set(packages ITK)
 
 # This adds global targets that run this step in every subproject
 set(global_targets configure update build install)
@@ -45,3 +46,7 @@ endforeach()
 
 file(APPEND ${${PROJECT_NAME}_CONFIG_FILE}
     "set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)\n")
+
+
+
+include(Packaging)    

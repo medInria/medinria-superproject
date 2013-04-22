@@ -37,6 +37,7 @@ function(dtk_project)
               -DDTK_HAVE_NITE:BOOL=OFF
               -DQT_QMAKE_EXECUTABLE:FILEPATH=${QT_QMAKE_EXECUTABLE}
               ${DISABLE_DTK_COMPOSER}
+        #INSTALL_COMMAND ""      
         DEPENDS Qt 
     )
     ExternalForceBuild(dtk)

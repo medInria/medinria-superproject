@@ -36,6 +36,7 @@ function(medInria_project)
             -DTTK_DIR:FILEPATH=${TTK_DIR}
             -DVTK_DIR:FILEPATH=${VTK_DIR}
             -DMEDINRIA_BUILD_TOOLS:BOOL=ON
+        #INSTALL_COMMAND ""
         DEPENDS dtk dcmtk ITK VTK TTK QtDcm RPI
     )
     ExternalForceBuild(medInria)
