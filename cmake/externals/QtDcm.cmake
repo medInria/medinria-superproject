@@ -37,6 +37,7 @@ function(QtDcm_project)
             -DDCMTK_DIR:FILEPATH=${DCMTK_DIR}
             -DDCMTK_SOURCE_DIR:FILEPATH=${DCMTK_SOURCE_DIR}
             -DQT_QMAKE_EXECUTABLE:FILEPATH=${QT_QMAKE_EXECUTABLE}
+        #INSTALL_COMMAND ""
         DEPENDS ITK dcmtk
     )
     ExternalForceBuild(QtDcm)

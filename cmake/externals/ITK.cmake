@@ -65,8 +65,8 @@ function(ITK_project)
             -DBUILD_SHARED_LIBS:BOOL=ON
             -DITK_USE_REVIEW:BOOL=ON
             -DITK_USE_REVIEW_STATISTICS:BOOL=ON
-            -DITK_INSTALL_NO_DEVELOPMENT:BOOL=ON
             -DITK_USE_CONCEPT_CHECKING:BOOL=OFF
+        #INSTALL_COMMAND ""
     )
     ExternalForceBuild(ITK)
 
