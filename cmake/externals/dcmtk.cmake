@@ -21,7 +21,7 @@ function(DCMTK_project)
             "-DCMAKE_PROJECT_DCMTK_INCLUDE:FILEPATH=${CMAKE_ROOT}/Modules/CTestUseLaunchers.cmake")
     endif()
 
-    if (NOT DEFINED location)
+    if (NOT DEFINED dcmtk_SOURCE_DIR)
         if (NOT dcmtkp_UPSTREAM)
             set(location GIT_REPOSITORY "git://github.com/medInria/dcmtk.git" ${extproj_revision_tag})
         else()

@@ -10,7 +10,7 @@ function(RPI_project)
 
     ParseProjectArguments(RPI rpip "" "" ${ARGN})
 
-    if (NOT DEFINED location)
+    if (NOT DEFINED RPI_SOURCE_DIR)
         set(location GIT_REPOSITORY "git@github.com:Inria-Asclepios/RPI.git")
     endif()
 

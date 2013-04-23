@@ -10,7 +10,7 @@ function(medInria_project)
 
     ParseProjectArguments(medInria medInriap "" "" ${ARGN})
 
-    if (NOT DEFINED location)
+    if (NOT DEFINED medInria_SOURCE_DIR)
         set(location GIT_REPOSITORY "git@github.com:medInria/medInria-public.git")
     endif()
     

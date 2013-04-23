@@ -33,7 +33,7 @@ function(VTK_project)
         list(APPEND additional_vtk_cmakevars -DVTK_USE_NVCONTROL:BOOL=ON)
     endif()
 
-    if (NOT DEFINED location)
+    if (NOT DEFINED VTK_SOURCE_DIR)
         set(location ${location_args})
     endif()
 

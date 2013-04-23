@@ -20,7 +20,7 @@ function(QtDcm_project)
         include(${QT_USE_FILE})
     endif(QT4_FOUND)
 
-    if (NOT DEFINED location)
+    if (NOT DEFINED QtDcm_SOURCE_DIR)
         set(location GIT_REPOSITORY "git@github.com:medInria/qtdcm.git")
     endif()
 
