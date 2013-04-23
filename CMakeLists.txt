@@ -39,7 +39,7 @@ endforeach()
 foreach (package ${packages})
     call(${package}_project)
 	foreach (target ${global_targets})
-		    add_dependencies(${target} ${package}-${target})
+        add_dependencies(${target} ${package}-${target})
 	endforeach()
 endforeach()
 
