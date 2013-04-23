@@ -15,7 +15,7 @@ function(TTK_project)
         set(ttkp_TESTING ON)
     endif()
 
-    if (NOT DEFINED location)
+    if (NOT DEFINED TTK_SOURCE_DIR)
         set(location SVN_REPOSITORY "svn://scm.gforge.inria.fr/svnroot/ttk/trunk")
     endif()
 

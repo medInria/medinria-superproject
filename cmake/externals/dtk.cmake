@@ -10,7 +10,7 @@ function(dtk_project)
 
     ParseProjectArguments(dtk dtkp "" "" ${ARGN})
 
-    if (NOT DEFINED location)
+    if (NOT DEFINED dtk_SOURCE_DIR)
         set(location GIT_REPOSITORY "git://dtk.inria.fr/+medinria/dtk/dtk-clone-medinria.git")
     endif()
 
