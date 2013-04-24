@@ -18,12 +18,14 @@ if("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
   
   set (CPACK_PACKAGING_INSTALL_PREFIX /usr/local/medInria CACHE STRING "Prefix where the package be install on linux plateformes")  
   #Write a postinst and prerm script for Linux
-  set( INSTALL_LIBS_DIRECTORIES_STRING "\"${CPACK_PACKAGING_INSTALL_PREFIX}/lib\\n${CPACK_PACKAGING_INSTALL_PREFIX}/lib/InsightToolkit\\n${CPACK_PACKAGING_INSTALL_PREFIX}/lib/vtk-5.8\"" )
+  set( INSTALL_LIBS_DIRECTORIES_STRING \"${CPACK_PACKAGING_INSTALL_PREFIX}/lib\\n${CPACK_PACKAGING_INSTALL_PREFIX}/lib/InsightToolkit\\n${CPACK_PACKAGING_INSTALL_PREFIX}/lib/vtk-5.8\" )
 
   set(POSTINST_SCRIPT ${CMAKE_BINARY_DIR}/linux/postinst)
   file(WRITE ${POSTINST_SCRIPT} "\#!/bin/sh\n" )
   file(APPEND ${POSTINST_SCRIPT} "set -e\n")
-  file(APPEND ${POSTINST_SCRIPT} "echo ${INSTALL_LIBS_DIRECTORIES_STRING}>/etc/ld.so.conf.d/medInria.conf\n")
+  file(APPEND ${POSTINST_SCRIPT} "echo ${CPACK_PACKAGING_INSTALL_PREFIX}/lib>/etc/ld.so.conf.d/medInria.conf\n")
+  file(APPEND ${POSTINST_SCRIPT} "echo ${CPACK_PACKAGING_INSTALL_PREFIX}/lib/InsightToolkit>>/etc/ld.so.conf.d/medInria.conf\n")
+  file(APPEND ${POSTINST_SCRIPT} "echo ${CPACK_PACKAGING_INSTALL_PREFIX}/lib/vtk-5.8>>/etc/ld.so.conf.d/medInria.conf\n")
   file(APPEND ${POSTINST_SCRIPT} "ldconfig\n")
   file(APPEND ${POSTINST_SCRIPT} "ln -s ${CPACK_PACKAGING_INSTALL_PREFIX}/share/applications/medInria.desktop /usr/share/applications/medInria.desktop\n")
   file(APPEND ${POSTINST_SCRIPT} "ln -s ${CPACK_PACKAGING_INSTALL_PREFIX}/bin/medInria /usr/bin/medInria\n")
