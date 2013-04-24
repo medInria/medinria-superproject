@@ -31,15 +31,12 @@ function(dtk_project)
         ${ep_build_dirs}
         CMAKE_GENERATOR ${gen}
         CMAKE_ARGS
-            -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
             ${ep_common_cache_args}
+            -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
             -DDTK_HAVE_NITE:BOOL=OFF
             -DQT_QMAKE_EXECUTABLE:FILEPATH=${QT_QMAKE_EXECUTABLE}
-            -DCMAKE_SKIP_BUILD_RPATH:BOOL=FALSE
-            -DCMAKE_BUILD_WITH_INSTALL_RPATH:BOOL=FALSE
-            -DCMAKE_INSTALL_RPATH:PATH=${CMAKE_INSTALL_PREFIX}/lib
             ${DISABLE_DTK_COMPOSER}
-        INSTALL_COMMAND ""
+        INSTALL_COMMAND ""      
         DEPENDS Qt 
     )
     ExternalForceBuild(dtk)
