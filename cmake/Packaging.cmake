@@ -1,20 +1,48 @@
 include (InstallRequiredSystemLibraries)
 
-set(CPACK_PACKAGE_NAME ${PROJECT_NAME})
-set(CPACK_GENERATOR "DEB")
+set(CPACK_PACKAGE_NAME ${PROJECT_NAME} CACHE STRING "Name of the package for medInria superproject")
+set(CPACK_GENERATOR "DEB" CACHE STRING "Type of package to build")
 
 if("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
   #GET distribution id
   execute_process(COMMAND lsb_release -irs
     COMMAND sed "s/ //"
     COMMAND sed "s/Fedora/fc/"
-    COMMAND tr -d '\n' # In Ubuntu the string is Ubuntu\n10.04\n
+    COMMAND tr -d '\n' 
     OUTPUT_VARIABLE DISTRIB
     OUTPUT_STRIP_TRAILING_WHITESPACE)
   execute_process(COMMAND arch 
     OUTPUT_VARIABLE ARCH
     OUTPUT_STRIP_TRAILING_WHITESPACE)
   set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME}-${${PROJECT_NAME}_VERSION}-${DISTRIB}-${ARCH}")
+  
+  set (CPACK_PACKAGING_INSTALL_PREFIX /usr/local/medInria CACHE STRING "Prefix where the package be install on linux plateformes")  
+  #Write a postinst and prerm script for Linux
+  set( INSTALL_LIBS_DIRECTORIES_STRING "\"${CPACK_PACKAGING_INSTALL_PREFIX}/lib\\n${CPACK_PACKAGING_INSTALL_PREFIX}/lib/InsightToolkit\\n${CPACK_PACKAGING_INSTALL_PREFIX}/lib/vtk-5.8\"" )
+
+  set(POSTINST_SCRIPT ${CMAKE_BINARY_DIR}/linux/postinst)
+  file(WRITE ${POSTINST_SCRIPT} "\#!/bin/sh\n" )
+  file(APPEND ${POSTINST_SCRIPT} "set -e\n")
+  file(APPEND ${POSTINST_SCRIPT} "echo ${INSTALL_LIBS_DIRECTORIES_STRING}>/etc/ld.so.conf.d/medInria.conf\n")
+  file(APPEND ${POSTINST_SCRIPT} "ldconfig\n")
+  file(APPEND ${POSTINST_SCRIPT} "ln -s ${CPACK_PACKAGING_INSTALL_PREFIX}/share/applications/medInria.desktop /usr/share/applications/medInria.desktop\n")
+  file(APPEND ${POSTINST_SCRIPT} "ln -s ${CPACK_PACKAGING_INSTALL_PREFIX}/bin/medInria /usr/bin/medInria\n")
+
+  set(PRERM_SCRIPT ${CMAKE_BINARY_DIR}/linux/postinst)
+  file(WRITE ${PRERM_SCRIPT} "\#!/bin/sh\n" )
+  file(APPEND ${PRERM_SCRIPT} "set -e\n")
+  file(APPEND ${PRERM_SCRIPT} "[ -h /usr/share/applications/medInria.desktop ] && rm -f /usr/share/applications/medInria.desktop\n")
+  file(APPEND ${PRERM_SCRIPT} "[ -h /usr/bin/medInria ]  && rm -f /usr/bin/medInria")
+  file(APPEND ${PRERM_SCRIPT} "rm -f /etc/ld.so.conf.d/medInria.conf")
+
+  set(CPACK_DEBIAN_PACKAGE_CONTROL_EXTRA "${POSTINST_SCRIPT};${PRERM_SCRIPT}")
+  set(CPACK_RPM_POST_INSTALL_SCRIPT_FILE ${POSTINST_SCRIPT})
+  set(CPACK_RPM_PRE_UNINSTALL_SCRIPT_FILE ${POSTINST_SCRIPT})
+  
+  
+set(CPACK_DEBIAN_PACKAGE_DEPENDS "libopenmpi1.3, libqt4-sql-sqlite, libxml++1.0c2a, libboost-all-dev, nvidia-settings")
+set(CPACK_RPM_PACKAGE_REQUIRES "libopenmpi1.3, libqt4-sql-sqlite, libxml++1.0c2a, libboost-all-dev, nvidia-settings")
+  
 else("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
   set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME}-${${PROJECT_NAME}_VERSION}-${CMAKE_SYSTEM_PROCESSOR}")
 endif("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
@@ -25,18 +53,16 @@ set(CPACK_PACKAGE_DESCRIPTION_SUMMARY ${PROJECT_NAME})
 set(CPACK_PACKAGE_DESCRIPTION ${PROJECT_NAME})
 
 set(CPACK_PACKAGE_VENDOR "http://www.inria.fr/")
-set(CPACK_PACKAGE_CONTACT "Benoît Bleuzé <Benoit.Bleuze@inria.fr>")
-set(CPACK_PACKAGE_DESCRIPTION_FILE ${CMAKE_CURRENT_SOURCE_DIR}/README.txt)
+set(CPACK_PACKAGE_CONTACT "medInria Team <medinria-userfeedback@inria.fr>")
+
 set(CPACK_PACKAGE_VERSION_MAJOR ${${PROJECT_NAME}_VERSION_MAJOR})
 set(CPACK_PACKAGE_VERSION_MINOR ${${PROJECT_NAME}_VERSION_MINOR})
-set(CPACK_PACKAGE_VERSION_PATCH ${${PROJECT_NAME}_VERSION_BUILD})
-set(CPACK_RESOURCE_FILE_LICENSE ${CMAKE_CURRENT_SOURCE_DIR}/COPYING.txt)
+set(CPACK_PACKAGE_VERSION_PATCH ${${PROJECT_NAME}_VERSION_PATCH})
 
-
-set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_SOURCE_DIR}/Description.txt")
-set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/License.txt")
-set(CPACK_RESOURCE_FILE_README "${CMAKE_SOURCE_DIR}/Readme.txt")
-set(CPACK_RESOURCE_FILE_WELCOME "${CMAKE_SOURCE_DIR}/Welcome.txt")
+set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_SOURCE_DIR}/cmake/packaging/Description.txt")
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/cmake/packaging/License.txt")
+set(CPACK_RESOURCE_FILE_README "${CMAKE_SOURCE_DIR}/cmake/packaging/Readme.txt")
+set(CPACK_RESOURCE_FILE_WELCOME "${CMAKE_SOURCE_DIR}/cmake/packaging/Welcome.txt")
 
 set(CPACK_BINARY_STGZ OFF)
 set(CPACK_BINARY_TBZ2 OFF)
@@ -97,27 +123,6 @@ IF(WIN32)
     MAKE_NSIS_INSTALLER( nsis  ${PROJECT_SOURCE_DIR}/installerMedinria.nsi  ${${PROJECT_NAME}_VERSION})
 ENDIF(WIN32)
 
-#Write a postinst and prerm script for Debian
-if(CPACK_GENERATOR STREQUAL "DEB")
-    set( INSTALL_LIBS_DIRECTORIES_STRING "\"${CMAKE_INSTALL_PREFIX}/lib\\n${CMAKE_INSTALL_PREFIX}/lib/InsightToolkit\\n${CMAKE_INSTALL_PREFIX}/lib/vtk-5.8\"" )
-    file(WRITE ${CMAKE_BINARY_DIR}/debian/postinst "\#!/bin/sh\n" )
-    file(APPEND ${CMAKE_BINARY_DIR}/debian/postinst "set -e\n")
-    file(APPEND ${CMAKE_BINARY_DIR}/debian/postinst "echo ${INSTALL_LIBS_DIRECTORIES_STRING}>/etc/ld.so.conf.d/medInria.conf\n")
-    file(APPEND ${CMAKE_BINARY_DIR}/debian/postinst "ldconfig\n")
-    file(APPEND ${CMAKE_BINARY_DIR}/debian/postinst "ln -s ${CMAKE_INSTALL_PREFIX}/share/applications/medInria.desktop /usr/share/applications/medInria.desktop\n")
-    file(APPEND ${CMAKE_BINARY_DIR}/debian/postinst "ln -s ${CMAKE_INSTALL_PREFIX}/bin/medInria /usr/bin/medInria\n")
-
-    file(WRITE ${CMAKE_BINARY_DIR}/debian/prerm "\#!/bin/sh\n" )
-    file(APPEND ${CMAKE_BINARY_DIR}/debian/prerm "set -e\n")
-    file(APPEND ${CMAKE_BINARY_DIR}/debian/prerm "[ -h /usr/share/applications/medInria.desktop ] && rm -f /usr/share/applications/medInria.desktop\n")
-    file(APPEND ${CMAKE_BINARY_DIR}/debian/prerm "[ -h /usr/bin/medInria ]  && rm -f /usr/bin/medInria")
-    file(APPEND ${CMAKE_BINARY_DIR}/debian/prerm "rm -f /etc/ld.so.conf.d/medInria.conf")
-
-    set(CPACK_DEBIAN_PACKAGE_CONTROL_EXTRA "${CMAKE_BINARY_DIR}/debian/postinst")
-endif()
-
-
-set (CPACK_PACKAGING_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
 foreach(package ${packages}) 
     if(NOT USE_SYSTEM_${package})
         ExternalProject_Get_Property(${package} binary_dir)

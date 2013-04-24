@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 2.8.9)
 
+
 if (DEFINED CMAKE_BUILD_TYPE)
    set(CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE} CACHE STRING
    "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel.")
@@ -16,6 +17,10 @@ set(CMAKE_MODULE_PATH
     ${CMAKE_MODULE_PATH})
 
 project(medInria-superProject)
+
+set(${PROJECT_NAME}_VERSION_MAJOR 2 CACHE STRING "medInria major version number." FORCE)
+set(${PROJECT_NAME}_VERSION_MINOR 2 CACHE STRING "medInria minor version number." FORCE)
+set(${PROJECT_NAME}_VERSION_PATCH 0 CACHE STRING "medInria build version number." FORCE)
 
 include(ExternalProjects)
 include(CheckEnvironment)
@@ -47,7 +52,6 @@ endforeach()
 
 file(APPEND ${${PROJECT_NAME}_CONFIG_FILE}
     "set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)\n")
-
 
 include(Packaging)    
 
