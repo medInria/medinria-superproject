@@ -28,7 +28,7 @@ if("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
   file(APPEND ${POSTINST_SCRIPT} "ln -s ${CPACK_PACKAGING_INSTALL_PREFIX}/share/applications/medInria.desktop /usr/share/applications/medInria.desktop\n")
   file(APPEND ${POSTINST_SCRIPT} "ln -s ${CPACK_PACKAGING_INSTALL_PREFIX}/bin/medInria /usr/bin/medInria\n")
 
-  set(PRERM_SCRIPT ${CMAKE_BINARY_DIR}/linux/postinst)
+  set(PRERM_SCRIPT ${CMAKE_BINARY_DIR}/linux/prerm)
   file(WRITE ${PRERM_SCRIPT} "\#!/bin/sh\n" )
   file(APPEND ${PRERM_SCRIPT} "set -e\n")
   file(APPEND ${PRERM_SCRIPT} "[ -h /usr/share/applications/medInria.desktop ] && rm -f /usr/share/applications/medInria.desktop\n")
