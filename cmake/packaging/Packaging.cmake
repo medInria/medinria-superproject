@@ -18,7 +18,6 @@ if("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
   
   set (CPACK_PACKAGING_INSTALL_PREFIX /usr/local/medInria CACHE STRING "Prefix where the package be install on linux plateformes")  
   #Write a postinst and prerm script for Linux
-  set( INSTALL_LIBS_DIRECTORIES_STRING \"${CPACK_PACKAGING_INSTALL_PREFIX}/lib\\n${CPACK_PACKAGING_INSTALL_PREFIX}/lib/InsightToolkit\\n${CPACK_PACKAGING_INSTALL_PREFIX}/lib/vtk-5.8\" )
 
   set(POSTINST_SCRIPT ${CMAKE_BINARY_DIR}/linux/postinst)
   file(WRITE ${POSTINST_SCRIPT} "\#!/bin/sh\n" )
@@ -75,55 +74,6 @@ set(CPACK_SOURCE_TBZ2 OFF)
 set(CPACK_SOURCE_TGZ OFF)
 set(CPACK_SOURCE_TZ OFF)
 set(CPACK_SOURCE_ZIP OFF)
-
-
-#Windows
-IF(WIN32)
-	MACRO( MAKE_NSIS_INSTALLER TARGET INPUT VERSION)
-		FIND_FILE(MAKENSIS makensis.exe
-			"C:/Program Files/NSIS/" 
-            "C:/Program Files (x86)/NSIS/" 
-			)    
-        #MESSAGE("makensis found?: ${MAKENSIS}")
-		IF( MAKENSIS )       
-            #MESSAGE("makensis found")
-			FILE(TO_CMAKE_PATH "$ENV{SYSTEMROOT}" SYSTEMROOT)
-			IF(CMAKE_CL_64)
-				SET(MSVC_ARCH x64)
-                set(PROGFILES_DIR "$PROGRAMFILES64")
-			ELSE(CMAKE_CL_64)
-				SET(MSVC_ARCH x86)
-                set(PROGFILES_DIR "$PROGRAMFILES")
-			ENDIF(CMAKE_CL_64)
-			SET(NSIS_OPTIONS
-				${NSIS_OPTIONS}
-				"/DmedInriaDIR=${EXECUTABLE_OUTPUT_PATH}"
-				"/DmedInriaLIBDIR=${LIBRARY_OUTPUT_PATH}/release"
-				"/DVERSION=${VERSION}"
-				"/DSRCDIR=${PROJECT_SOURCE_DIR}"
-				"/DINST_PREFIX=${CMAKE_INSTALL_PREFIX}"
-				#must be changed but ${CMAKE_INSTALL_PREFIX} has slashes not backslashes...
-				
-                "/DPACK_INSTALLDIR=${PROGFILES_DIR}\\inria"
-				"/DPROJECT_NAME=${PROJECT_NAME}"
-				"/DMED_EXECUTABLE=${PROJECT_NAME}.exe"
-                "/DMED_INSTALLER_EXE=${PROJECT_NAME}-${${PROJECT_NAME}_VERSION}-win32-${MSVC_ARCH}.exe"
-				)
-            #MESSAGE(${NSIS_OPTIONS})
-			ADD_CUSTOM_COMMAND(
-				TARGET ${TARGET} POST_BUILD
-				COMMAND ${MAKENSIS} 
-				ARGS ${NSIS_OPTIONS} ${INPUT}
-				)
-		ENDIF( MAKENSIS )
-	ENDMACRO( MAKE_NSIS_INSTALLER )
-	
-	ADD_CUSTOM_TARGET(nsis  
-		COMMENT "Create an installer for windows"
-		DEPENDS install 
-	)
-    MAKE_NSIS_INSTALLER( nsis  ${PROJECT_SOURCE_DIR}/installerMedinria.nsi  ${${PROJECT_NAME}_VERSION})
-ENDIF(WIN32)
 
 foreach(package ${packages}) 
     if(NOT USE_SYSTEM_${package})
