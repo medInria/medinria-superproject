@@ -11,7 +11,7 @@ function(RPI_project)
     ParseProjectArguments(RPI rpip "" "" ${ARGN})
 
     if (NOT DEFINED location)
-        set(location GIT_REPOSITORY "git://scm.gforge.inria.fr/asclepiospublic/asclepiospublic.git")
+        set(location GIT_REPOSITORY "git@github.com:Inria-Asclepios/RPI.git")
     endif()
 
     SetExternalProjectsDirs(RPI ep_build_dirs)
