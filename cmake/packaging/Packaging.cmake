@@ -40,8 +40,8 @@ if("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
   set(CPACK_RPM_PRE_UNINSTALL_SCRIPT_FILE ${POSTINST_SCRIPT})
   
   
-set(CPACK_DEBIAN_PACKAGE_DEPENDS "libopenmpi1.3, libqt4-sql-sqlite, libxml++1.0c2a, libboost-all-dev, nvidia-settings")
-set(CPACK_RPM_PACKAGE_REQUIRES "libopenmpi1.3, libqt4-sql-sqlite, libxml++1.0c2a, libboost-all-dev, nvidia-settings")
+set(CPACK_DEBIAN_PACKAGE_DEPENDS "libopenmpi1.3, libqt4-sql-sqlite, libboost-all-dev, nvidia-settings")
+#set(CPACK_RPM_PACKAGE_REQUIRES "libopenmpi1.3, libqt4-sql-sqlite, libboost-all-dev, nvidia-settings")
   
 else("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
   set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME}-${${PROJECT_NAME}_VERSION}-${CMAKE_SYSTEM_PROCESSOR}")
