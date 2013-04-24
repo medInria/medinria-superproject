@@ -54,8 +54,10 @@ function(DCMTK_project)
             -DDCMTK_WITH_ICONV:BOOL=OFF   # see github issue #178
             -DDCMTK_FORCE_FPIC_ON_UNIX:BOOL=ON
             -DDCMTK_OVERWRITE_WIN32_COMPILER_FLAGS:BOOL=OFF
-            #INSTALL_COMMAND ""
+       #INSTALL_COMMAND ""
     )
+    
+    
     ExternalForceBuild(dcmtk)
 
     ExternalProject_Get_Property(dcmtk install_dir)

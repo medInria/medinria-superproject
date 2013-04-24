@@ -53,7 +53,7 @@ function(VTK_project)
             -DDESIRED_QT_VERSION:STRING=4
             -DVTK_USE_QT:BOOL=ON
             -DQT_QMAKE_EXECUTABLE:FILEPATH=${QT_QMAKE_EXECUTABLE}
-       #INSTALL_COMMAND ""
+       INSTALL_COMMAND ""
     )
     ExternalForceBuild(VTK)
 

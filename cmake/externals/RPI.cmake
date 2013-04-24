@@ -26,7 +26,7 @@ function(RPI_project)
             -DRPI_BUILD_EXAMPLES:BOOL=OFF
             -DBUILD_SHARED_LIBS:BOOL=ON
             -DITK_DIR:FILEPATH=${ITK_DIR}
-        #INSTALL_COMMAND ""
+        INSTALL_COMMAND ""
         DEPENDS ITK
     )
     ExternalForceBuild(RPI)
