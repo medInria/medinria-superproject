@@ -11,6 +11,7 @@ endif()
 set(CMAKE_MODULE_PATH
     "${CMAKE_CURRENT_SOURCE_DIR}/cmake"
     "${CMAKE_CURRENT_SOURCE_DIR}/cmake/externals"
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/packaging"
     "${CMAKE_CURRENT_SOURCE_DIR}/medInria/cmake"
     ${CMAKE_MODULE_PATH})
 
@@ -48,5 +49,5 @@ file(APPEND ${${PROJECT_NAME}_CONFIG_FILE}
     "set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)\n")
 
 
-
 include(Packaging)    
+

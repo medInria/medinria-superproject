@@ -30,7 +30,7 @@ function(TTK_project)
             -DBUILD_TESTING:BOOL=${ttkp_TESTING}
             -DITK_DIR:FILEPATH=${ITK_DIR}
             -DVTK_DIR:FILEPATH=${VTK_DIR}
-        #INSTALL_COMMAND ""    
+        INSTALL_COMMAND ""    
         DEPENDS ITK VTK
     )
     ExternalForceBuild(TTK)
