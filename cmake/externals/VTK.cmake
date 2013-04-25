@@ -45,9 +45,8 @@ function(VTK_project)
         CMAKE_GENERATOR ${gen}
         CMAKE_ARGS
             -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
-        CMAKE_CACHE_ARGS
             ${ep_common_cache_args}
-             ${additional_vtk_cmakevars}
+            ${additional_vtk_cmakevars}
             -DVTK_WRAP_TCL:BOOL=OFF
             -DBUILD_SHARED_LIBS:BOOL=ON
             -DDESIRED_QT_VERSION:STRING=4

@@ -21,7 +21,6 @@ function(RPI_project)
         CMAKE_GENERATOR ${gen}
         CMAKE_ARGS
             -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
-        CMAKE_CACHE_ARGS
             ${ep_common_cache_args}
             -DRPI_BUILD_EXAMPLES:BOOL=OFF
             -DBUILD_SHARED_LIBS:BOOL=ON

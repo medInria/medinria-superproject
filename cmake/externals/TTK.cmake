@@ -26,7 +26,6 @@ function(TTK_project)
         CMAKE_GENERATOR ${gen}
         CMAKE_ARGS
             -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
-        CMAKE_CACHE_ARGS
             ${ep_common_cache_args}
             -DBUILD_TESTING:BOOL=${ttkp_TESTING}
             -DITK_DIR:FILEPATH=${ITK_DIR}

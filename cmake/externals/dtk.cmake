@@ -32,11 +32,10 @@ function(dtk_project)
         CMAKE_GENERATOR ${gen}
         CMAKE_ARGS
             -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
-        CMAKE_CACHE_ARGS
-              ${ep_common_cache_args}
-              -DDTK_HAVE_NITE:BOOL=OFF
-              -DQT_QMAKE_EXECUTABLE:FILEPATH=${QT_QMAKE_EXECUTABLE}
-              ${DISABLE_DTK_COMPOSER}
+            ${ep_common_cache_args}
+            -DDTK_HAVE_NITE:BOOL=OFF
+            -DQT_QMAKE_EXECUTABLE:FILEPATH=${QT_QMAKE_EXECUTABLE}
+            ${DISABLE_DTK_COMPOSER}
         DEPENDS Qt 
     )
     ExternalForceBuild(dtk)

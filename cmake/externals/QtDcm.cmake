@@ -31,8 +31,7 @@ function(QtDcm_project)
         CMAKE_GENERATOR ${gen}
         CMAKE_ARGS
             -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
-        CMAKE_CACHE_ARGS
-             ${ep_common_cache_args}
+            ${ep_common_cache_args}
             -DBUILD_SHARED_LIBS:BOOL=ON
             -DITK_DIR:FILEPATH=${ITK_DIR}
             -DDCMTK_DIR:FILEPATH=${DCMTK_DIR}
