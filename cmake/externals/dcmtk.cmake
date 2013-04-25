@@ -41,7 +41,6 @@ function(DCMTK_project)
         CMAKE_GENERATOR ${gen}
         CMAKE_ARGS
             -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
-        CMAKE_CACHE_ARGS
             ${ep_common_cache_args}
             ${ep_project_include_arg}
             -DBUILD_SHARED_LIBS:BOOL=${shared_libs_option}

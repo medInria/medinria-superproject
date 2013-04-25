@@ -24,7 +24,6 @@ function(medInria_project)
         CMAKE_GENERATOR ${gen}
         CMAKE_ARGS
             -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
-        CMAKE_CACHE_ARGS
             ${ep_common_cache_args}
             -DDCMTK_DIR:FILEPATH=${DCMTK_DIR}
             -DDCMTK_SOURCE_DIR:FILEPATH=${DCMTK_SOURCE_DIR}
