@@ -11,10 +11,15 @@ endif()
 set(CMAKE_MODULE_PATH
     "${CMAKE_CURRENT_SOURCE_DIR}/cmake"
     "${CMAKE_CURRENT_SOURCE_DIR}/cmake/externals"
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/packaging"
     "${CMAKE_CURRENT_SOURCE_DIR}/medInria/cmake"
     ${CMAKE_MODULE_PATH})
 
 project(medInria-superProject)
+
+set(${PROJECT_NAME}_VERSION_MAJOR 2 CACHE STRING "medInria major version number." FORCE)
+set(${PROJECT_NAME}_VERSION_MINOR 2 CACHE STRING "medInria minor version number." FORCE)
+set(${PROJECT_NAME}_VERSION_PATCH 0 CACHE STRING "medInria build version number." FORCE)
 
 include(ExternalProjects)
 include(CheckEnvironment)
@@ -45,3 +50,5 @@ endforeach()
 
 file(APPEND ${${PROJECT_NAME}_CONFIG_FILE}
     "set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)\n")
+
+include(Packaging)    

@@ -52,8 +52,8 @@ function(VTK_project)
             -DBUILD_SHARED_LIBS:BOOL=ON
             -DDESIRED_QT_VERSION:STRING=4
             -DVTK_USE_QT:BOOL=ON
-            -DVTK_INSTALL_NO_DEVELOPMENT:BOOL=ON
             -DQT_QMAKE_EXECUTABLE:FILEPATH=${QT_QMAKE_EXECUTABLE}
+       INSTALL_COMMAND ""
     )
     ExternalForceBuild(VTK)
 
