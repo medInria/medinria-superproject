@@ -27,7 +27,7 @@ function(Qt_project)
             URL_MD5 "89c5ecba180cae74c66260ac732dc5cb")
     endif()
 
-    if (NOT DEFINED location)
+    if (NOT DEFINED Qt_SOURCE_DIR)
         set(location ${location_args})
     endif()
 

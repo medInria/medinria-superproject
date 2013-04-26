@@ -41,10 +41,8 @@ macro(PackageInit package package_name var sys_def)
         message(FATAL_ERROR "${package}_DIR variable is defined but corresponds to non-existing directory")
     endif()
 
-    set(${package}_SOURCE_DIR)
-    if (IS_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/${package}/CMakeLists.txt)
-        set(location SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/${package})
-        set(${package}_SOURCE_DIR ${location})
+    if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${package}/CMakeLists.txt OR EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${package}/configure)
+        set(${package}_SOURCE_DIR SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/${package})
     endif()
 
     if (${NeededForPlugins})

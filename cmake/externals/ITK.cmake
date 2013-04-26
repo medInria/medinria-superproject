@@ -46,7 +46,7 @@ function(ITK_project)
             "-DCMAKE_PROJECT_ITK_INCLUDE:FILEPATH=${CMAKE_ROOT}/Modules/CTestUseLaunchers.cmake")
     endif()
 
-    if (NOT DEFINED location)
+    if (NOT DEFINED ITK_SOURCE_DIR)
         set(location ${location_args} ${MD5_CHECK})
     endif()
 
