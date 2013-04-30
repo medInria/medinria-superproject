@@ -80,6 +80,11 @@ foreach(package ${packages})
     endif()
 endforeach()
 
+foreach(dir ${PRIVATE_PLUGINS_DIRS})
+        set(CPACK_INSTALL_CMAKE_PROJECTS "${CPACK_INSTALL_CMAKE_PROJECTS};${dir};${dir};ALL;${dir}")
+endforeach()
+
+
 if (APPLE)
 	set(CPACK_BINARY_TGZ ON)
 	set(CPACK_BINARY_STGZ OFF)
