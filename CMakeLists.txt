@@ -29,7 +29,7 @@ include(CheckEnvironment)
 set(MEDINRIA_TEST_DATA_ROOT ${CMAKE_CURRENT_SOURCE_DIR}/medInria-testdata)
 set(packages Qt dtk VTK ITK dcmtk TTK QtDcm RPI medInria)
 
-set(PRIVATE_PLUGINS_DIRS "" CACHE STRING "Folders containing private plugins")
+set(PRIVATE_PLUGINS_DIRS "" CACHE PATH "Folders containing private plugins")
 
 # This adds global targets that run this step in every subproject
 set(global_targets configure update build install)
