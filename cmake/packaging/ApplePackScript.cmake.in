@@ -1,3 +1,2 @@
 execute_process(COMMAND rm -f @PROJECT_BINARY_DIR@/medInria-@@PROJECT_NAME@_VERSION@.dmg)
-execute_process(COMMAND @PROJECT_BINARY_DIR@/medInria/build/mac_packager.sh @PROJECT_BINARY_DIR@/medInria/build @PRIVATE_PLUGINS_DIRS@)
-execute_process(COMMAND mv -f @PROJECT_BINARY_DIR@/medInria/build/medInria-@@PROJECT_NAME@_VERSION@.dmg @PROJECT_BINARY_DIR@)
+execute_process(COMMAND @PROJECT_BINARY_DIR@/mac_packager.sh @medInria_DIR@ @PRIVATE_PLUGINS_DIRS@)

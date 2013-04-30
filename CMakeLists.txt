@@ -23,6 +23,10 @@ set(${PROJECT_NAME}_VERSION_PATCH 0 CACHE STRING "medInria build version number.
 set(${PROJECT_NAME}_VERSION_TWEAK git CACHE STRING "medInria development marker." FORCE)
 set(${PROJECT_NAME}_VERSION ${${PROJECT_NAME}_VERSION_MAJOR}.${${PROJECT_NAME}_VERSION_MINOR}.${${PROJECT_NAME}_VERSION_PATCH})
 
+mark_as_advanced(${PROJECT_NAME}_VERSION_MAJOR)
+mark_as_advanced(${PROJECT_NAME}_VERSION_MINOR)
+mark_as_advanced(${PROJECT_NAME}_VERSION_PATCH)
+
 include(ExternalProjects)
 include(CheckEnvironment)
 
@@ -62,6 +66,8 @@ if (APPLE)
 		 ${PROJECT_BINARY_DIR}/tmp.in)
   configure_file(${PROJECT_BINARY_DIR}/tmp.in
 		 ${PROJECT_BINARY_DIR}/ApplePackScript.cmake)
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/packaging/mac_packager.sh.in
+                 ${PROJECT_BINARY_DIR}/mac_packager.sh)
 endif()
 
 include(Packaging)    
