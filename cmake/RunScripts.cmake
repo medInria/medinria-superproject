@@ -14,4 +14,5 @@ elseif (WIN32)
     string(REPLACE ";" ":" WIN_PRIVATE_PLUGINS "${PRIVATE_PLUGINS_DIRS}")
 
     configure_file(${CMAKE_SOURCE_DIR}/medInria.bat.in medInria.bat @ONLY)
+    configure_file(${CMAKE_SOURCE_DIR}/medInria-dev.bat.in medInria-dev.bat @ONLY)
 endif()

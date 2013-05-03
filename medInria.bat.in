@@ -1,10 +1,10 @@
-call "%@VS_TYPE@%\..\..\VC\vcvarsall.bat" @WIN_TYPE@
-
 REM This .bat sets the environment variables MEDINRIA_PLUGIN_PATH and PATH and launches medinria
 REM Usage : medInria.bat <Configuration> <args>
 @echo off
 set PATH=%PATH%;@dtk_DIR@/bin/%1;@ITK_DIR@/bin/%1;@TTK_DIR@/bin/%1;@VTK_DIR@/bin/%1;@medInria_DIR@/bin/%1;@QT_BINARY_DIR@
 set MEDINRIA_PLUGIN_PATH=@medInria_DIR@/plugins/%1:@WIN_PRIVATE_PLUGINS@
+
+set BIN_PATH=@medInria_DIR@/bin/%1
 
 shift
 set args=%1
@@ -15,4 +15,4 @@ set args=%args% %1
 goto loop
 :afterloop
 
-@medInria_DIR@/bin/%1/medInria args
+%BIN_PATH%/medInria %args%
