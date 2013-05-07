@@ -43,4 +43,10 @@ function(medInria_project)
     ExternalProject_Get_Property(medInria binary_dir)
     set(medInria_DIR ${binary_dir} PARENT_SCOPE)
 
+if(APPLE)
+    set(medInria_exe_PATH ${binary_dir}/bin/medInria.app/Contents/MacOS/medInria PARENT_SCOPE)
+elseif(LINUX)    
+    set(medInria_exe_PATH ${binary_dir}/bin/medInria PARENT_SCOPE)
+endif()
+
 endfunction()
