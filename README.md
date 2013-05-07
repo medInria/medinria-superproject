@@ -1,8 +1,8 @@
 #The medInria superproject 
 
-is a super-build project based on CMake to retrieves and compiles all the necessary dependencies as well as medInria.
+is a super-build project based on CMake to retrieve and compile all the necessary dependencies as well as medInria.
 
-###Deploying
+###Installation
 
 To compile everything, you just need these steps:
 
@@ -14,7 +14,7 @@ To compile everything, you just need these steps:
 For more informations, please see :
 - https://github.com/medInria/medinria-superproject/wiki/Compiling-medInria.
 
-###Contributing changes
+###Contributions
 
 You are welcome to fork the project from github and make a contribution by sending us a pull request.
 
