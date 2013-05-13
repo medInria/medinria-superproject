@@ -11,6 +11,10 @@
 #
 #######################################################################
 
+# This file checks that all dependencies are met, and it necessary sets up a few
+# things, like adding the github.com signature to known_hosts.
+# Assume Unix by default
+
 set(HOME_PATH $ENV{HOME})
 
 if (WIN32)
