@@ -1,4 +1,4 @@
 #!/bin/bash
 
-MEDINRIA_PLUGIN_PATH=@medInria_DIR@/plugins;@PRIVATE_PLUGINS_DIRS@ @medInria_exe_PATH@ $*
+MEDINRIA_PLUGIN_PATH=@medInria_DIR@/plugins:@PRIVATE_PLUGINS_DIRS@ @medInria_exe_PATH@ $*
 
