@@ -16,18 +16,14 @@ if("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
     OUTPUT_STRIP_TRAILING_WHITESPACE)
   set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME}-${${PROJECT_NAME}_VERSION}-${DISTRIB}-${ARCH}")
   
-  set (CPACK_PACKAGING_INSTALL_PREFIX /usr/local/medInria CACHE STRING "Prefix where the package be install on linux plateformes")  
-  #Write a postinst and prerm script for Linux
-
+  set (CPACK_PACKAGING_INSTALL_PREFIX /usr/local/medInria CACHE STRING "Prefix where the package will be installed on linux plateforms")  
+  
+  #Write a postinst and prerm script for Linux  
   set(POSTINST_SCRIPT ${CMAKE_BINARY_DIR}/linux/postinst)
   file(WRITE ${POSTINST_SCRIPT} "\#!/bin/sh\n" )
   file(APPEND ${POSTINST_SCRIPT} "set -e\n")
-  file(APPEND ${POSTINST_SCRIPT} "echo ${CPACK_PACKAGING_INSTALL_PREFIX}/lib>/etc/ld.so.conf.d/medInria.conf\n")
-  file(APPEND ${POSTINST_SCRIPT} "echo ${CPACK_PACKAGING_INSTALL_PREFIX}/lib/InsightToolkit>>/etc/ld.so.conf.d/medInria.conf\n")
-  file(APPEND ${POSTINST_SCRIPT} "echo ${CPACK_PACKAGING_INSTALL_PREFIX}/lib/vtk-5.8>>/etc/ld.so.conf.d/medInria.conf\n")
-  file(APPEND ${POSTINST_SCRIPT} "ldconfig\n")
   file(APPEND ${POSTINST_SCRIPT} "ln -s ${CPACK_PACKAGING_INSTALL_PREFIX}/share/applications/medInria.desktop /usr/share/applications/medInria.desktop\n")
-  file(APPEND ${POSTINST_SCRIPT} "ln -s ${CPACK_PACKAGING_INSTALL_PREFIX}/bin/medInria /usr/bin/medInria\n")
+  file(APPEND ${POSTINST_SCRIPT} "ln -s ${CPACK_PACKAGING_INSTALL_PREFIX}/bin/medInria.sh /usr/bin/medInria\n")
 
   set(PRERM_SCRIPT ${CMAKE_BINARY_DIR}/linux/prerm)
   file(WRITE ${PRERM_SCRIPT} "\#!/bin/sh\n" )
@@ -40,12 +36,21 @@ if("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
   set(CPACK_RPM_POST_INSTALL_SCRIPT_FILE ${POSTINST_SCRIPT})
   set(CPACK_RPM_PRE_UNINSTALL_SCRIPT_FILE ${POSTINST_SCRIPT})
   
-  set(CPACK_DEBIAN_PACKAGE_DEPENDS "libopenmpi1.3, libqt4-sql-sqlite, libboost-all-dev, nvidia-settings")
+  #dependances
+  #set(CPACK_DEBIAN_PACKAGE_DEPENDS "libopenmpi1.3, libqt4-sql-sqlite, libboost-all-dev")
   #set(CPACK_RPM_PACKAGE_REQUIRES "libopenmpi1.3, libqt4-sql-sqlite, libboost-all-dev, nvidia-settings")
   
-else("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
+  #Install a run script on linux OS to launch medInria with right environment variable
+  set(RUN_SCRIPT ${CMAKE_BINARY_DIR}/linux/medInria.sh)
+  file(WRITE ${RUN_SCRIPT} "\#!/bin/sh\n")
+  file(APPEND ${RUN_SCRIPT} "MEDINRIA_PLUGIN_PATH=${CPACK_PACKAGING_INSTALL_PREFIX}/plugins\n")
+  file(APPEND ${RUN_SCRIPT} "export LD_LIBRARY_PATH=${CPACK_PACKAGING_INSTALL_PREFIX}/lib:${CPACK_PACKAGING_INSTALL_PREFIX}/lib/InsightToolkit:${CPACK_PACKAGING_INSTALL_PREFIX}/lib/vtk-5.8:$LD_LIBRARY_PATH\n")
+  file(APPEND ${RUN_SCRIPT} "${CPACK_PACKAGING_INSTALL_PREFIX}/bin/medInria $*\n")
+  install(PROGRAMS ${RUN_SCRIPT} DESTINATION bin)
+
+else()
   set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME}-${${PROJECT_NAME}_VERSION}-${CMAKE_SYSTEM_PROCESSOR}")
-endif("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
+endif()
 
 set(CPACK_SOURCE_PACKAGE_FILE_NAME "${PROJECT_NAME}-${${PROJECT_NAME}_VERSION}-src")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY ${PROJECT_NAME})
@@ -72,6 +77,9 @@ set(CPACK_SOURCE_TBZ2 OFF)
 set(CPACK_SOURCE_TGZ OFF)
 set(CPACK_SOURCE_TZ OFF)
 set(CPACK_SOURCE_ZIP OFF)
+
+#Add project to package
+set(CPACK_INSTALL_CMAKE_PROJECTS "${CPACK_INSTALL_CMAKE_PROJECTS};${CMAKE_BINARY_DIR};medInria-superProject;ALL;medInria-superProject")
 
 foreach(package ${packages}) 
     if(NOT USE_SYSTEM_${package})
