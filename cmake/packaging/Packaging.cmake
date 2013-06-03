@@ -16,7 +16,7 @@ if("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
     OUTPUT_STRIP_TRAILING_WHITESPACE)
   set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME}-${${PROJECT_NAME}_VERSION}-${DISTRIB}-${ARCH}")
   
-  set (CPACK_PACKAGING_INSTALL_PREFIX /usr/local/medInria CACHE STRING "Prefix where the package will be install on linux plateformes")  
+  set (CPACK_PACKAGING_INSTALL_PREFIX /usr/local/medInria CACHE STRING "Prefix where the package will be installed on linux plateforms")  
   
   #Write a postinst and prerm script for Linux  
   set(POSTINST_SCRIPT ${CMAKE_BINARY_DIR}/linux/postinst)
