@@ -15,3 +15,6 @@ QtDcm
 RPI
 medInria
 build*
+*.autosave
+*.user
+*~
