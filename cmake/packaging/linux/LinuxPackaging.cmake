@@ -25,8 +25,6 @@ set(CPACK_RPM_PRE_UNINSTALL_SCRIPT_FILE ${CMAKE_BINARY_DIR}/Packaging/prerm)
 configure_file(${CMAKE_SOURCE_DIR}/cmake/packaging/linux/medInria_launcher.sh.in ${CMAKE_BINARY_DIR}/Packaging/medInria_launcher.sh)
 install(PROGRAMS ${CMAKE_BINARY_DIR}/Packaging/medInria_launcher.sh DESTINATION bin)
 
-message("Configure File !!!")
-
 # Add project to package 
 set(CPACK_INSTALL_CMAKE_PROJECTS "${CPACK_INSTALL_CMAKE_PROJECTS};${CMAKE_BINARY_DIR};medInria-superProject;ALL;medInria-superProject") 
 foreach(package ${packages}) 
