@@ -13,10 +13,18 @@
 
 include (InstallRequiredSystemLibraries)
 
-set(CPACK_PACKAGE_NAME ${PROJECT_NAME} CACHE STRING "Name of the package for medInria superproject")
+set(CPACK_PACKAGE_NAME medInria CACHE 
+  STRING "Name of the package for medInria superproject"
+  )
+mark_as_advanced(CPACK_PACKAGE_NAME)
 
-set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "${PROJECT_NAME} - medical image visualisation and processing tool")
-set(CPACK_PACKAGE_DESCRIPTION "${PROJECT_NAME} is a medical image visualisation and processing tool developed at Inria by the teams Asclepios, Athena, Parietal and Visages.")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY 
+  "${CPACK_PACKAGE_NAME} - medical image visualisation and processing tool"
+  )
+
+set(CPACK_PACKAGE_DESCRIPTION 
+  "${CPACK_PACKAGE_NAME} is a medical image visualisation and processing tool developed at Inria by the teams Asclepios, Athena, Parietal and Visages."
+  )
 
 set(CPACK_PACKAGE_VENDOR "http://med.inria.fr/")
 set(CPACK_PACKAGE_CONTACT "medInria Team <medinria-userfeedback@inria.fr>")
@@ -24,6 +32,7 @@ set(CPACK_PACKAGE_CONTACT "medInria Team <medinria-userfeedback@inria.fr>")
 set(CPACK_PACKAGE_VERSION_MAJOR ${${PROJECT_NAME}_VERSION_MAJOR})
 set(CPACK_PACKAGE_VERSION_MINOR ${${PROJECT_NAME}_VERSION_MINOR})
 set(CPACK_PACKAGE_VERSION_PATCH ${${PROJECT_NAME}_VERSION_PATCH})
+set(CPACK_PACKAGE_VERSION ${${PROJECT_NAME}_VERSION})
 
 set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_SOURCE_DIR}/cmake/packaging/Description.txt")
 set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/cmake/packaging/License.txt")
@@ -52,5 +61,4 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
   include(LinuxPackaging)
 endif()
 
-include(CPack)
-
+include (CPack)
