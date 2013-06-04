@@ -35,7 +35,10 @@ if (APPLE)
   include(ApplePackaging)
 endif()
 
-if (LINUX)
+message("Configure before Linux !!!")
+
+if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
+  message("Configure after Linux !!!")
   include(LinuxPackaging)
 endif()
 

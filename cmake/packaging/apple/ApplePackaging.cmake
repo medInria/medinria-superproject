@@ -16,8 +16,8 @@ set(CPACK_BINARY_DRAGNDROP OFF)
 set(CPACK_BINARY_PACKAGEMAKER OFF)
 
 
-configure_file(ApplePackScript.cmake.in ${PROJECT_BINARY_DIR}/tmp.in)
+configure_file(${CMAKE_SOURCE_DIR}/cmake/packaging/apple/ApplePackScript.cmake.in ${PROJECT_BINARY_DIR}/tmp.in)
 configure_file(${PROJECT_BINARY_DIR}/tmp.in ${PROJECT_BINARY_DIR}/ApplePackScript.cmake)
-configure_file(mac_packager.sh.in ${PROJECT_BINARY_DIR}/mac_packager.sh)
+configure_file(${CMAKE_SOURCE_DIR}/cmake/packaging/apple/mac_packager.sh.in ${PROJECT_BINARY_DIR}/mac_packager.sh)
 
 set(CPACK_INSTALL_SCRIPT ${PROJECT_BINARY_DIR}/ApplePackScript.cmake)

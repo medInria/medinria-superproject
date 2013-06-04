@@ -14,16 +14,18 @@ set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME}-${${PROJECT_NAME}_VERSION}-${DISTRI
 set (CPACK_LINUX_PACKAGING_INSTALL_PREFIX /usr/local/medInria CACHE STRING "Prefix where the will package be installed on linux plateforms")  
 
 # Add a postinst and prerm script 
-configure_file(postinst.in ${CMAKE_BINARY_DIR}/linux/postinst)
-configure_file(prerm.in ${CMAKE_BINARY_DIR}/linux/prerm)
+configure_file(${CMAKE_SOURCE_DIR}/cmake/packaging/linux/postinst.in ${CMAKE_BINARY_DIR}/Packaging/postinst)
+configure_file(${CMAKE_SOURCE_DIR}/cmake/packaging/linux/prerm.in ${CMAKE_BINARY_DIR}/Packaging/prerm)
 
-set(CPACK_DEBIAN_PACKAGE_CONTROL_EXTRA "${CMAKE_BINARY_DIR}/linux/prerm;${CMAKE_BINARY_DIR}/linux/postinst")
-set(CPACK_RPM_POST_INSTALL_SCRIPT_FILE ${CMAKE_BINARY_DIR}/linux/postinst)
-set(CPACK_RPM_PRE_UNINSTALL_SCRIPT_FILE ${CMAKE_BINARY_DIR}/linux/prerm)
+set(CPACK_DEBIAN_PACKAGE_CONTROL_EXTRA "${CMAKE_BINARY_DIR}/Packaging/prerm;${CMAKE_BINARY_DIR}/Packaging/postinst")
+set(CPACK_RPM_POST_INSTALL_SCRIPT_FILE ${CMAKE_BINARY_DIR}/Packaging/postinst)
+set(CPACK_RPM_PRE_UNINSTALL_SCRIPT_FILE ${CMAKE_BINARY_DIR}/Packaging/prerm)
 
 # Install a launcher for medInria with right environment variable
-configure_file(medInria_launcher.sh.in ${CMAKE_BINARY_DIR}/linux/medInria_launcher.sh)
-install(PROGRAMS ${CMAKE_BINARY_DIR}/linux/medInria_launcher.sh DESTINATION bin)
+configure_file(${CMAKE_SOURCE_DIR}/cmake/packaging/linux/medInria_launcher.sh.in ${CMAKE_BINARY_DIR}/Packaging/medInria_launcher.sh)
+install(PROGRAMS ${CMAKE_BINARY_DIR}/Packaging/medInria_launcher.sh DESTINATION bin)
+
+message("Configure File !!!")
 
 # Add project to package 
 set(CPACK_INSTALL_CMAKE_PROJECTS "${CPACK_INSTALL_CMAKE_PROJECTS};${CMAKE_BINARY_DIR};medInria-superProject;ALL;medInria-superProject") 

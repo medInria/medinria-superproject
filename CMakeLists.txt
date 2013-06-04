@@ -15,7 +15,6 @@ set(CMAKE_MODULE_PATH
     "${CMAKE_CURRENT_SOURCE_DIR}/cmake/packaging/windows"
     "${CMAKE_CURRENT_SOURCE_DIR}/cmake/packaging/linux"
     "${CMAKE_CURRENT_SOURCE_DIR}/cmake/packaging/apple"
-    "${CMAKE_CURRENT_SOURCE_DIR}/medInria/cmake"
     ${CMAKE_MODULE_PATH}
     )
 
