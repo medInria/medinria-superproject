@@ -48,7 +48,7 @@ function(medInria_project)
 
 if(APPLE)
     set(medInria_exe_PATH ${binary_dir}/bin/medInria.app/Contents/MacOS/medInria PARENT_SCOPE)
-elseif(LINUX)    
+elseif(UNIX)    
     set(medInria_exe_PATH ${binary_dir}/bin/medInria PARENT_SCOPE)
 endif()
 
