@@ -1,40 +1,32 @@
 set(CPACK_GENERATOR "DEB" CACHE STRING "Type of package to build")
-#GET distribution id
+
+# Get distribution id
 execute_process(COMMAND lsb_release -irs
 COMMAND sed "s/ //"
 COMMAND sed "s/Fedora/fc/"
 COMMAND tr -d '\n' 
 OUTPUT_VARIABLE DISTRIB
 OUTPUT_STRIP_TRAILING_WHITESPACE)
-execute_process(COMMAND arch 
-OUTPUT_VARIABLE ARCH
-OUTPUT_STRIP_TRAILING_WHITESPACE)
+execute_process(COMMAND arch OUTPUT_VARIABLE ARCH OUTPUT_STRIP_TRAILING_WHITESPACE)
 set(CPACK_PACKAGE_FILE_NAME "${PROJECT_NAME}-${${PROJECT_NAME}_VERSION}-${DISTRIB}-${ARCH}")
 
-set (CPACK_PACKAGING_INSTALL_PREFIX /usr/local/medInria CACHE STRING "Prefix where the package be install on linux plateformes")  
-#Write a postinst and prerm script for Linux
 
-set(POSTINST_SCRIPT ${CMAKE_BINARY_DIR}/linux/postinst)
-file(WRITE ${POSTINST_SCRIPT} "\#!/bin/sh\n" )
-file(APPEND ${POSTINST_SCRIPT} "set -e\n")
-file(APPEND ${POSTINST_SCRIPT} "echo ${CPACK_PACKAGING_INSTALL_PREFIX}/lib>/etc/ld.so.conf.d/medInria.conf\n")
-file(APPEND ${POSTINST_SCRIPT} "echo ${CPACK_PACKAGING_INSTALL_PREFIX}/lib/InsightToolkit>>/etc/ld.so.conf.d/medInria.conf\n")
-file(APPEND ${POSTINST_SCRIPT} "echo ${CPACK_PACKAGING_INSTALL_PREFIX}/lib/vtk-5.8>>/etc/ld.so.conf.d/medInria.conf\n")
-file(APPEND ${POSTINST_SCRIPT} "ldconfig\n")
-file(APPEND ${POSTINST_SCRIPT} "ln -s ${CPACK_PACKAGING_INSTALL_PREFIX}/share/applications/medInria.desktop /usr/share/applications/medInria.desktop\n")
-file(APPEND ${POSTINST_SCRIPT} "ln -s ${CPACK_PACKAGING_INSTALL_PREFIX}/bin/medInria /usr/bin/medInria\n")
+set (CPACK_LINUX_PACKAGING_INSTALL_PREFIX /usr/local/medInria CACHE STRING "Prefix where the will package be installed on linux plateforms")  
 
-set(PRERM_SCRIPT ${CMAKE_BINARY_DIR}/linux/prerm)
-file(WRITE ${PRERM_SCRIPT} "\#!/bin/sh\n" )
-file(APPEND ${PRERM_SCRIPT} "set -e\n")
-file(APPEND ${PRERM_SCRIPT} "[ -h /usr/share/applications/medInria.desktop ] && rm -f /usr/share/applications/medInria.desktop\n")
-file(APPEND ${PRERM_SCRIPT} "[ -h /usr/bin/medInria ]  && rm -f /usr/bin/medInria\n")
-file(APPEND ${PRERM_SCRIPT} "rm -f /etc/ld.so.conf.d/medInria.conf\n")
+# Add a postinst and prerm script 
+configure_file(postinst.in ${CMAKE_BINARY_DIR}/linux/postinst)
+configure_file(prerm.in ${CMAKE_BINARY_DIR}/linux/prerm)
 
-set(CPACK_DEBIAN_PACKAGE_CONTROL_EXTRA "${POSTINST_SCRIPT};${PRERM_SCRIPT}")
-set(CPACK_RPM_POST_INSTALL_SCRIPT_FILE ${POSTINST_SCRIPT})
-set(CPACK_RPM_PRE_UNINSTALL_SCRIPT_FILE ${POSTINST_SCRIPT})
+set(CPACK_DEBIAN_PACKAGE_CONTROL_EXTRA "${CMAKE_BINARY_DIR}/linux/prerm;${CMAKE_BINARY_DIR}/linux/postinst")
+set(CPACK_RPM_POST_INSTALL_SCRIPT_FILE ${CMAKE_BINARY_DIR}/linux/postinst)
+set(CPACK_RPM_PRE_UNINSTALL_SCRIPT_FILE ${CMAKE_BINARY_DIR}/linux/prerm)
 
+# Install a launcher for medInria with right environment variable
+configure_file(medInria_launcher.sh.in ${CMAKE_BINARY_DIR}/linux/medInria_launcher.sh)
+install(PROGRAMS ${CMAKE_BINARY_DIR}/linux/medInria_launcher.sh DESTINATION bin)
+
+# Add project to package 
+set(CPACK_INSTALL_CMAKE_PROJECTS "${CPACK_INSTALL_CMAKE_PROJECTS};${CMAKE_BINARY_DIR};medInria-superProject;ALL;medInria-superProject") 
 foreach(package ${packages}) 
 	if(NOT USE_SYSTEM_${package})
 		ExternalProject_Get_Property(${package} binary_dir)
