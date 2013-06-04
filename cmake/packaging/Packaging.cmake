@@ -28,15 +28,15 @@ set(CPACK_SOURCE_TZ OFF)
 set(CPACK_SOURCE_ZIP OFF)
 
 if (WIN32)
-  include(windows/WindowsPackaging.cmake)
+  include(WindowsPackaging)
 endif()
 
 if (APPLE)
-  include(apple/ApplePackaging.cmake)
+  include(ApplePackaging)
 endif()
 
 if (LINUX)
-  include (linux/LinuxPackaging.cmake)
+  include(LinuxPackaging)
 endif()
 
 include(CPack)
