@@ -18,7 +18,7 @@ function(RPI_project)
 ## #############################################################################
 
 set(ep_name RPI)
-string(TOUPPER "${ep_name}" EP_NAME)
+set(EP_NAME RPI)
 
 EP_Initialisation(${ep_name}  
   USE_SYSTEM OFF 
@@ -26,7 +26,8 @@ EP_Initialisation(${ep_name}
   REQUIERD_FOR_PLUGINS OFF
   )
 
-EP_SetDirectories(${ep_name} 
+EP_SetDirectories(${ep_name}
+  CMAKE_VAR_EP_NAME ${EP_NAME}
   ep_build_dirs
   )
 
@@ -44,12 +45,28 @@ endif()
 ## Add specific cmake arguments for configuration step of the project
 ## #############################################################################
 
+# set compilation flags
+set(c_flags ${ep_common_c_flags})
+set(cxx_flags ${ep_common_cxx_flags})
+
+if (UNIX)
+  set(c_flags "${c_flags} -Wall")
+  set(cxx_flags "${cxx_flags} -Wall")
+  # Add PIC flag if Static build on UNIX
+  if (NOT BUILD_SHARED_LIBS_${ep_name})
+    set(c_flags "${c_flags} -fPIC")
+    set(cxx_flags "${cxx_flags} -fPIC")
+  endif()
+endif()
+
 set(cmake_args
-  -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
   ${ep_common_cache_args}
-  -DRPI_BUILD_EXAMPLES:BOOL=OFF
-  -DBUILD_SHARED_LIBS:BOOL=ON
+  -DCMAKE_C_FLAGS:STRING=${c_flags}
+  -DCMAKE_CXX_FLAGS:STRING=${cxx_flags}    
+  -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
+  -DBUILD_SHARED_LIBS:BOOL=${BUILD_SHARED_LIBS_${ep_name}}  
   -DITK_DIR:FILEPATH=${ITK_DIR}
+  -DRPI_BUILD_EXAMPLES:BOOL=OFF
   )
 
 

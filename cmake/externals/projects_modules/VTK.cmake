@@ -18,7 +18,7 @@ function(VTK_project)
 ## #############################################################################
 
 set(ep_name VTK)
-string(TOUPPER "${ep_name}" EP_NAME)
+set(EP_NAME VTK)
 
 EP_Initialisation(${ep_name} 
   USE_SYSTEM OFF 
@@ -26,7 +26,8 @@ EP_Initialisation(${ep_name}
   REQUIERD_FOR_PLUGINS ON
   )
 
-EP_SetDirectories(${ep_name} 
+EP_SetDirectories(${ep_name}
+  CMAKE_VAR_EP_NAME ${EP_NAME}
   ep_build_dirs
   )
 
@@ -47,15 +48,29 @@ endif()
 ## Add specific cmake arguments for configuration step of the project
 ## #############################################################################
 
+# set compilation flags
+set(c_flag ${ep_common_c_flags})
+set(cxx_flag ${ep_common_cxx_flags})
+
+if (UNIX)
+  set(c_flags "${c_flags} -Wall")
+  set(cxx_flags "${cxx_flags} -Wall")
+  # Add PIC flag if Static build on UNIX
+  if (NOT BUILD_SHARED_LIBS_${ep_name})
+    set(c_flags "${c_flags} -fPIC")
+    set(cxx_flags "${cxx_flags} -fPIC")
+  endif()
+endif()
+
 set(cmake_args
-  -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
   ${ep_common_cache_args}
-  ${additional_vtk_cmakevars}
-  -DVTK_WRAP_TCL:BOOL=OFFlspci|grep VGA
-  -DBUILD_SHARED_LIBS:BOOL=ON
-  -DDESIRED_QT_VERSION:STRING=4
-  -DVTK_USE_QT:BOOL=ON
+  -DCMAKE_C_FLAGS:STRING=${c_flags}
+  -DCMAKE_CXX_FLAGS:STRING=${cxx_flags}
+  -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>  
+  -DBUILD_SHARED_LIBS:BOOL=${BUILD_SHARED_LIBS_${ep_name}}
   -DQT_QMAKE_EXECUTABLE:FILEPATH=${QT_QMAKE_EXECUTABLE}
+  -DVTK_USE_QT:BOOL=ON
+  -DVTK_WRAP_TCL:BOOL=OFF
   )
 
 # Activate nvidia optimisation ? (currently only for Linux)
@@ -72,6 +87,7 @@ if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
       )
   endif()
 endif()
+
 
 ## #############################################################################
 ## Resolve dependencies with other external-project

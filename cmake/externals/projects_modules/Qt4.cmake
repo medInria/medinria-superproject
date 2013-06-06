@@ -5,7 +5,7 @@ function(Qt4_project)
 ## #############################################################################
 
 set(ep_name Qt4)
-string(TOUPPER "${ep_name}" EP_NAME)
+set(EP_NAME QT4)
 
 EP_Initialisation(${ep_name}
   USE_SYSTEM ON 
@@ -14,6 +14,7 @@ EP_Initialisation(${ep_name}
   )
 
 EP_SetDirectories(${ep_name}
+  CMAKE_VAR_EP_NAME ${EP_NAME}
   ep_build_dirs
   ) 
 

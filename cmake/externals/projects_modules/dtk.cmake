@@ -18,7 +18,7 @@ function(dtk_project)
 ## ############################################################################# 
 
 set(ep_name dtk)
-string(TOUPPER "${ep_name}" EP_NAME)
+set(EP_NAME dtk)
 
 EP_Initialisation(${ep_name}  
   USE_SYSTEM OFF 
@@ -27,6 +27,7 @@ EP_Initialisation(${ep_name}
   )
   
 EP_SetDirectories(${ep_name} 
+  CMAKE_VAR_EP_NAME ${EP_NAME}
   ep_build_dirs
   )
 
@@ -44,29 +45,43 @@ endif()
 
 
 ## #############################################################################
-## Disable the dtk composer if QtDeclarative is missing.
+## Add specific cmake arguments for configuration step of the project
 ## #############################################################################
 
+# set compilation flags
+set(c_flags ${ep_common_c_flags})
+set(cxx_flags ${ep_common_cxx_flags})
+  
+if (UNIX)
+  set(c_flags "${c_flags} -Wall")
+  set(cxx_flags "${cxx_flags} -Wall")
+  # Add PIC flag if Static build on UNIX
+  if (NOT BUILD_SHARED_LIBS_${ep_name})
+    set(c_flags "${c_flags} -fPIC")
+    set(cxx_flags "${cxx_flags} -fPIC")
+  endif()
+endif()
+
+# Disable the dtk composer if QtDeclarative is missing.
 include(CheckIncludeFileCXX)
 set(CMAKE_REQUIRED_INCLUDES ${QT_INCLUDES})
 Check_Include_File_CXX(QtDeclarative HasQtDeclarative)
 
-set(DISABLE_DTK_COMPOSER)
 if (NOT HasQtDeclarative)
-  set(DISABLE_DTK_COMPOSER -DDTK_BUILD_COMPOSER:BOOL=OFF)
+  set(BUILD_DTK_COMPOSER OFF)
+else()
+  set(BUILD_DTK_COMPOSER ON)  
 endif()
-
-
-## #############################################################################
-## Add specific cmake arguments for configuration step of the project
-## #############################################################################
 
 set(cmake_args
   ${ep_common_cache_args}
+  -DCMAKE_C_FLAGS:STRING=${c_flags}
+  -DCMAKE_CXX_FLAGS:STRING=${cxx_flags}    
   -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
-  -DDTK_HAVE_NITE:BOOL=OFF
+  -DBUILD_SHARED_LIBS:BOOL=${BUILD_SHARED_LIBS_${ep_name}}
   -DQT_QMAKE_EXECUTABLE:FILEPATH=${QT_QMAKE_EXECUTABLE}
-  ${DISABLE_DTK_COMPOSER}
+  -DDTK_BUILD_COMPOSER:BOOL=${BUILD_DTK_COMPOSER}
+  -DDTK_HAVE_NITE:BOOL=OFF
   )
 
 
@@ -104,6 +119,6 @@ ExternalProject_Add(${ep_name}
 EP_ForceBuild(${ep_name})
 
 ExternalProject_Get_Property(${ep_name} binary_dir)
-set(${EP_NAME}_DIR ${binary_dir} PARENT_SCOPE)
+set(${ep_name}_DIR ${binary_dir} PARENT_SCOPE)
 
 endfunction()

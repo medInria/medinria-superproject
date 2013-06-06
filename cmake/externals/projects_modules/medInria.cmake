@@ -18,7 +18,7 @@ function(medInria_project)
 ## ############################################################################# 
 
 set(ep_name medInria)
-string(TOUPPER "${ep_name}" EP_NAME)
+set(EP_NAME MEDINRIA)
 
 EP_Initialisation(${ep_name}  
   USE_SYSTEM OFF 
@@ -26,7 +26,8 @@ EP_Initialisation(${ep_name}
   REQUIERD_FOR_PLUGINS ON
   )
 
-EP_SetDirectories(${ep_name} 
+EP_SetDirectories(${ep_name}
+  CMAKE_VAR_EP_NAME ${EP_NAME}
   ep_build_dirs
   )
 
@@ -46,14 +47,31 @@ set(custom_update_cmd git pull --ff-only ALWAYS 1)
 ## Add specific cmake arguments for configuration step of the project
 ## #############################################################################
 
+# set compilation flags
+set(c_flags ${ep_common_c_flags})
+set(cxx_flags ${ep_common_cxx_flags})
+  
+if (UNIX)
+  set(c_flags "${c_flags} -Wall")
+  set(cxx_flags "${cxx_flags} -Wall")
+  # Add PIC flag if Static build on UNIX
+  if (NOT BUILD_SHARED_LIBS_${ep_name})
+    set(c_flags "${c_flags} -fPIC")
+    set(cxx_flags "${cxx_flags} -fPIC")
+  endif()
+endif()
+
 set(cmake_args
    ${ep_common_cache_args}
+  -DCMAKE_C_FLAGS:STRING=${c_flags}
+  -DCMAKE_CXX_FLAGS:STRING=${cxx_flags}     
   -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
+  -DBUILD_SHARED_LIBS:BOOL=${BUILD_SHARED_LIBS_${ep_name}}
+  -DQT_QMAKE_EXECUTABLE:FILEPATH=${QT_QMAKE_EXECUTABLE}
   -DDCMTK_DIR:FILEPATH=${DCMTK_DIR}
   -DDCMTK_SOURCE_DIR:FILEPATH=${DCMTK_SOURCE_DIR}
-  -DDTK_DIR:FILEPATH=${DTK_DIR}
+  -Ddtk_DIR:FILEPATH=${dtk_DIR}
   -DITK_DIR:FILEPATH=${ITK_DIR}
-  -DQT_QMAKE_EXECUTABLE:FILEPATH=${QT_QMAKE_EXECUTABLE}
   -DQTDCM_DIR:FILEPATH=${QTDCM_DIR}
   -DRPI_DIR:FILEPATH=${RPI_DIR}
   -DTTK_DIR:FILEPATH=${TTK_DIR}
@@ -108,15 +126,12 @@ EP_ForceBuild(${ep_name})
 ExternalProject_Get_Property(${ep_name} binary_dir)
 set(${EP_NAME}_DIR ${binary_dir} PARENT_SCOPE)
 
-ExternalProject_Get_Property(${ep_name} source_dir)
-set(${EP_NAME}_SOURCE_DIR ${source_dir} PARENT_SCOPE)
-
 if(APPLE)
   set(${EP_NAME}_EXE_PATH 
     ${binary_dir}/bin/medInria.app/Contents/MacOS/medInria PARENT_SCOPE
     )
 
-elseif(LINUX)    
+elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")    
   set(${EP_NAME}_EXE_PATH 
     ${binary_dir}/bin/medInria PARENT_SCOPE
     )

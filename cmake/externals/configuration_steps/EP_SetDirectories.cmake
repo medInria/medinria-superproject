@@ -1,16 +1,9 @@
-function(EP_SetDirectories ep  varname)
+function(EP_SetDirectories ep  
+  CMAKE_VAR_EP_NAME EP
+  build_dirs
+  )
 
 if (NOT USE_SYSTEM_${ep})  
-## #############################################################################
-## Check for mkdir failed 
-## #############################################################################
-
-  if (DEFINED ${ep}_DIR AND NOT EXISTS ${${ep}_DIR})
-    message(FATAL_ERROR 
-      "${ep}_DIR variable is defined but corresponds to non-existing directory"
-      )
-  endif()
-
 ## #############################################################################
 ## Define a directory for each target of the project
 ## #############################################################################
@@ -56,7 +49,6 @@ if (NOT USE_SYSTEM_${ep})
   if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${ep}/CMakeLists.txt OR 
     EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${ep}/configure
     )
-    string(TOUPPER "${ep}" EP)
     set(${EP}_SOURCE_DIR SOURCE_DIR 
       ${CMAKE_CURRENT_SOURCE_DIR}/${ep}
       )    
@@ -66,7 +58,7 @@ if (NOT USE_SYSTEM_${ep})
   set(dirs ${dirs} SOURCE_DIR ${SOURCE_DIR})
 
   set(SOURCE_DIR ${SOURCE_DIR} PARENT_SCOPE)
-  set(${varname} ${dirs} PARENT_SCOPE) 
+  set(${build_dirs} ${dirs} PARENT_SCOPE) 
 
 endif()    
 

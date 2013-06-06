@@ -5,7 +5,7 @@ function(DCMTK_project)
 ## ############################################################################# 
 
 set(ep_name DCMTK)
-string(TOUPPER "${ep_name}" EP_NAME)
+set(EP_NAME DCMTK)
 
 EP_Initialisation(${ep_name}  
   USE_SYSTEM OFF 
@@ -13,7 +13,8 @@ EP_Initialisation(${ep_name}
   REQUIERD_FOR_PLUGINS ON
   )
 
-EP_SetDirectories("${ep_name} "
+EP_SetDirectories(${ep_name}
+  CMAKE_VAR_EP_NAME ${EP_NAME}
   ep_build_dirs
   )
 
@@ -33,22 +34,38 @@ endif()
 ## Add specific cmake arguments for configuration step of the project
 ## #############################################################################
 
-set(shared_libs_option ON)
 if (WIN32)
-  set(shared_libs_option OFF)
+  set(BUILD_SHARED_LIBS_${ep_name} OFF)
 endif()
 
-set(ep_project_include_arg)
+set(ep_optional_args)
 if (CTEST_USE_LAUNCHERS)
-  set(ep_project_include_arg
-    "-DCMAKE_PROJECT_DCMTK_INCLUDE:FILEPATH=${CMAKE_ROOT}/Modules/CTestUseLaunchers.cmake")
+  set(ep_optional_args
+    "-DCMAKE_PROJECT_DCMTK_INCLUDE:FILEPATH=${CMAKE_ROOT}/Modules/CTestUseLaunchers.cmake"
+    )    
+endif()
+
+# set compilation flags
+set(c_flags ${ep_common_c_flags})
+set(cxx_flags ${ep_common_cxx_flags})
+  
+if (UNIX)
+  set(c_flags "${c_flags} -w")
+  set(cxx_flags "${cxx_flags} -w")
+  # Add PIC flag if Static build on UNIX
+  if (NOT BUILD_SHARED_LIBS_${ep_name})
+    set(c_flags "${c_flags} -fPIC")
+    set(cxx_flags "${cxx_flags} -fPIC")
+  endif()
 endif()
 
 set(cmake_args
   ${ep_common_cache_args}
   ${ep_project_include_arg}
+  -DCMAKE_C_FLAGS:STRING=${c_flags}
+  -DCMAKE_CXX_FLAGS:STRING=${cxx_flags}  
   -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
-  -DBUILD_SHARED_LIBS:BOOL=${shared_libs_option}
+  -DBUILD_SHARED_LIBS:BOOL=${BUILD_SHARED_LIBS_${ep_name}}
   -DDCMTK_WITH_DOXYGEN:BOOL=OFF
   -DDCMTK_WITH_ZLIB:BOOL=OFF    
   -DDCMTK_WITH_OPENSSL:BOOL=OFF 
@@ -56,7 +73,6 @@ set(cmake_args
   -DDCMTK_WITH_TIFF:BOOL=OFF    
   -DDCMTK_WITH_XML:BOOL=OFF     
   -DDCMTK_WITH_ICONV:BOOL=OFF   
-  -DDCMTK_FORCE_FPIC_ON_UNIX:BOOL=ON
   -DDCMTK_OVERWRITE_WIN32_COMPILER_FLAGS:BOOL=OFF
   )
 

@@ -18,7 +18,7 @@ function(ITK_project)
 ## ############################################################################# 
 
 set(ep_name ITK)
-string(TOUPPER "${ep_name}" EP_NAME)
+set(EP_NAME ITK)
 
 EP_Initialisation(${ep_name} 
   USE_SYSTEM OFF 
@@ -26,7 +26,8 @@ EP_Initialisation(${ep_name}
   REQUIERD_FOR_PLUGINS OFF
   )
 
-EP_SetDirectories(${ep_name} 
+EP_SetDirectories(${ep_name}
+  CMAKE_VAR_EP_NAME ${EP_NAME}
   ep_build_dirs
   )
 
@@ -46,21 +47,36 @@ endif()
 ## Add specific cmake arguments for configuration step of the project
 ## #############################################################################
 
-set(ep_project_include_arg)
+set(ep_optional_args)
 if (CTEST_USE_LAUNCHERS)
-  set(ep_project_include_arg
+  set(ep_optional_args
     "-DCMAKE_PROJECT_ITK_INCLUDE:FILEPATH=${CMAKE_ROOT}/Modules/CTestUseLaunchers.cmake")
 endif()
 
+# set compilation flags
+set(c_flags ${ep_common_c_flags})
+set(cxx_flags ${ep_common_cxx_flags})
+  
+if (UNIX)
+  set(c_flags "${c_flags} -w")
+  set(cxx_flags "${cxx_flags} -w")
+  # Add PIC flag if Static build on UNIX
+  if (NOT BUILD_SHARED_LIBS_${ep_name})
+    set(c_flags "${c_flags} -fPIC")
+    set(cxx_flags "${cxx_flags} -fPIC")
+  endif()
+endif()
+
+
 set(cmake_args
   ${ep_common_cache_args}
-  ${ep_project_include_arg}
+  ${ep_optional_args}
+  -DCMAKE_C_FLAGS:STRING=${c_flags}
+  -DCMAKE_CXX_FLAGS:STRING=${cxx_flags}    
   -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
-  ${ep_common_cache_args}
-  ${ep_project_include_arg}
+  -DBUILD_SHARED_LIBS:BOOL=${BUILD_SHARED_LIBS_${ep_name}}
   -DBUILD_EXAMPLES:BOOL=OFF
   -DBUILD_TESTING:BOOL=OFF
-  -DBUILD_SHARED_LIBS:BOOL=ON
   -DITK_USE_REVIEW:BOOL=ON
   -DITK_USE_REVIEW_STATISTICS:BOOL=ON
   -DITK_USE_CONCEPT_CHECKING:BOOL=OFF
