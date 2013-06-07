@@ -28,7 +28,7 @@ list(APPEND ${ep_name}_dependencies
 EP_Initialisation(${ep_name} 
   USE_SYSTEM OFF 
   BUILD_SHARED_LIBS ON
-  REQUIERD_FOR_PLUGINS OFF
+  REQUIERD_FOR_PLUGINS ON
   )
 
 EP_SetDirectories(${ep_name}

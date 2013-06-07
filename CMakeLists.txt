@@ -45,22 +45,27 @@ list(APPEND external_projects
 ## #############################################################################
 
 set(CMAKE_MODULE_PATH
-    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/environment
-    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/externals
-    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/externals/configuration_steps
-    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/externals/projects_modules
-    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/packaging
-    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/packaging/windows
-    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/packaging/linux
-    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/packaging/apple
-    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/launchers
-    ${CMAKE_MODULE_PATH}
+  ${CMAKE_CURRENT_SOURCE_DIR}/cmake/environment
+  ${CMAKE_CURRENT_SOURCE_DIR}/cmake/externals
+  ${CMAKE_CURRENT_SOURCE_DIR}/cmake/externals/configuration_steps
+  ${CMAKE_CURRENT_SOURCE_DIR}/cmake/externals/projects_modules
+  ${CMAKE_MODULE_PATH}
     )
-    
-# Add CMAKE_MODULE_PATH to superProjectConfig.cmake, usefull for private plugins.
+
+# Add CMAKE_MODULE_PATH to superProjectConfig.cmake, usefull for 
+# Asclepios and visages plugins
 set(${PROJECT_NAME}_CONFIG_FILE "${CMAKE_BINARY_DIR}/${PROJECT_NAME}Config.cmake")
 file(WRITE ${${PROJECT_NAME}_CONFIG_FILE}
-    "set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)\n")    
+  "set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)\n")  
+
+set(CMAKE_MODULE_PATH
+  ${CMAKE_CURRENT_SOURCE_DIR}/cmake/launchers
+  ${CMAKE_CURRENT_SOURCE_DIR}/packaging
+  ${CMAKE_CURRENT_SOURCE_DIR}/packaging/windows
+  ${CMAKE_CURRENT_SOURCE_DIR}/packaging/linux
+  ${CMAKE_CURRENT_SOURCE_DIR}/packaging/apple
+  ${CMAKE_MODULE_PATH}
+  )
 
 ## #############################################################################
 ## Add variables
@@ -99,8 +104,8 @@ mark_as_advanced(PRIVATE_PLUGINS_DIRS)
 set(MEDINRIA_TEST_DATA_ROOT ${CMAKE_SOURCE_DIR}/medInria-testdata)
 
 set(CMAKE_INSTALL_PREFIX "" CACHE 
-    PATH "If you set this variable all external projects will be installed under this path."
-    )
+  PATH "If you set this variable all external projects will be installed under this path."
+  )
 mark_as_advanced(CMAKE_INSTALL_PREFIX)    
 
 ## #############################################################################
@@ -118,7 +123,7 @@ set(global_targets
 set_property(DIRECTORY PROPERTY EP_STEP_TARGETS ${global_targets})
 
 foreach (target ${global_targets})
-    add_custom_target(${target})
+  add_custom_target(${target})
 endforeach()
 
 ## #############################################################################

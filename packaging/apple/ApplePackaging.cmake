@@ -41,19 +41,19 @@ set(CPACK_BINARY_PACKAGEMAKER OFF)
 ## Add Apple packaging script
 ## #############################################################################
 
-configure_file(${CMAKE_SOURCE_DIR}/cmake/packaging/apple/ApplePackScript.cmake.in 
+configure_file(${CMAKE_SOURCE_DIR}/packaging/apple/ApplePackScript.cmake.in 
   ${PROJECT_BINARY_DIR}/tmp.in
   )
   
 configure_file(
   ${PROJECT_BINARY_DIR}/tmp.in 
-  ${PROJECT_BINARY_DIR}/Packaging/ApplePackScript.cmake
+  ${PROJECT_BINARY_DIR}/packaging/apple/ApplePackScript.cmake
   )
   
-configure_file(${CMAKE_SOURCE_DIR}/cmake/packaging/apple/mac_packager.sh.in 
-  ${PROJECT_BINARY_DIR}/Packaging/mac_packager.sh
+configure_file(${CMAKE_SOURCE_DIR}/packaging/apple/mac_packager.sh.in 
+  ${PROJECT_BINARY_DIR}/packaging/apple/mac_packager.sh
   )
 
 set(CPACK_INSTALL_SCRIPT 
-  ${PROJECT_BINARY_DIR}/Packaging/ApplePackScript.cmake
+  ${PROJECT_BINARY_DIR}/packaging/apple/ApplePackScript.cmake
   )

@@ -2,4 +2,4 @@
 set -e
 
 ln -s @CPACK_PACKAGING_INSTALL_PREFIX@/share/applications/medInria.desktop /usr/share/applications/medInria.desktop
-ln -s @CPACK_PACKAGING_INSTALL_PREFIX@/bin/medInria.sh /usr/bin/medInria
+ln -s @CPACK_PACKAGING_INSTALL_PREFIX@/bin/medInria_launcher.sh /usr/bin/medInria

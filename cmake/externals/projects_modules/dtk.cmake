@@ -54,7 +54,7 @@ endif()
 ## #############################################################################
 
 # set compilation flags
-if (UNIX)
+ if (UNIX)
   set(${ep_name}_c_flags "${${ep_name}_c_flags} -Wall")
   set(${ep_name}_cxx_flags "${${ep_name}_cxx_flags} -Wall")
 endif()
