@@ -19,7 +19,13 @@ function(TTK_project)
 
 set(ep_name TTK)
 set(EP_NAME TTK)
-  
+
+# list here all the dependencies of the project
+list(APPEND ${ep_name}_dependencies 
+  ITK 
+  VTK
+  )
+    
 EP_Initialisation(${ep_name} 
   USE_SYSTEM OFF 
   BUILD_SHARED_LIBS ON
@@ -46,9 +52,6 @@ endif()
 ## #############################################################################
 
 # set compilation flags
-set(${ep_name}_c_flags "${ep_common_c_flags} ${${ep_name}_c_flags}")
-set(${ep_name}_cxx_flags "${ep_common_cxx_flags} ${${ep_name}_cxx_flags}")
-  
 if (UNIX)
   set(${ep_name}_c_flags "${${ep_name}_c_flags} -Wall")
   set(${ep_name}_cxx_flags "${${ep_name}_cxx_flags} -Wall")
@@ -64,22 +67,6 @@ set(cmake_args
   -DVTK_DIR:FILEPATH=${VTK_DIR}
   -DBUILD_TESTING:BOOL=OFF  
   )
-    
-
-## #############################################################################
-## Resolve dependencies with other external-project
-## #############################################################################
-
-list(APPEND dependencies 
-  ITK 
-  VTK
-  )
-  
-foreach(dependence ${dependencies})
- if (USE_SYSTEM_${dependence})
-  list(REMOVE_ITEM dependencies ${dependence})
- endif()
-endforeach()
 
 
 ## #############################################################################
@@ -91,15 +78,14 @@ ExternalProject_Add(${ep_name}
   ${location}
   CMAKE_GENERATOR ${gen}
   CMAKE_ARGS ${cmake_args}
+  DEPENDS ${${ep_name}_dependencies}
   INSTALL_COMMAND ""    
-  DEPENDS ${dependencies}
   )
   
-## #############################################################################
-## Finalize
-## #############################################################################
   
-EP_ForceBuild(${ep_name})
+## #############################################################################
+## Set variable to provide infos about the project
+## #############################################################################
 
 ExternalProject_Get_Property(TTK binary_dir)
 set(${EP_NAME}_DIR ${binary_dir} PARENT_SCOPE)

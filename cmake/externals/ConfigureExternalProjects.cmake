@@ -1,5 +1,5 @@
 ## #############################################################################
-## Add common variable for all external-projects
+## Add common variables for all external-projects
 ## #############################################################################
 
 set(ep_common_c_flags 
@@ -30,11 +30,9 @@ endif()
 
 
 ## #############################################################################
-## Include cmake module
+## Include cmake modules of external-project
 ## #############################################################################
 include(ExternalProject) 
-include(CMakeParseArguments)
-
 
 ## #############################################################################
 ## Include common configuration steps
@@ -42,11 +40,10 @@ include(CMakeParseArguments)
 
 include(EP_Initialisation)
 include(EP_SetDirectories)
-include(EP_ForceBuild)
 
 
 ## #############################################################################
-## Include specific modules of each project
+## Include specific module of each project
 ## #############################################################################
 
 file(GLOB projects_modules RELATIVE ${CMAKE_SOURCE_DIR} 

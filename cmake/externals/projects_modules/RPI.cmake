@@ -20,6 +20,11 @@ function(RPI_project)
 set(ep_name RPI)
 set(EP_NAME RPI)
 
+# list here all the dependencies of the project
+list(APPEND ${ep_name}_dependencies 
+  ITK
+  )
+  
 EP_Initialisation(${ep_name}  
   USE_SYSTEM OFF 
   BUILD_SHARED_LIBS ON
@@ -46,9 +51,6 @@ endif()
 ## #############################################################################
 
 # set compilation flags
-set(${ep_name}_c_flags "${ep_common_c_flags} ${${ep_name}_c_flags}")
-set(${ep_name}_cxx_flags "${ep_common_cxx_flags} ${${ep_name}_cxx_flags}")
-  
 if (UNIX)
   set(${ep_name}_c_flags "${${ep_name}_c_flags} -Wall")
   set(${ep_name}_cxx_flags "${${ep_name}_cxx_flags} -Wall")
@@ -66,21 +68,6 @@ set(cmake_args
 
 
 ## #############################################################################
-## Resolve dependencies with other external-project
-## #############################################################################
-
-list(APPEND dependencies 
-  ITK
-  )
-  
-foreach(dependence ${dependencies})
- if (USE_SYSTEM_${dependence})
-  list(REMOVE_ITEM dependencies ${dependence})
- endif()
-endforeach()
-
-
-## #############################################################################
 ## Add external-project
 ## #############################################################################
 
@@ -89,15 +76,14 @@ ExternalProject_Add(${ep_name}
   ${location}
   CMAKE_GENERATOR ${gen}
   CMAKE_ARGS ${cmake_args}
+  DEPENDS ${${ep_name}_dependencies}
   INSTALL_COMMAND ""
-  DEPENDS ${dependencies}
   ) 
   
-## #############################################################################
-## Finalize
-## #############################################################################
   
-EP_ForceBuild(${ep_name})
+## #############################################################################
+## Set variable to provide infos about the project
+## #############################################################################
 
 ExternalProject_Get_Property(${ep_name} binary_dir)
 set(${EP_NAME}_DIR ${binary_dir} PARENT_SCOPE)

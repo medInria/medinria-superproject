@@ -7,7 +7,7 @@ rules.ninja
 build.ninja
 Qt
 dtk
-dcmtk
+DCMTK
 VTK
 ITK
 TTK

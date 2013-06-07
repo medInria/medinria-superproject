@@ -20,6 +20,11 @@ function(ITK_project)
 set(ep_name ITK)
 set(EP_NAME ITK)
 
+# list here all the dependencies of the project
+list(APPEND ${ep_name}_dependencies 
+  ""
+  )
+  
 EP_Initialisation(${ep_name} 
   USE_SYSTEM OFF 
   BUILD_SHARED_LIBS ON
@@ -43,6 +48,7 @@ if (NOT DEFINED ${EP_NAME}_SOURCE_DIR)
     )
 endif()
 
+
 ## #############################################################################
 ## Add specific cmake arguments for configuration step of the project
 ## #############################################################################
@@ -54,9 +60,6 @@ if (CTEST_USE_LAUNCHERS)
 endif()
 
 # set compilation flags
-set(${ep_name}_c_flags "${ep_common_c_flags} ${${ep_name}_c_flags}")
-set(${ep_name}_cxx_flags "${ep_common_cxx_flags} ${${ep_name}_cxx_flags}")
-  
 if (UNIX)
   set(${ep_name}_c_flags "${${ep_name}_c_flags} -w")
   set(${ep_name}_cxx_flags "${${ep_name}_cxx_flags} -w")
@@ -89,14 +92,11 @@ ExternalProject_Add(${ep_name}
   CMAKE_ARGS ${cmake_args}
   INSTALL_COMMAND ""
   )
-  
 
 
 ## #############################################################################
-## Finalize
+## Set variable to provide infos about the project
 ## #############################################################################
-  
-EP_ForceBuild(${ep_name})
 
 ExternalProject_Get_Property(ITK binary_dir)
 set(${EP_NAME}_DIR ${binary_dir} PARENT_SCOPE)

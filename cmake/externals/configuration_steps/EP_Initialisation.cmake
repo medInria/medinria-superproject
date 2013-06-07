@@ -1,5 +1,4 @@
-macro(EP_Initialisation 
-  ep 
+macro(EP_Initialisation ep 
   USE_SYSTEM use_system_def 
   BUILD_SHARED_LIBS build_shared_libs_def
   REQUIERD_FOR_PLUGINS required_for_plugins
@@ -39,26 +38,46 @@ if (NOT USE_SYSTEM_${ep})
     )
   mark_as_advanced(BUILD_SHARED_LIBS_${ep})
   
-# Add PIC flag if Static build on UNIX with amd64 arch
-if (UNIX)
-  if (NOT BUILD_SHARED_LIBS_${ep} AND 
-      "${CMAKE_SYSTEM_PROCESSOR}" MATCHES amd64|AMD64|x86_64|X86_64)
-      
-    set(${ep}_c_flags "${${ep}_c_flags} -fPIC")
-    set(${ep}_cxx_flags "${${ep}_cxx_flags} -fPIC")
-  endif()
-endif()  
+  
+## #############################################################################
+## Set compilation flags
+## #############################################################################
+  
+  set(${ep_name}_c_flags ${ep_common_c_flags})
+  set(${ep_name}_cxx_flags ${ep_common_cxx_flags})
+  
+  # Add PIC flag if Static build on UNIX with amd64 arch
+  if (UNIX)
+    if (NOT BUILD_SHARED_LIBS_${ep} AND 
+        "${CMAKE_SYSTEM_PROCESSOR}" MATCHES amd64|AMD64|x86_64|X86_64)
+        
+      set(${ep}_c_flags "${${ep}_c_flags} -fPIC")
+      set(${ep}_cxx_flags "${${ep}_cxx_flags} -fPIC")
+    endif()
+  endif()  
+
 
 ## #############################################################################
-## Add dependencies 
+## Resolve dependencies with other external-project
+## #############################################################################
+
+  foreach(dependence ${${ep}_dependencies})
+   if (USE_SYSTEM_${dependence})
+    list(REMOVE_ITEM ${ep}_dependencies ${dependence})
+   endif()
+  endforeach()
+
+
+## #############################################################################
+## Add target dependencies 
 ## #############################################################################
 
   # Add dependencies between the target of this package 
   # and the global target from the superproject
-  
-  foreach (target ${global_targets})
+    foreach (target ${global_targets})
     add_dependencies(${target} ${ep}-${target})
   endforeach() 
+
 endif()
 
 endmacro()

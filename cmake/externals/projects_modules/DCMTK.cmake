@@ -7,6 +7,12 @@ function(DCMTK_project)
 set(ep_name DCMTK)
 set(EP_NAME DCMTK)
 
+# list here all the dependencies of the project
+list(APPEND ${ep_name}_dependencies 
+  ""
+  )
+
+
 EP_Initialisation(${ep_name}  
   USE_SYSTEM OFF 
   BUILD_SHARED_LIBS OFF
@@ -46,9 +52,6 @@ if (CTEST_USE_LAUNCHERS)
 endif()
 
 # set compilation flags
-set(${ep_name}_c_flags "${ep_common_c_flags} ${${ep_name}_c_flags}")
-set(${ep_name}_cxx_flags "${ep_common_cxx_flags} ${${ep_name}_cxx_flags}")
-  
 if (UNIX)
   set(${ep_name}_c_flags "${${ep_name}_c_flags} -w")
   set(${ep_name}_cxx_flags "${${ep_name}_cxx_flags} -w")
@@ -83,10 +86,8 @@ ExternalProject_Add(${ep_name}
 
 
 ## #############################################################################
-## Finalize
+## Set variable to provide infos about the project
 ## #############################################################################
-
-EP_ForceBuild(${ep_name})
 
 ExternalProject_Get_Property(${ep_name} install_dir)
 set(${EP_NAME}_DIR ${install_dir} PARENT_SCOPE)

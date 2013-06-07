@@ -20,6 +20,11 @@ function(VTK_project)
 set(ep_name VTK)
 set(EP_NAME VTK)
 
+# list here all the dependencies of the project
+list(APPEND ${ep_name}_dependencies 
+  Qt4
+  )
+
 EP_Initialisation(${ep_name} 
   USE_SYSTEM OFF 
   BUILD_SHARED_LIBS ON
@@ -49,12 +54,9 @@ endif()
 ## #############################################################################
 
 # set compilation flags
-set(${ep_name}_c_flags "${ep_common_c_flags} ${${ep_name}_c_flags}")
-set(${ep_name}_cxx_flags "${ep_common_cxx_flags} ${${ep_name}_cxx_flags}")
-  
 if (UNIX)
-  set(${ep_name}_c_flags "${${ep_name}_c_flags} -Wall")
-  set(${ep_name}_cxx_flags "${${ep_name}_cxx_flags} -Wall")
+  set(${ep_name}_c_flags "${${ep_name}_c_flags} -w")
+  set(${ep_name}_cxx_flags "${${ep_name}_cxx_flags} -w")
 endif()
 
 set(cmake_args
@@ -87,20 +89,6 @@ if(TRY_ENABLE_NVCONTROL)
   endif()
 endif()
 
-## #############################################################################
-## Resolve dependencies with other external-project
-## #############################################################################
-
-list(APPEND dependencies 
-  Qt4
-  )
-  
-foreach(dependence ${dependencies})
- if (USE_SYSTEM_${dependence})
-  list(REMOVE_ITEM dependencies ${dependence})
- endif()
-endforeach()
-
 
 ## #############################################################################
 ## Add external-project
@@ -112,16 +100,14 @@ ExternalProject_Add(${ep_name}
   UPDATE_COMMAND ""
   CMAKE_GENERATOR ${gen}
   CMAKE_ARGS ${cmake_args}
-  DEPENDS ${VTK_dependencies}
+  DEPENDS ${${ep_name}_dependencies}
   INSTALL_COMMAND ""
   )
   
 
 ## #############################################################################
-## Finalize
+## Set variable to provide infos about the project
 ## #############################################################################
-
-EP_ForceBuild(${ep_name})
 
 ExternalProject_Get_Property(${ep_name} binary_dir)
 set(${EP_NAME}_DIR ${binary_dir} PARENT_SCOPE)

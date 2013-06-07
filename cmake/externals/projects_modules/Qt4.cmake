@@ -1,3 +1,5 @@
+#TODO This module need test. Not sure it actually works.
+
 function(Qt4_project)
 
 ## #############################################################################
@@ -7,6 +9,11 @@ function(Qt4_project)
 set(ep_name Qt4)
 set(EP_NAME QT4)
 
+# list here all the dependencies of the project
+list(APPEND ${ep_name}_dependencies 
+  ""
+  )
+  
 EP_Initialisation(${ep_name}
   USE_SYSTEM ON 
   BUILD_SHARED_LIBS ON
@@ -102,12 +109,11 @@ ExternalProject_Add(${ep_name}
 
 
 ## #############################################################################
-## Finalize
+## Set variable to provide infos about the project
 ## #############################################################################
-
-EP_ForceBuild(${ep_name})
 
 ExternalProject_Get_Property(${ep_name} binary_dir)
 set(${EP_NAME}_DIR ${binary_dir} PARENT_SCOPE)
 
+mark_as_advanced(USE_SYSTEM_${ep_name})
 endfunction()
