@@ -11,26 +11,12 @@
 #
 ################################################################################
 
-macro(EP_Initialisation ep 
+macro(EP_Initialisation ep
+  CMAKE_VAR_EP_NAME EP 
   USE_SYSTEM use_system_def 
   BUILD_SHARED_LIBS build_shared_libs_def
   REQUIERD_FOR_PLUGINS required_for_plugins
   )
-
-## #############################################################################
-## Complete superProjectConfig.cmake
-## #############################################################################
-
-if (${required_for_plugins})  
-  #  provide path of project needeed for Asclepios and visages plugins 
-  file(APPEND ${${PROJECT_NAME}_CONFIG_FILE}
-    "find_package(${ep} REQUIRED
-      PATHS \"${CMAKE_BINARY_DIR}/${ep}\" 
-      PATH_SUFFIXES install build
-      )\n"
-    )
-endif()
-
 ## #############################################################################
 ## Add variable : do we want use the system version ?
 ## #############################################################################
@@ -40,7 +26,25 @@ option(USE_SYSTEM_${ep}
   ${use_system_def}
   )
 
-if (NOT USE_SYSTEM_${ep})
+if (USE_SYSTEM_${ep})
+  find_package(${EP} REQUIRED)
+else()
+
+## #############################################################################
+## Complete superProjectConfig.cmake
+## #############################################################################
+
+  if (${required_for_plugins})  
+    #  provide path of project needeed for Asclepios and visages plugins 
+    file(APPEND ${${PROJECT_NAME}_CONFIG_FILE}
+      "find_package(${EP} REQUIRED
+        PATHS \"${CMAKE_BINARY_DIR}/${ep}\" 
+        PATH_SUFFIXES install build
+        )\n"
+      )
+  endif()
+
+
 ## #############################################################################
 ## Add Variable : do we want a static or a dynamic build ?
 ## #############################################################################

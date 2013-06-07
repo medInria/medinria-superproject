@@ -15,6 +15,9 @@
 ## Add common variables for all external-projects
 ## #############################################################################
 
+set(CMAKE_INSTALL_PREFIX "" )  
+mark_as_advanced(CMAKE_INSTALL_PREFIX)
+
 set(ep_common_c_flags 
   "${CMAKE_C_FLAGS} ${CMAKE_C_FLAGS_INIT} ${ADDITIONAL_C_FLAGS}"
   )
@@ -73,15 +76,11 @@ endforeach()
 
 macro(call func_name)
     string(REPLACE "-" "_" func ${func_name})
-    file(WRITE tmp_call.cmake "${func}(${ARGN})")
+    file(WRITE tmp_call.cmake "${func}()")
     include(tmp_call.cmake OPTIONAL)
     file(REMOVE tmp_call.cmake)
 endmacro()
 
 foreach (external_project ${external_projects})
-  if (NOT USE_SYSTEM_${external_project})
     call(${external_project}_project)
-  else ()
-    find_package(${external_project} REQUIRED)
-  endif ()
 endforeach()

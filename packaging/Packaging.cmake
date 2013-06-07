@@ -1,17 +1,6 @@
-#######################################################################
-#
-# medInria
-#
-# Copyright (c) INRIA 2013. All rights reserved.
-# See LICENSE.txt for details.
-# 
-#  This software is distributed WITHOUT ANY WARRANTY; without even
-#  the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-#  PURPOSE.
-#
-#######################################################################
-
-include (InstallRequiredSystemLibraries)
+## #############################################################################
+## Set common CPACK variables
+## #############################################################################
 
 set(CPACK_PACKAGE_NAME medInria CACHE 
   STRING "Name of the package for medInria superproject"
@@ -49,6 +38,10 @@ set(CPACK_SOURCE_TGZ OFF)
 set(CPACK_SOURCE_TZ OFF)
 set(CPACK_SOURCE_ZIP OFF)
 
+## #############################################################################
+## Set cpack variables specific to the plateform
+## #############################################################################
+
 if (WIN32)
   include(WindowsPackaging)
 endif()
@@ -61,4 +54,9 @@ if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
   include(LinuxPackaging)
 endif()
 
+## #############################################################################
+## Include cpack modules
+## #############################################################################
+
+include (InstallRequiredSystemLibraries)
 include (CPack)

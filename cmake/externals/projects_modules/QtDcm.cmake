@@ -13,18 +13,41 @@
 
 function(QtDcm_project)
 
-## #############################################################################
-## Prepare the project
-## #############################################################################
-
 set(ep_name QtDcm)
-set(EP_NAME QTDCM)
+set(EP_NAME QtDCM)
 
-# list here all the dependencies of the project
+## #############################################################################
+## List the dependencies of the project
+## #############################################################################
+
 list(APPEND ${ep_name}_dependencies 
   Qt4 
   ITK 
   DCMTK
+  )
+  
+  
+## #############################################################################
+## Prepare the project
+## #############################################################################
+
+EP_Initialisation(${ep_name}  
+  CMAKE_VAR_EP_NAME ${EP_NAME}
+  USE_SYSTEM OFF 
+  BUILD_SHARED_LIBS ON
+  REQUIERD_FOR_PLUGINS ON
+  )
+
+
+
+if (NOT USE_SYSTEM_${ep_name})
+## #############################################################################
+## Set directories
+## #############################################################################
+
+EP_SetDirectories(${ep_name}
+  CMAKE_VAR_EP_NAME ${EP_NAME}
+  ep_dirs
   )
 
 # Active QTNETWORK
@@ -32,17 +55,7 @@ if (QT4_FOUND)
   set(QT_USE_QTNETWORK TRUE)
   include(${QT_USE_FILE})
 endif(QT4_FOUND)
-  
-EP_Initialisation(${ep_name}  
-  USE_SYSTEM OFF 
-  BUILD_SHARED_LIBS ON
-  REQUIERD_FOR_PLUGINS OFF
-  )
 
-EP_SetDirectories(${ep_name}
-  CMAKE_VAR_EP_NAME ${EP_NAME}
-  ep_build_dirs
-  )
 
 ## #############################################################################
 ## Define repository where get the sources
@@ -79,7 +92,7 @@ set(cmake_args
 ## #############################################################################
 
 ExternalProject_Add(${ep_name}
-  ${ep_build_dirs}
+  ${ep_dirs}
   ${location}
   CMAKE_GENERATOR ${gen}
   CMAKE_ARGS ${cmake_args}
@@ -94,5 +107,7 @@ ExternalProject_Add(${ep_name}
 
 ExternalProject_Get_Property(${ep_name} binary_dir)
 set(${EP_NAME}_DIR ${binary_dir} PARENT_SCOPE)
+
+endif()
 
 endfunction()

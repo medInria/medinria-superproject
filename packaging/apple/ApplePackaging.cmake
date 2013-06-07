@@ -11,6 +11,10 @@
 #
 ################################################################################
 
+set(CPACK_BINARY_TGZ ON)
+
+set(CPACK_BINARY_DRAGNDROP OFF)
+set(CPACK_BINARY_PACKAGEMAKER OFF)
 
 ## #############################################################################
 ## Get distribution name and architecture
@@ -19,36 +23,6 @@
 set(CPACK_PACKAGE_FILE_NAME 
   "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}-${CMAKE_SYSTEM_PROCESSOR}"
    )
-
-
-## #############################################################################
-## Add project to package
-## #############################################################################
-
-foreach(external_project ${external_projects}) 
-	if(NOT USE_SYSTEM_${external_project})
-	  ExternalProject_Get_Property(${package} binary_dir)	
-    
-    set(CPACK_INSTALL_CMAKE_PROJECTS "${CPACK_INSTALL_CMAKE_PROJECTS};
-      ${binary_dir};
-      ${package};
-      ALL;
-      ${package}
-      )
-	endif()
-endforeach()
-
-foreach(dir ${PRIVATE_PLUGINS_DIRS})
-  set(CPACK_INSTALL_CMAKE_PROJECTS ${CPACK_INSTALL_CMAKE_PROJECTS};
-    ${dir};
-    ${dir};
-    ALL;
-    ${dir}
-    )
-endforeach()
-
-set(CPACK_BINARY_DRAGNDROP OFF)
-set(CPACK_BINARY_PACKAGEMAKER OFF)
 
 
 ## #############################################################################

@@ -13,28 +13,40 @@
 
 function(TTK_project)
 
-## #############################################################################
-## Prepare the project
-## #############################################################################
-
 set(ep_name TTK)
 set(EP_NAME TTK)
 
-# list here all the dependencies of the project
+## #############################################################################
+## List the dependencies of the project
+## #############################################################################
+
 list(APPEND ${ep_name}_dependencies 
   ITK 
   VTK
   )
-    
+  
+  
+## #############################################################################
+## Prepare the project
+## #############################################################################
+
 EP_Initialisation(${ep_name} 
+  CMAKE_VAR_EP_NAME ${EP_NAME}
   USE_SYSTEM OFF 
   BUILD_SHARED_LIBS ON
-  REQUIERD_FOR_PLUGINS OFF
+  REQUIERD_FOR_PLUGINS ON
   )
+
+
+
+if (NOT USE_SYSTEM_${ep_name})
+## #############################################################################
+## Set directories
+## #############################################################################
 
 EP_SetDirectories(${ep_name}
   CMAKE_VAR_EP_NAME ${EP_NAME}
-  ep_build_dirs
+  ep_dirs
   )
 
 
@@ -74,7 +86,7 @@ set(cmake_args
 ## #############################################################################
 
 ExternalProject_Add(${ep_name}
-  ${ep_build_dirs}
+  ${ep_dirs}
   ${location}
   CMAKE_GENERATOR ${gen}
   CMAKE_ARGS ${cmake_args}
@@ -89,5 +101,7 @@ ExternalProject_Add(${ep_name}
 
 ExternalProject_Get_Property(TTK binary_dir)
 set(${EP_NAME}_DIR ${binary_dir} PARENT_SCOPE)
+
+endif()
 
 endfunction()

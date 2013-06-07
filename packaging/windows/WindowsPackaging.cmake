@@ -66,7 +66,7 @@ set(CPACK_NSIS_DELETE_ICONS_EXTRA "
 ")
 
 if (NOT PRIVATE_PLUGINS_DIRS STREQUAL "")
-    message(WARNING "PRIVATE_PLUGINS_DIRS : Be careful to use '/' in your plugin paths and to end each path with '/' to copy the private plugins in the same level as the public plugins. Do no forget to separate each path with ';'")
+    message(WARNING "PRIVATE_PLUGINS_DIRS : Be careful to use '/' in your plugin paths and to end each path with '/' to copy the private plugins in the same level as the public plugins. Do not forget to separate each path with ';'")
     foreach(pluginpath ${PRIVATE_PLUGINS_DIRS}) 
         install(DIRECTORY ${pluginpath} DESTINATION plugins COMPONENT Runtime FILES_MATCHING PATTERN "*${CMAKE_SHARED_LIBRARY_SUFFIX}")
     endforeach(pluginpath)
@@ -77,7 +77,19 @@ endif()
 #${CMAKE_CFG_INTDIR}
 set(APP "\${CMAKE_INSTALL_PREFIX}/bin/medInria.exe")
 
-list(APPEND libSearchDirs ${QT_PLUGINS_DIR}/* ${QT_BINARY_DIR} ${ITK_DIR}/bin/Release ${DCMTK_DIR}/bin/Release ${VTK_DIR}/bin/Release ${QTDCM_DIR}/bin/Release ${TTK_DIR}/bin/Release ${dtk_DIR}/bin/Release ${RPI_DIR}/bin/Release ${CMAKE_INSTALL_PREFIX}/bin)
+list(APPEND 
+  libSearchDirs 
+  ${QT_PLUGINS_DIR}/* ${QT_BINARY_DIR} 
+  ${ITK_DIR}/bin/Release 
+  ${DCMTK_DIR}/bin/Release 
+  ${VTK_DIR}/bin/Release 
+  ${QtDCM_DIR}/bin/Release 
+  ${TTK_DIR}/bin/Release 
+  ${dtk_DIR}/bin/Release 
+  ${RPI_DIR}/bin/Release 
+  ${CMAKE_INSTALL_PREFIX}/bin
+  )
+  
 set(PLUGINS "\${CMAKE_INSTALL_PREFIX}/plugins/")
 
 install(CODE "

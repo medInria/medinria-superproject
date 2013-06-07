@@ -15,27 +15,39 @@
 
 function(Qt4_project)
 
-## #############################################################################
-## Prepare the project
-## #############################################################################
-
 set(ep_name Qt4)
-set(EP_NAME QT4)
+set(EP_NAME Qt4)
 
-# list here all the dependencies of the project
+## #############################################################################
+## List the dependencies of the project
+## #############################################################################
+
 list(APPEND ${ep_name}_dependencies 
   ""
   )
   
+  
+## #############################################################################
+## Prepare the project
+## #############################################################################
+
 EP_Initialisation(${ep_name}
+  CMAKE_VAR_EP_NAME ${EP_NAME}
   USE_SYSTEM ON 
   BUILD_SHARED_LIBS ON
   REQUIERD_FOR_PLUGIN ON
   )
 
+
+
+if (NOT USE_SYSTEM_${ep_name})
+## #############################################################################
+## Set directories
+## #############################################################################
+
 EP_SetDirectories(${ep_name}
   CMAKE_VAR_EP_NAME ${EP_NAME}
-  ep_build_dirs
+  ep_dirs
   ) 
 
 
@@ -114,7 +126,7 @@ set(ConfigCommand
 ## #############################################################################
 
 ExternalProject_Add(${ep_name}
-  ${ep_build_dirs}
+  ${ep_dirs}
   ${location}
   ${ConfigCommand}
   UPDATE_COMMAND ""
@@ -128,5 +140,8 @@ ExternalProject_Add(${ep_name}
 ExternalProject_Get_Property(${ep_name} binary_dir)
 set(${EP_NAME}_DIR ${binary_dir} PARENT_SCOPE)
 
+endif()
+
+#TODO it si mark as advanced because not really tested yet.
 mark_as_advanced(USE_SYSTEM_${ep_name})
 endfunction()

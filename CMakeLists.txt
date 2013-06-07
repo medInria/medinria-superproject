@@ -48,7 +48,6 @@ set(CMAKE_MODULE_PATH
   ${CMAKE_CURRENT_SOURCE_DIR}/cmake/environment
   ${CMAKE_CURRENT_SOURCE_DIR}/cmake/externals
   ${CMAKE_CURRENT_SOURCE_DIR}/cmake/externals/configuration_steps
-  ${CMAKE_CURRENT_SOURCE_DIR}/cmake/externals/projects_modules
   ${CMAKE_MODULE_PATH}
     )
 
@@ -56,9 +55,14 @@ set(CMAKE_MODULE_PATH
 # Asclepios and visages plugins
 set(${PROJECT_NAME}_CONFIG_FILE "${CMAKE_BINARY_DIR}/${PROJECT_NAME}Config.cmake")
 file(WRITE ${${PROJECT_NAME}_CONFIG_FILE}
-  "set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)\n")  
+  "set(CMAKE_MODULE_PATH 
+    ${CMAKE_MODULE_PATH}
+    \${CMAKE_MODULE_PATH}
+    )\n\n"
+  )  
 
 set(CMAKE_MODULE_PATH
+  ${CMAKE_CURRENT_SOURCE_DIR}/cmake/externals/projects_modules
   ${CMAKE_CURRENT_SOURCE_DIR}/cmake/launchers
   ${CMAKE_CURRENT_SOURCE_DIR}/packaging
   ${CMAKE_CURRENT_SOURCE_DIR}/packaging/windows
@@ -100,13 +104,6 @@ set(${PROJECT_NAME}_VERSION
 
 set(PRIVATE_PLUGINS_DIRS "" CACHE PATH "Folders containing private plugins")
 mark_as_advanced(PRIVATE_PLUGINS_DIRS)
-
-set(MEDINRIA_TEST_DATA_ROOT ${CMAKE_SOURCE_DIR}/medInria-testdata)
-
-set(CMAKE_INSTALL_PREFIX "" CACHE 
-  PATH "If you set this variable all external projects will be installed under this path."
-  )
-mark_as_advanced(CMAKE_INSTALL_PREFIX)    
 
 ## #############################################################################
 ## Add Targets

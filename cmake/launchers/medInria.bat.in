@@ -1,10 +1,10 @@
-REM This .bat sets the environment variables MEDINRIA_PLUGIN_PATH and PATH and launches medinria
+REM This .bat sets the environment variables medInria_PLUGIN_PATH and PATH and launches medInria
 REM Usage : medInria.bat <Configuration> <args>
 @echo off
-set PATH=%PATH%;@dtk_DIR@/bin/%1;@ITK_DIR@/bin/%1;@TTK_DIR@/bin/%1;@VTK_DIR@/bin/%1;@MEDINRIA_DIR@/bin/%1;@QT_BINARY_DIR@
-set MEDINRIA_PLUGIN_PATH=@MEDINRIA_DIR@/plugins/%1:@WIN_PRIVATE_PLUGINS@
+set PATH=%PATH%;@dtk_DIR@/bin/%1;@ITK_DIR@/bin/%1;@TTK_DIR@/bin/%1;@VTK_DIR@/bin/%1;@medInria_DIR@/bin/%1;@QT_BINARY_DIR@
+set medInria_PLUGIN_PATH=@medInria_DIR@/plugins/%1:@WIN_PRIVATE_PLUGINS@
 
-set BIN_PATH=@MEDINRIA_DIR@/bin/%1
+set BIN_PATH=@medInria_DIR@/bin/%1
 
 shift
 set args=%1
