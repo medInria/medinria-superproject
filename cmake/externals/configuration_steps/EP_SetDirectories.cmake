@@ -1,3 +1,16 @@
+##############################################################################
+#
+# medInria
+#
+# Copyright (c) INRIA 2013. All rights reserved.
+# See LICENSE.txt for details.
+# 
+#  This software is distributed WITHOUT ANY WARRANTY; without even
+#  the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+#  PURPOSE.
+#
+################################################################################
+
 function(EP_SetDirectories ep  
   CMAKE_VAR_EP_NAME EP
   build_dirs

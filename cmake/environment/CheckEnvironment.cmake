@@ -1,3 +1,16 @@
+##############################################################################
+#
+# medInria
+#
+# Copyright (c) INRIA 2013. All rights reserved.
+# See LICENSE.txt for details.
+# 
+#  This software is distributed WITHOUT ANY WARRANTY; without even
+#  the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+#  PURPOSE.
+#
+################################################################################
+
 # This file checks that all dependencies are met, and it necessary sets up a few
 # things, like adding the github.com signature to known_hosts.
 

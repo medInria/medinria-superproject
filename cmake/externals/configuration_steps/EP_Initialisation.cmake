@@ -1,3 +1,16 @@
+##############################################################################
+#
+# medInria
+#
+# Copyright (c) INRIA 2013. All rights reserved.
+# See LICENSE.txt for details.
+# 
+#  This software is distributed WITHOUT ANY WARRANTY; without even
+#  the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+#  PURPOSE.
+#
+################################################################################
+
 macro(EP_Initialisation ep 
   USE_SYSTEM use_system_def 
   BUILD_SHARED_LIBS build_shared_libs_def
