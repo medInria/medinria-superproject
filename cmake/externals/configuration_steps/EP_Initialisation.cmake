@@ -38,6 +38,16 @@ if (NOT USE_SYSTEM_${ep})
     ${build_shared_libs_def}
     )
   mark_as_advanced(BUILD_SHARED_LIBS_${ep})
+  
+# Add PIC flag if Static build on UNIX with amd64 arch
+if (UNIX)
+  if (NOT BUILD_SHARED_LIBS_${ep} AND 
+      "${CMAKE_SYSTEM_PROCESSOR}" MATCHES amd64|AMD64|x86_64|X86_64)
+      
+    set(${ep}_c_flags "${${ep}_c_flags} -fPIC")
+    set(${ep}_cxx_flags "${${ep}_cxx_flags} -fPIC")
+  endif()
+endif()  
 
 ## #############################################################################
 ## Add dependencies 

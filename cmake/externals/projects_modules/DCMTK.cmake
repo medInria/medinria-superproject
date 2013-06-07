@@ -46,24 +46,19 @@ if (CTEST_USE_LAUNCHERS)
 endif()
 
 # set compilation flags
-set(c_flags ${ep_common_c_flags})
-set(cxx_flags ${ep_common_cxx_flags})
+set(${ep_name}_c_flags "${ep_common_c_flags} ${${ep_name}_c_flags}")
+set(${ep_name}_cxx_flags "${ep_common_cxx_flags} ${${ep_name}_cxx_flags}")
   
 if (UNIX)
-  set(c_flags "${c_flags} -w")
-  set(cxx_flags "${cxx_flags} -w")
-  # Add PIC flag if Static build on UNIX
-  if (NOT BUILD_SHARED_LIBS_${ep_name})
-    set(c_flags "${c_flags} -fPIC")
-    set(cxx_flags "${cxx_flags} -fPIC")
-  endif()
+  set(${ep_name}_c_flags "${${ep_name}_c_flags} -w")
+  set(${ep_name}_cxx_flags "${${ep_name}_cxx_flags} -w")
 endif()
 
 set(cmake_args
   ${ep_common_cache_args}
   ${ep_project_include_arg}
-  -DCMAKE_C_FLAGS:STRING=${c_flags}
-  -DCMAKE_CXX_FLAGS:STRING=${cxx_flags}  
+  -DCMAKE_C_FLAGS:STRING=${${ep_name}_c_flags}
+  -DCMAKE_CXX_FLAGS:STRING=${${ep_name}_cxx_flags}  
   -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
   -DBUILD_SHARED_LIBS:BOOL=${BUILD_SHARED_LIBS_${ep_name}}
   -DDCMTK_WITH_DOXYGEN:BOOL=OFF
@@ -72,7 +67,6 @@ set(cmake_args
   -DDCMTK_WITH_PNG:BOOL=OFF     
   -DDCMTK_WITH_TIFF:BOOL=OFF    
   -DDCMTK_WITH_XML:BOOL=OFF     
-  -DDCMTK_WITH_ICONV:BOOL=OFF   
   -DDCMTK_OVERWRITE_WIN32_COMPILER_FLAGS:BOOL=OFF
   )
 
@@ -86,6 +80,7 @@ ExternalProject_Add(${ep_name}
   CMAKE_GENERATOR ${gen}
   CMAKE_ARGS ${cmake_args}
   )
+
 
 ## #############################################################################
 ## Finalize
