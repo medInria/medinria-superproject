@@ -25,8 +25,11 @@ set(CMAKE_MODULE_PATH
     "${CMAKE_CURRENT_SOURCE_DIR}/cmake"
     "${CMAKE_CURRENT_SOURCE_DIR}/cmake/externals"
     "${CMAKE_CURRENT_SOURCE_DIR}/cmake/packaging"
-    "${CMAKE_CURRENT_SOURCE_DIR}/medInria/cmake"
-    ${CMAKE_MODULE_PATH})
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/packaging/windows"
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/packaging/linux"
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/packaging/apple"
+    ${CMAKE_MODULE_PATH}
+    )
 
 project(medInria-superProject)
 
@@ -69,18 +72,8 @@ foreach (package ${packages})
 	endforeach()
 endforeach()
 
+# Add CMAKE_MODULE_PATH to medInria-superProjectConfig.cmake, usefull for private plugins.
 file(APPEND ${${PROJECT_NAME}_CONFIG_FILE}
     "set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)\n")
-
-include(RunScripts)
-
-if (APPLE)
-  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/packaging/ApplePackScript.cmake.in
-		 ${PROJECT_BINARY_DIR}/tmp.in)
-  configure_file(${PROJECT_BINARY_DIR}/tmp.in
-		 ${PROJECT_BINARY_DIR}/ApplePackScript.cmake)
-  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/packaging/mac_packager.sh.in
-                 ${PROJECT_BINARY_DIR}/mac_packager.sh)
-endif()
 
 include(Packaging)    
