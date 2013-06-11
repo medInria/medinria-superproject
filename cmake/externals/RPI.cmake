@@ -24,7 +24,11 @@ function(RPI_project)
     ParseProjectArguments(RPI rpip "" "" ${ARGN})
 
     if (NOT DEFINED RPI_SOURCE_DIR)
-        set(location GIT_REPOSITORY "git@github.com:Inria-Asclepios/RPI.git")
+	if(USE_GIT_SSH)
+	    set(location GIT_REPOSITORY "git@github.com:Inria-Asclepios/RPI.git")
+	else()
+	    set(location GIT_REPOSITORY "https://github.com/Inria-Asclepios/RPI.git")
+	endif()
     endif()
 
     SetExternalProjectsDirs(RPI ep_build_dirs)

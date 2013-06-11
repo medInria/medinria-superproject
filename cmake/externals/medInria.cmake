@@ -24,7 +24,11 @@ function(medInria_project)
     ParseProjectArguments(medInria medInriap "" "" ${ARGN})
 
     if (NOT DEFINED medInria_SOURCE_DIR)
-        set(location GIT_REPOSITORY "git@github.com:medInria/medInria-public.git")
+	if(USE_GIT_SSH)
+	    set(location GIT_REPOSITORY "git@github.com:medInria/medInria-public.git")
+	else()
+	    set(location GIT_REPOSITORY "https://github.com/medInria/medInria-public.git")
+	endif()
     endif()
     
     set(custom_update_cmd git pull --ff-only ALWAYS 1)

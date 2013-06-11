@@ -72,6 +72,9 @@ endforeach()
 file(APPEND ${${PROJECT_NAME}_CONFIG_FILE}
     "set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)\n")
 
+option(USE_GIT_SSH "Use by default Git SSH addresses, requires public key set on github" OFF)
+mark_as_advanced(USE_GIT_SSH)
+
 include(RunScripts)
 
 if (APPLE)
