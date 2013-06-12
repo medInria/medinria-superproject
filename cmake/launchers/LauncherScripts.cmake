@@ -11,6 +11,10 @@
 #
 ################################################################################
 
+foreach(dir ${PRIVATE_PLUGINS_DIRS})
+  set(DEV_PLUGINS_DIRS "${DEV_PLUGINS_DIRS}:${dir}/plugins")
+endforeach() 
+
 if (UNIX)
   configure_file(${CMAKE_SOURCE_DIR}/cmake/launchers/medInria.sh.in medInria.sh @ONLY)
 elseif (WIN32)
@@ -23,8 +27,6 @@ elseif (WIN32)
   if (CMAKE_GENERATOR MATCHES "Visual Studio 10")
     set(VS_TYPE "VS100COMNTOOLS")
   endif()
-
-    string(REPLACE ";" ":" WIN_PRIVATE_PLUGINS "${PRIVATE_PLUGINS_DIRS}")
 
     configure_file(${CMAKE_SOURCE_DIR}/cmake/launchers/medInria.bat.in medInria.bat @ONLY)
     configure_file(${CMAKE_SOURCE_DIR}/cmake/launchers/medInria-dev.bat.in medInria-dev.bat @ONLY)

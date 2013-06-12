@@ -101,6 +101,10 @@ set(${PROJECT_NAME}_VERSION
   ${${PROJECT_NAME}_VERSION_MAJOR}.${${PROJECT_NAME}_VERSION_MINOR}.${${PROJECT_NAME}_VERSION_PATCH}
   )
 
+option(USE_GITHUB_SSH 
+  "Use by default Git SSH addresses, requires public key set on github" OFF
+  )
+mark_as_advanced(USE_GITHUB_SSH)
 
 set(PRIVATE_PLUGINS_DIRS "" CACHE PATH "Folders containing private plugins")
 mark_as_advanced(PRIVATE_PLUGINS_DIRS)

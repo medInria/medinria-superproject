@@ -99,6 +99,12 @@ endif()
 ## Test ssh access for github
 ## #############################################################################
 
-include(GithubSshTest)
+set (SKIP_GITHUB_TESTS OFF CACHE BOOL 
+  "Set this to ON to skip GitHub access tests"
+  )
+mark_as_advanced(SKIP_GITHUB_TESTS)
 
+if (NOT ${SKIP_GITHUB_TESTS} AND ${USE_GITHUB_SSH})
+  include(GithubSshTest)
+endif()
 

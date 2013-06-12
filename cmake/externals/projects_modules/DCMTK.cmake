@@ -54,7 +54,7 @@ EP_SetDirectories(${ep_name}
 
 if (NOT DEFINED ${EP_NAME}_SOURCE_DIR)
   set(location 
-  GIT_REPOSITORY "git://github.com/medInria/dcmtk.git"
+  GIT_REPOSITORY "${GITHUB_PREFIX}medInria/dcmtk.git"
   )
 endif()
 

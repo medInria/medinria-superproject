@@ -44,10 +44,17 @@ else()
   set(gen "${CMAKE_GENERATOR}")
 endif()
 
+if(${USE_GITHUB_SSH})
+  set(GITHUB_PREFIX git@github.com:)
+else()
+  set(GITHUB_PREFIX https://github.com/)
+endif()
+
 
 ## #############################################################################
 ## Include cmake modules of external-project
 ## #############################################################################
+
 include(ExternalProject) 
 
 ## #############################################################################

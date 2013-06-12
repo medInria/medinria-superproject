@@ -64,7 +64,7 @@ EP_SetDirectories(${ep_name}
 ## #############################################################################
 
 if (NOT DEFINED ${EP_NAME}_SOURCE_DIR)
-  set(location GIT_REPOSITORY "git@github.com:medInria/medInria-public.git")
+  set(location GIT_REPOSITORY "${GITHUB_PREFIX}medInria/medInria-public.git")
 endif()
 
 set(custom_update_cmd git pull --ff-only ALWAYS 1)

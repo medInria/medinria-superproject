@@ -53,7 +53,7 @@ EP_SetDirectories(${ep_name}
 ## #############################################################################
 
 if (NOT DEFINED ${EP_NAME}_SOURCE_DIR)
-  set(location GIT_REPOSITORY "git@github.com:Inria-Asclepios/RPI.git")
+  set(location GIT_REPOSITORY "${GITHUB_PREFIX}Inria-Asclepios/RPI.git")
 endif()
 
 

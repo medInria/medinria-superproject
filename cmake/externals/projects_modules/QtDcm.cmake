@@ -62,7 +62,7 @@ endif(QT4_FOUND)
 ## #############################################################################
 
 if (NOT DEFINED ${EP_NAME}_SOURCE_DIR)
-  set(location GIT_REPOSITORY "git@github.com:medInria/qtdcm.git")
+  set(location GIT_REPOSITORY "${GITHUB_PREFIX}medInria/qtdcm.git")
 endif()
 
 
