@@ -1,4 +1,4 @@
-##############################################################################
+################################################################################
 #
 # medInria
 #
@@ -12,6 +12,20 @@
 ################################################################################
 
 cmake_minimum_required(VERSION 2.8.9)
+
+## #############################################################################
+## Set CMAKE_BUILD_TYPE to Release by default.
+## #############################################################################
+
+if (DEFINED CMAKE_BUILD_TYPE)
+  set(CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE} CACHE STRING 
+    "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel."
+    )
+else()
+  set(CMAKE_BUILD_TYPE Release CACHE STRING 
+    "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel."
+    )
+endif()
 
 project(medInria-superProject)
 
@@ -55,7 +69,7 @@ set(CMAKE_MODULE_PATH
 # Asclepios and visages plugins
 set(${PROJECT_NAME}_CONFIG_FILE "${CMAKE_BINARY_DIR}/${PROJECT_NAME}Config.cmake")
 file(WRITE ${${PROJECT_NAME}_CONFIG_FILE}
-  "set(CMAKE_MODULE_PATH 
+  "set(CMAKE_MODULE_PATH c
     ${CMAKE_MODULE_PATH}
     \${CMAKE_MODULE_PATH}
     )\n\n"
@@ -74,16 +88,6 @@ set(CMAKE_MODULE_PATH
 ## #############################################################################
 ## Add variables
 ## #############################################################################
-
-if (DEFINED CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE} CACHE STRING 
-    "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel."
-    )
-else()
-  set(CMAKE_BUILD_TYPE Release CACHE STRING 
-    "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel."
-    )
-endif()
 
 set(${PROJECT_NAME}_VERSION_MAJOR 2 CACHE STRING "medInria major version number.")
 mark_as_advanced(${PROJECT_NAME}_VERSION_MAJOR)
