@@ -80,28 +80,10 @@ set(cmake_args
   -DQT_QMAKE_EXECUTABLE:FILEPATH=${QT_QMAKE_EXECUTABLE}
   -DVTK_USE_QT:BOOL=ON
   -DVTK_WRAP_TCL:BOOL=OFF
-  -DBUILD_TESTING:BOOL=OFF  
+  -DBUILD_TESTING:BOOL=OFF 
+  -DVTK_USE_NVCONTROL:BOOL=ON 
   -DVTK_INSTALL_QT_PLUGIN_DIR:STRING=""
   )
-
-# Activate nvidia optimisation ? (currently only for Linux)
-option(TRY_ENABLE_NVCONTROL "Try to enable nvidia optimisation for vtk" OFF)
-mark_as_advanced(TRY_ENABLE_NVCONTROL)
-if(TRY_ENABLE_NVCONTROL)
-  if(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-    execute_process(COMMAND lspci
-      COMMAND grep VGA
-      OUTPUT_VARIABLE PCI_VGA
-      OUTPUT_STRIP_TRAILING_WHITESPACE
-      )
-    if(${PCI_VGA} MATCHES Nvidia|NVIDIA|nvidia)
-      set(cmake_args
-        ${cmake_args}
-        -DVTK_USE_NVCONTROL:BOOL=ON
-        )
-    endif()
-  endif()
-endif()
 
 
 ## #############################################################################
