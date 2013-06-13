@@ -15,7 +15,7 @@ macro(EP_Initialisation ep
   CMAKE_VAR_EP_NAME EP 
   USE_SYSTEM use_system_def 
   BUILD_SHARED_LIBS build_shared_libs_def
-  REQUIERD_FOR_PLUGINS required_for_plugins
+  REQUIRED_FOR_PLUGINS required_for_plugins
   )
 ## #############################################################################
 ## Add variable : do we want use the system version ?
