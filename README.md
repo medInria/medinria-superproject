@@ -1,6 +1,7 @@
 #The medInria superproject 
 
-is a super-build project based on CMake to retrieve and compile all the necessary dependencies as well as medInria.
+is a super-build project based on CMake to retrieve and compile 
+all the necessary dependencies as well as medInria.
 
 ###Installation
 
@@ -16,7 +17,8 @@ For more informations, please see :
 
 ###Contributions
 
-You are welcome to fork the project from github and make a contribution by sending us a pull request.
+You are welcome to fork the project from github and make a contribution 
+by sending us a pull request.
 
 You can also help us to track and correct bug by posting your issue on :
 - https://med.inria.fr/redmine.
@@ -28,7 +30,8 @@ Find more documentation on our wiki :
 
 ###Contact us
 
-Information on how to contact the developers can be found on the medInria web page :
+Information on how to contact the developers can be found 
+on the medInria web page :
 - http://med.inria.fr/
 
 ####License
