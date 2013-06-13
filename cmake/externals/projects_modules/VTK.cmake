@@ -24,7 +24,7 @@ list(APPEND ${ep_name}_dependencies
   Qt4
   )
   
-  
+
 ## #############################################################################
 ## Prepare the project
 ## #############################################################################
@@ -69,6 +69,7 @@ endif()
 if (UNIX)
   set(${ep_name}_c_flags "${${ep_name}_c_flags} -w")
   set(${ep_name}_cxx_flags "${${ep_name}_cxx_flags} -w")
+  set(unix_additional_args -DVTK_USE_NVCONTROL:BOOL=ON)
 endif()
 
 set(cmake_args
@@ -81,7 +82,6 @@ set(cmake_args
   -DVTK_USE_QT:BOOL=ON
   -DVTK_WRAP_TCL:BOOL=OFF
   -DBUILD_TESTING:BOOL=OFF 
-  -DVTK_USE_NVCONTROL:BOOL=ON 
   )
 
 
