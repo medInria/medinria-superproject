@@ -69,7 +69,7 @@ set(CMAKE_MODULE_PATH
 # Asclepios and visages plugins
 set(${PROJECT_NAME}_CONFIG_FILE "${CMAKE_BINARY_DIR}/${PROJECT_NAME}Config.cmake")
 file(WRITE ${${PROJECT_NAME}_CONFIG_FILE}
-  "set(CMAKE_MODULE_PATH c
+  "set(CMAKE_MODULE_PATH 
     ${CMAKE_MODULE_PATH}
     \${CMAKE_MODULE_PATH}
     )\n\n"
@@ -114,6 +114,7 @@ set(PRIVATE_PLUGINS_DIRS "" CACHE PATH "Folders containing private plugins")
 mark_as_advanced(PRIVATE_PLUGINS_DIRS)
 
 ## #############################################################################
+
 ## Add Targets
 ## #############################################################################
 
