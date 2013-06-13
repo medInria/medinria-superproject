@@ -26,12 +26,6 @@ set(ep_common_cxx_flags
   "${CMAKE_CXX_FLAGS} ${CMAKE_CXX_FLAGS_INIT} ${ADDITIONAL_CXX_FLAGS}"
   )
 
-if (${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
-  set(ep_common_cxx_flags 
-    "${ep_common_cxx_flags} -fpermissive "
-    )
-endif()
-
 set(ep_common_cache_args
   -DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}
   -DCMAKE_C_COMPILER:FILEPATH=${CMAKE_C_COMPILER}

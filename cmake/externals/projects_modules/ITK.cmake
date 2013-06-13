@@ -72,7 +72,7 @@ endif()
 # set compilation flags
 if (UNIX)
   set(${ep_name}_c_flags "${${ep_name}_c_flags} -w")
-  set(${ep_name}_cxx_flags "${${ep_name}_cxx_flags} -w")
+  set(${ep_name}_cxx_flags "${${ep_name}_cxx_flags} -w -fpermissive")
 endif()
 
 set(cmake_args
