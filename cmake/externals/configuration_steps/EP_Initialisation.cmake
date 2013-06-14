@@ -37,7 +37,7 @@ if (USE_SYSTEM_${ep})
   #  provide path of project needeed for Asclepios and visages plugins 
   file(APPEND ${${PROJECT_NAME}_CONFIG_FILE}
     "find_package(${EP} REQUIRED
-      ${${EP}_DIR}
+      PATHS ${${EP}_DIR}
       )\n"
     )
   endif()
