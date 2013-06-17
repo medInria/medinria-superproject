@@ -142,6 +142,18 @@ set(${EP_NAME}_DIR ${binary_dir} PARENT_SCOPE)
 
 endif()
 
+
+## #############################################################################
+## Provide path of qmake executable for Asclepios and visages plugins 
+## #############################################################################
+  
+  
+  file(APPEND ${${PROJECT_NAME}_CONFIG_FILE}
+    "set(QT_QMAKE_EXECUTABLE ${QT_QMAKE_EXECUTABLE})
+    find_package(Qt REQUIRED)\n\n"
+    )
+
+
 #TODO it si mark as advanced because not really tested yet.
 mark_as_advanced(USE_SYSTEM_${ep_name})
 endfunction()
