@@ -1,5 +1,4 @@
 #!/bin/bash
 
 export MEDINRIA_PLUGIN_PATH=@medInria_DIR@/plugins:@DEV_PLUGINS_DIRS@ 
-@medInria_EXE_PATH@ $*
-
+exec @medInria_EXE_PATH@ $*
