@@ -28,12 +28,28 @@ option(USE_SYSTEM_${ep}
 
 if (USE_SYSTEM_${ep})
   find_package(${EP} REQUIRED)
-else()
 
 ## #############################################################################
 ## Complete superProjectConfig.cmake
 ## #############################################################################
 
+  if (${required_for_plugins})  
+  #  provide path of project needeed for Asclepios and visages plugins 
+  file(APPEND ${${PROJECT_NAME}_CONFIG_FILE}
+    "find_package(${EP} REQUIRED
+      PATHS ${${EP}_DIR}
+      )\n"
+    )
+  endif()
+
+
+else()
+## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+##      This part will be run only if USED_SYSTEM_EP is set to OFF
+## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  
   if (${required_for_plugins})  
     #  provide path of project needeed for Asclepios and visages plugins 
     file(APPEND ${${PROJECT_NAME}_CONFIG_FILE}

@@ -35,7 +35,7 @@ EP_Initialisation(${ep_name}
   CMAKE_VAR_EP_NAME ${EP_NAME}
   USE_SYSTEM ON 
   BUILD_SHARED_LIBS ON
-  REQUIRED_FOR_PLUGIN ON
+  REQUIRED_FOR_PLUGIN OFF
   )
 
 
@@ -141,6 +141,18 @@ ExternalProject_Get_Property(${ep_name} binary_dir)
 set(${EP_NAME}_DIR ${binary_dir} PARENT_SCOPE)
 
 endif()
+
+
+## #############################################################################
+## Provide path of qmake executable for Asclepios and visages plugins 
+## #############################################################################
+  
+  
+  file(APPEND ${${PROJECT_NAME}_CONFIG_FILE}
+    "set(QT_QMAKE_EXECUTABLE ${QT_QMAKE_EXECUTABLE})
+    find_package(Qt REQUIRED)\n\n"
+    )
+
 
 #TODO it si mark as advanced because not really tested yet.
 mark_as_advanced(USE_SYSTEM_${ep_name})
