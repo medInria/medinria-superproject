@@ -48,12 +48,9 @@ endforeach()
 ## Look for and define the source directory of the project 
 ## #############################################################################
 
-if (EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${ep}/CMakeLists.txt OR 
-EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${ep}/configure
-)
-set(${EP}_SOURCE_DIR SOURCE_DIR 
-  ${CMAKE_CURRENT_SOURCE_DIR}/${ep}
-  )    
+if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${ep}/CMakeLists.txt 
+OR EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${ep}/configure)
+  set(${EP}_SOURCE_DIR SOURCE_DIR ${CMAKE_SOURCE_DIR}/${ep} PARENT_SCOPE)    
 endif()
 
 set(SOURCE_DIR ${CMAKE_SOURCE_DIR}/${ep})
