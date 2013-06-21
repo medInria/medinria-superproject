@@ -16,12 +16,27 @@
 ## Get distribution name and architecture
 ## #############################################################################
 
-execute_process(COMMAND lsb_release -irs
-  COMMAND sed "s/ //"
-  COMMAND sed "s/Fedora/fc/"
-  COMMAND tr -d '\n' 
-  OUTPUT_VARIABLE DISTRIB
+execute_process(COMMAND cat /etc/os-release
+  COMMAND grep "^NAME="
+  COMMAND sed -e "s/NAME=//ig"
+  OUTPUT_VARIABLE NAME
   OUTPUT_STRIP_TRAILING_WHITESPACE
+  )
+  
+execute_process(COMMAND cat /etc/os-release
+  COMMAND grep "^VERSION_ID="
+  COMMAND sed -e "s/VERSION_ID=//ig"
+  OUTPUT_VARIABLE VERSION_ID
+  OUTPUT_STRIP_TRAILING_WHITESPACE
+  )
+  
+execute_process(COMMAND arch 
+  OUTPUT_VARIABLE ARCH 
+  OUTPUT_STRIP_TRAILING_WHITESPACE
+  )
+  
+set(CPACK_PACKAGE_FILE_NAME 
+  "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}-${NAME}_${VERSION_ID}-${ARCH}"
   )
   
 execute_process(COMMAND arch 
@@ -38,7 +53,7 @@ set(CPACK_PACKAGE_FILE_NAME
 ## Set right package generator
 ## #############################################################################
 
-if(${DISTRIB} MATCHES fc|fedora|Centos|centos|SUSE|Suse|suse)
+if(${NAME} MATCHES fc|fedora|Fedora|Centos|centos|SUSE|Suse|suse)
   set(CPACK_GENERATOR RPM)
 else()
   set(CPACK_GENERATOR DEB)

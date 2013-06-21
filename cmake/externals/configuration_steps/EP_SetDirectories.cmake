@@ -38,10 +38,9 @@ set(DIR_NAMES
 
 set(dirs PREFIX ${ep})
 foreach(i RANGE 4)
-list(GET DIR_VAR_NAMES ${i} var)
-list(GET DIR_NAMES     ${i} dir)
-
-set(dirs ${dirs} ${var}_DIR ${ep}/${dir})
+  list(GET DIR_VAR_NAMES ${i} var)
+  list(GET DIR_NAMES     ${i} dir)
+  set(dirs ${dirs} ${var}_DIR ${ep}/${dir})
 endforeach()
 
 ## #############################################################################
