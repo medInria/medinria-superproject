@@ -17,15 +17,17 @@
 ## #############################################################################
 
 execute_process(COMMAND cat /etc/os-release
-  COMMAND grep "^NAME="
-  COMMAND sed -e "s/NAME=//ig"
-  OUTPUT_VARIABLE NAME
+  COMMAND grep "^ID="
+  COMMAND sed -e "s/ID=//ig"
+  COMMAND sed -e "s/\"//ig"    
+  OUTPUT_VARIABLE ID
   OUTPUT_STRIP_TRAILING_WHITESPACE
   )
   
 execute_process(COMMAND cat /etc/os-release
   COMMAND grep "^VERSION_ID="
   COMMAND sed -e "s/VERSION_ID=//ig"
+  COMMAND sed -e "s/\"//ig"  
   OUTPUT_VARIABLE VERSION_ID
   OUTPUT_STRIP_TRAILING_WHITESPACE
   )
@@ -35,19 +37,14 @@ execute_process(COMMAND arch
   OUTPUT_STRIP_TRAILING_WHITESPACE
   )
   
-set(CPACK_PACKAGE_FILE_NAME 
-  "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}-${NAME}_${VERSION_ID}-${ARCH}"
-  )
-  
 execute_process(COMMAND arch 
   OUTPUT_VARIABLE ARCH 
   OUTPUT_STRIP_TRAILING_WHITESPACE
   )
   
 set(CPACK_PACKAGE_FILE_NAME 
-  "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}-${DISTRIB}-${ARCH}"
+  "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}-${ID}_${VERSION_ID}-${ARCH}"
   )
-
  
 ## #############################################################################
 ## Set right package generator
