@@ -48,7 +48,7 @@ set(CPACK_PACKAGE_FILE_NAME
 ## Set right package generator
 ## #############################################################################
 
-if(${NAME} MATCHES fc|fedora|Fedora|Centos|centos|SUSE|Suse|suse)
+if(${DISTRIBUTOR_ID} MATCHES fc|fedora|Fedora|Centos|centos|SUSE|Suse|suse)
   set(CPACK_GENERATOR RPM)
 else()
   set(CPACK_GENERATOR DEB)
