@@ -1,4 +1,4 @@
-##############################################################################
+################################################################################
 #
 # medInria
 #
@@ -11,8 +11,7 @@
 #
 ################################################################################
 
-macro(EP_Initialisation ep
-  CMAKE_VAR_EP_NAME EP 
+macro(ep_Initialisation ep
   USE_SYSTEM use_system_def 
   BUILD_SHARED_LIBS build_shared_libs_def
   REQUIRED_FOR_PLUGINS required_for_plugins
@@ -27,7 +26,7 @@ option(USE_SYSTEM_${ep}
   )
 
 if (USE_SYSTEM_${ep})
-  find_package(${EP} REQUIRED)
+  find_package(${ep} REQUIRED)
 
 ## #############################################################################
 ## Complete superProjectConfig.cmake
@@ -36,8 +35,8 @@ if (USE_SYSTEM_${ep})
   if (${required_for_plugins})  
   #  provide path of project needeed for Asclepios and visages plugins 
   file(APPEND ${${PROJECT_NAME}_CONFIG_FILE}
-    "find_package(${EP} REQUIRED
-      PATHS ${${EP}_DIR}
+    "find_package(${ep} REQUIRED
+      PATHS ${${ep}_DIR}
       )\n"
     )
   endif()
@@ -46,14 +45,14 @@ if (USE_SYSTEM_${ep})
 else()
 ## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-##      This part will be run only if USED_SYSTEM_EP is set to OFF
+##      This part will be run only if USED_SYSTEM_ep is set to OFF
 ## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   
   if (${required_for_plugins})  
     #  provide path of project needeed for Asclepios and visages plugins 
     file(APPEND ${${PROJECT_NAME}_CONFIG_FILE}
-      "find_package(${EP} REQUIRED
+      "find_package(${ep} REQUIRED
         PATHS \"${CMAKE_BINARY_DIR}/${ep}\" 
         PATH_SUFFIXES install build
         )\n"

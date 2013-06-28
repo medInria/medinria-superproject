@@ -14,15 +14,14 @@
 #TODO This module need test. Not sure it actually works.
 
 function(Qt4_project)
+set(ep Qt4)
 
-set(ep_name Qt4)
-set(EP_NAME Qt4)
 
 ## #############################################################################
 ## List the dependencies of the project
 ## #############################################################################
 
-list(APPEND ${ep_name}_dependencies 
+list(APPEND ${ep}_dependencies 
   ""
   )
   
@@ -31,23 +30,20 @@ list(APPEND ${ep_name}_dependencies
 ## Prepare the project
 ## #############################################################################
 
-EP_Initialisation(${ep_name}
-  CMAKE_VAR_EP_NAME ${EP_NAME}
+EP_Initialisation(${ep}
   USE_SYSTEM ON 
   BUILD_SHARED_LIBS ON
   REQUIRED_FOR_PLUGIN OFF
   )
 
 
-
-if (NOT USE_SYSTEM_${ep_name})
+if (NOT USE_SYSTEM_${ep})
 ## #############################################################################
 ## Set directories
 ## #############################################################################
 
-EP_SetDirectories(${ep_name}
-  CMAKE_VAR_EP_NAME ${EP_NAME}
-  ep_dirs
+EP_SetDirectories(${ep}
+  EP_DIRECTORIES ep_dirs
   ) 
 
 
@@ -55,7 +51,7 @@ EP_SetDirectories(${ep_name}
 ## Define repository where get the sources
 ## #############################################################################
 
-if (NOT DEFINED ${EP_NAME}_SOURCE_DIR)
+if (NOT DEFINED ${ep}_SOURCE_DIR)
     set(location
       URL "http://releases.qt-project.org/qt4/source/qt-everywhere-opensource-src-4.8.4.tar.gz"
       URL_MD5 "89c5ecba180cae74c66260ac732dc5cb"
@@ -121,24 +117,17 @@ set(ConfigCommand
   ${QtPlatformOptions}
   )
 
+
 ## #############################################################################
 ## Add external-project
 ## #############################################################################
 
-ExternalProject_Add(${ep_name}
+ExternalProject_Add(${ep}
   ${ep_dirs}
   ${location}
   ${ConfigCommand}
   UPDATE_COMMAND ""
   )
-
-
-## #############################################################################
-## Set variable to provide infos about the project
-## #############################################################################
-
-ExternalProject_Get_Property(${ep_name} binary_dir)
-set(${EP_NAME}_DIR ${binary_dir} PARENT_SCOPE)
 
 endif()
 
@@ -155,5 +144,5 @@ endif()
 
 
 #TODO it si mark as advanced because not really tested yet.
-mark_as_advanced(USE_SYSTEM_${ep_name})
+mark_as_advanced(USE_SYSTEM_${ep})
 endfunction()
