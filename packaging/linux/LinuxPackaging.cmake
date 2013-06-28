@@ -16,22 +16,20 @@
 ## Get distribution name and architecture
 ## #############################################################################
 
-execute_process(COMMAND cat /etc/os-release
-  COMMAND grep "^ID="
-  COMMAND sed -e "s/ID=//ig"
-  COMMAND sed -e "s/\"//ig"    
-  OUTPUT_VARIABLE ID
+execute_process(COMMAND lsb_release -a
+  COMMAND grep "^Distributor ID:" 
+  COMMAND sed -e "s/Distributor ID://ig"
+  OUTPUT_VARIABLE DISTRIBUTOR_ID
   OUTPUT_STRIP_TRAILING_WHITESPACE
   )
   
-execute_process(COMMAND cat /etc/os-release
-  COMMAND grep "^VERSION_ID="
-  COMMAND sed -e "s/VERSION_ID=//ig"
-  COMMAND sed -e "s/\"//ig"  
-  OUTPUT_VARIABLE VERSION_ID
+execute_process(COMMAND lsb_release -a
+  COMMAND grep "^Release:"
+  COMMAND sed -e "s/Release://ig"
+  OUTPUT_VARIABLE RELEASE
   OUTPUT_STRIP_TRAILING_WHITESPACE
   )
-  
+
 execute_process(COMMAND arch 
   OUTPUT_VARIABLE ARCH 
   OUTPUT_STRIP_TRAILING_WHITESPACE
@@ -43,7 +41,7 @@ execute_process(COMMAND arch
   )
   
 set(CPACK_PACKAGE_FILE_NAME 
-  "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}-${ID}_${VERSION_ID}-${ARCH}"
+  "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}-${DISTRIBUTOR_ID}_${RELEASE}-${ARCH}"
   )
  
 ## #############################################################################
