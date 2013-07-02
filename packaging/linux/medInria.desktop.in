@@ -5,7 +5,6 @@ GenericName=Medical Imaging Platform
 Comment=Process and Visualize Medical Images
 Icon=@CPACK_PACKAGING_INSTALL_PREFIX@/share/icons/medInria.png
 Exec=medInria %u
-TryExec=@CPACK_PACKAGING_INSTALL_PREFIX@/bin/medInria_launcher.sh %u
 Terminal=false
 Categories=Graphics;Science;MedicalSoftware;Qt;Viewer;
 MimeType=dcm;img;mha;nii;nii.gz;vtk;fib;roi;

@@ -19,5 +19,5 @@ rm -rf @CPACK_PACKAGING_INSTALL_PREFIX@/bin/itk*
 rm -rf @CPACK_PACKAGING_INSTALL_PREFIX@/bin/dtk*
 
 # Create Symbolic link
-ln -s @CPACK_PACKAGING_INSTALL_PREFIX@/share/applications/medInria.desktop $HOME/.local/share/applications/medInria.desktop
+ln -s @CPACK_PACKAGING_INSTALL_PREFIX@/share/applications/medInria.desktop /usr/share/applications/medInria.desktop
 ln -s @CPACK_PACKAGING_INSTALL_PREFIX@/bin/medInria_launcher.sh /usr/bin/medInria
