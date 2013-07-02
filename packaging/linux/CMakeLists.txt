@@ -27,7 +27,6 @@ configure_file(${CMAKE_SOURCE_DIR}/packaging/linux/medInria.desktop.in
 
 install(PROGRAMS 
   ${CMAKE_BINARY_DIR}/packaging/linux/medInria_launcher.sh
-  ${CMAKE_BINARY_DIR}/packaging/linux/medInria.desktop  
   DESTINATION bin
   )
   
