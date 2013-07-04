@@ -65,13 +65,11 @@ set(CPACK_NSIS_DELETE_ICONS_EXTRA "
 	Delete '\$SMPROGRAMS\\\\$MUI_TEMP\\\\*.*'
 ")
 
+file(TO_CMAKE_PATH PRIVATE_PLUGINS_DIRS PRIVATE_PLUGINS_DIRS)
 if (NOT PRIVATE_PLUGINS_DIRS STREQUAL "")
-    message(WARNING "PRIVATE_PLUGINS_DIRS : Be careful to use '/' in your plugin paths and to end each path with '/' to copy the private plugins in the same level as the public plugins. Do not forget to separate each path with ';'")
     foreach(pluginpath ${PRIVATE_PLUGINS_DIRS}) 
         install(DIRECTORY ${pluginpath} DESTINATION plugins COMPONENT Runtime FILES_MATCHING PATTERN "*${CMAKE_SHARED_LIBRARY_SUFFIX}")
     endforeach()
-else()
-    message(WARNING "PACKAGING : If you want to add private plugins to your package don't forget to set the PRIVATE_PLUGINS_DIRS variable in the cache.")
 endif()
 
 #${CMAKE_CFG_INTDIR}
