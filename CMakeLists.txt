@@ -49,7 +49,7 @@ list(APPEND external_projects
   ITK 
   DCMTK 
   TTK 
-  QtDcm 
+  QtDCM 
   RPI 
   medInria
   )
