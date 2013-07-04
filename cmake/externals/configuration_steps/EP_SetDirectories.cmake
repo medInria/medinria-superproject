@@ -1,4 +1,4 @@
-##############################################################################
+################################################################################
 #
 # medInria
 #
@@ -11,9 +11,8 @@
 #
 ################################################################################
 
-function(EP_SetDirectories ep  
-  CMAKE_VAR_EP_NAME EP
-  ep_dirs
+function(ep_SetDirectories ep  
+  EP_DIRECTORIES ep_dirs
   )
 
 ## #############################################################################
@@ -38,10 +37,9 @@ set(DIR_NAMES
 
 set(dirs PREFIX ${ep})
 foreach(i RANGE 4)
-list(GET DIR_VAR_NAMES ${i} var)
-list(GET DIR_NAMES     ${i} dir)
-
-set(dirs ${dirs} ${var}_DIR ${ep}/${dir})
+  list(GET DIR_VAR_NAMES ${i} var)
+  list(GET DIR_NAMES     ${i} dir)
+  set(dirs ${dirs} ${var}_DIR ${ep}/${dir})
 endforeach()
 
 ## #############################################################################
@@ -50,7 +48,7 @@ endforeach()
 
 if(EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${ep}/CMakeLists.txt 
 OR EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${ep}/configure)
-  set(${EP}_SOURCE_DIR SOURCE_DIR ${CMAKE_SOURCE_DIR}/${ep} PARENT_SCOPE)    
+  set(${ep}_SOURCE_DIR SOURCE_DIR ${CMAKE_SOURCE_DIR}/${ep} PARENT_SCOPE)    
 endif()
 
 set(SOURCE_DIR ${CMAKE_SOURCE_DIR}/${ep})

@@ -1,5 +1,4 @@
-
-##############################################################################
+################################################################################
 #
 # medInria
 #
@@ -13,22 +12,21 @@
 ################################################################################
 
 function(medInria_project)
+set(ep medInria)
 
-set(ep_name medInria)
-set(EP_NAME medInria)
 
 ## #############################################################################
 ## List the dependencies of the project
 ## #############################################################################
 
-list(APPEND ${ep_name}_dependencies 
+list(APPEND ${ep}_dependencies 
   Qt4 
   dtk 
   DCMTK 
   ITK 
   VTK 
   TTK 
-  QtDcm 
+  QtDCM
   RPI
   )
   
@@ -37,25 +35,25 @@ set(MEDINRIA_TEST_DATA_ROOT
   "Root directory of the data used for the test of medInria")
 mark_as_advanced(MEDINRIA_TEST_DATA_ROOT)  
   
+  
 ## #############################################################################
 ## Prepare the project
 ## ############################################################################# 
 
-EP_Initialisation(${ep_name}  
-  CMAKE_VAR_EP_NAME ${EP_NAME}
+EP_Initialisation(${ep}  
   USE_SYSTEM OFF 
   BUILD_SHARED_LIBS ON
   REQUIRED_FOR_PLUGINS ON
   )
 
-if (NOT USE_SYSTEM_${ep_name})
+
+if (NOT USE_SYSTEM_${ep})
 ## #############################################################################
 ## Set directories
 ## #############################################################################
 
-EP_SetDirectories(${ep_name}
-  CMAKE_VAR_EP_NAME ${EP_NAME}
-  ep_dirs
+EP_SetDirectories(${ep}
+  EP_DIRECTORIES ep_dirs
   )
 
 
@@ -63,7 +61,7 @@ EP_SetDirectories(${ep_name}
 ## Define repository where get the sources
 ## #############################################################################
 
-if (NOT DEFINED ${EP_NAME}_SOURCE_DIR)
+if (NOT DEFINED ${ep}_SOURCE_DIR)
   set(location GIT_REPOSITORY "${GITHUB_PREFIX}medInria/medInria-public.git")
 endif()
 
@@ -76,16 +74,16 @@ set(custom_update_cmd git pull --ff-only ALWAYS 1)
 
 # set compilation flags
 if (UNIX)
-  set(${ep_name}_c_flags "${${ep_name}_c_flags} -Wall")
-  set(${ep_name}_cxx_flags "${${ep_name}_cxx_flags} -Wall")
+  set(${ep}_c_flags "${${ep}_c_flags} -Wall")
+  set(${ep}_cxx_flags "${${ep}_cxx_flags} -Wall")
 endif()
 
 set(cmake_args
    ${ep_common_cache_args}
-  -DCMAKE_C_FLAGS:STRING=${${ep_name}_c_flags}
-  -DCMAKE_CXX_FLAGS:STRING=${${ep_name}_cxx_flags}
+  -DCMAKE_C_FLAGS:STRING=${${ep}_c_flags}
+  -DCMAKE_CXX_FLAGS:STRING=${${ep}_cxx_flags}
   -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
-  -DBUILD_SHARED_LIBS:BOOL=${BUILD_SHARED_LIBS_${ep_name}}
+  -DBUILD_SHARED_LIBS:BOOL=${BUILD_SHARED_LIBS_${ep}}
   -DQT_QMAKE_EXECUTABLE:FILEPATH=${QT_QMAKE_EXECUTABLE}
   -DDCMTK_DIR:FILEPATH=${DCMTK_DIR}
   -Ddtk_DIR:FILEPATH=${dtk_DIR}
@@ -102,13 +100,13 @@ set(cmake_args
 ## Add external-project
 ## #############################################################################
 
-ExternalProject_Add(${ep_name}
+ExternalProject_Add(${ep}
   ${ep_dirs}
   ${location}
   UPDATE_COMMAND ${custom_update_cmd}
   CMAKE_GENERATOR ${gen}
   CMAKE_ARGS ${cmake_args}
-  DEPENDS ${${ep_name}_dependencies}
+  DEPENDS ${${ep}_dependencies}
   INSTALL_COMMAND ""
   )
 
@@ -117,24 +115,24 @@ ExternalProject_Add(${ep_name}
 ## Set variable to provide infos about the project
 ## #############################################################################
 
-ExternalProject_Get_Property(${ep_name} binary_dir)
-set(${EP_NAME}_DIR ${binary_dir} PARENT_SCOPE)
+ExternalProject_Get_Property(${ep} binary_dir)
+set(${ep}_DIR ${binary_dir} PARENT_SCOPE)
 
-ExternalProject_Get_Property(${ep_name} source_dir)
-set(${EP_NAME}_SOURCE_DIR ${source_dir} PARENT_SCOPE)
+ExternalProject_Get_Property(${ep} source_dir)
+set(${ep}_SOURCE_DIR ${source_dir} PARENT_SCOPE)
 
 
 if(APPLE)
-  set(${EP_NAME}_EXE_PATH 
+  set(${ep}_EXE_PATH 
     ${binary_dir}/bin/medInria.app/Contents/MacOS/medInria PARENT_SCOPE
     )
 
 elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")    
-  set(${EP_NAME}_EXE_PATH 
+  set(${ep}_EXE_PATH 
     ${binary_dir}/bin/medInria PARENT_SCOPE
     )
 endif()
 
-endif()
+endif() #NOT USE_SYSTEM_ep
 
 endfunction()

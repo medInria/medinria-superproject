@@ -1,4 +1,4 @@
-##############################################################################
+################################################################################
 #
 # medInria
 #
@@ -12,15 +12,14 @@
 ################################################################################
 
 function(DCMTK_project)
+set(ep DCMTK)
 
-set(ep_name DCMTK)
-set(EP_NAME DCMTK)
 
 ## #############################################################################
 ## List the dependencies of the project
 ## #############################################################################
 
-list(APPEND ${ep_name}_dependencies 
+list(APPEND ${ep}_dependencies 
   ""
   )
   
@@ -29,22 +28,20 @@ list(APPEND ${ep_name}_dependencies
 ## Prepare the project
 ## ############################################################################# 
 
-EP_Initialisation(${ep_name}  
-  CMAKE_VAR_EP_NAME ${EP_NAME}
+EP_Initialisation(${ep}  
   USE_SYSTEM OFF 
-  BUILD_SHARED_LIBS OFF
+  BUILD_SHARED_LIBS ON
   REQUIRED_FOR_PLUGINS OFF
   )
 
 
-if (NOT USE_SYSTEM_${ep_name})
+if (NOT USE_SYSTEM_${ep})
 ## #############################################################################
 ## Set directories
 ## #############################################################################
 
-EP_SetDirectories(${ep_name}
-  CMAKE_VAR_EP_NAME ${EP_NAME}
-  ep_dirs
+EP_SetDirectories(${ep}
+  EP_DIRECTORIES ep_dirs
   )
 
 
@@ -52,7 +49,7 @@ EP_SetDirectories(${ep_name}
 ## Define repository where get the sources
 ## #############################################################################
 
-if (NOT DEFINED ${EP_NAME}_SOURCE_DIR)
+if (NOT DEFINED ${ep}_SOURCE_DIR)
   set(location 
   GIT_REPOSITORY "${GITHUB_PREFIX}medInria/dcmtk.git"
   )
@@ -64,7 +61,7 @@ endif()
 ## #############################################################################
 
 if (WIN32)
-  set(BUILD_SHARED_LIBS_${ep_name} OFF)
+  set(BUILD_SHARED_LIBS_${ep} OFF)
 endif()
 
 set(ep_optional_args)
@@ -76,17 +73,17 @@ endif()
 
 # set compilation flags
 if (UNIX)
-  set(${ep_name}_c_flags "${${ep_name}_c_flags} -w")
-  set(${ep_name}_cxx_flags "${${ep_name}_cxx_flags} -w")
+  set(${ep}_c_flags "${${ep}_c_flags} -w")
+  set(${ep}_cxx_flags "${${ep}_cxx_flags} -w")
 endif()
 
 set(cmake_args
   ${ep_common_cache_args}
   ${ep_project_include_arg}
-  -DCMAKE_C_FLAGS:STRING=${${ep_name}_c_flags}
-  -DCMAKE_CXX_FLAGS:STRING=${${ep_name}_cxx_flags}  
+  -DCMAKE_C_FLAGS:STRING=${${ep}_c_flags}
+  -DCMAKE_CXX_FLAGS:STRING=${${ep}_cxx_flags}  
   -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
-  -DBUILD_SHARED_LIBS:BOOL=${BUILD_SHARED_LIBS_${ep_name}}
+  -DBUILD_SHARED_LIBS:BOOL=${BUILD_SHARED_LIBS_${ep}}
   -DDCMTK_WITH_DOXYGEN:BOOL=OFF
   -DDCMTK_WITH_ZLIB:BOOL=OFF    
   -DDCMTK_WITH_OPENSSL:BOOL=OFF 
@@ -96,11 +93,12 @@ set(cmake_args
   -DDCMTK_OVERWRITE_WIN32_COMPILER_FLAGS:BOOL=OFF
   )
 
+
 ## #############################################################################
 ## Add external-project
 ## #############################################################################
 
-ExternalProject_Add(${ep_name}
+ExternalProject_Add(${ep}
   ${ep_dirs}
   ${location}
   CMAKE_GENERATOR ${gen}
@@ -112,8 +110,8 @@ ExternalProject_Add(${ep_name}
 ## Set variable to provide infos about the project
 ## #############################################################################
 
-ExternalProject_Get_Property(${ep_name} install_dir)
-set(${EP_NAME}_DIR ${install_dir} PARENT_SCOPE)
+ExternalProject_Get_Property(${ep} install_dir)
+set(${ep}_DIR ${install_dir} PARENT_SCOPE)
 
 endif()
 
