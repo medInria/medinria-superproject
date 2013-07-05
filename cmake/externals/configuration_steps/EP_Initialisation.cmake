@@ -75,8 +75,8 @@ else()
 ## Set compilation flags
 ## #############################################################################
   
-  set(${ep_name}_c_flags ${ep_common_c_flags})
-  set(${ep_name}_cxx_flags ${ep_common_cxx_flags})
+  set(${ep}_c_flags ${ep_common_c_flags})
+  set(${ep}_cxx_flags ${ep_common_cxx_flags})
   
   # Add PIC flag if Static build on UNIX with amd64 arch
   if (UNIX)
