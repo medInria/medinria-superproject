@@ -89,21 +89,35 @@ set(CMAKE_MODULE_PATH
 ## Add variables
 ## #############################################################################
 
-set(${PROJECT_NAME}_VERSION_MAJOR 2 CACHE STRING "medInria major version number.")
+set(${PROJECT_NAME}_VERSION_MAJOR 2 CACHE STRING 
+  "medInria major version number."
+  )
 mark_as_advanced(${PROJECT_NAME}_VERSION_MAJOR)
 
-set(${PROJECT_NAME}_VERSION_MINOR 1 CACHE STRING "medInria minor version number.")
+set(${PROJECT_NAME}_VERSION_MINOR 1 CACHE STRING 
+  "medInria minor version number."
+  )
 mark_as_advanced(${PROJECT_NAME}_VERSION_MINOR)
 
-set(${PROJECT_NAME}_VERSION_PATCH 0 CACHE STRING "medInria build version number.")
+set(${PROJECT_NAME}_VERSION_PATCH 0 CACHE STRING 
+  "medInria build version number."
+  )
 mark_as_advanced(${PROJECT_NAME}_VERSION_PATCH)
 
-set(${PROJECT_NAME}_VERSION_TWEAK git CACHE STRING "medInria development marker.")
+set(${PROJECT_NAME}_VERSION_TWEAK git CACHE STRING 
+  "medInria development marker."
+  )
 mark_as_advanced(${PROJECT_NAME}_VERSION_TWEAK)
 
-set(${PROJECT_NAME}_VERSION 
-  ${${PROJECT_NAME}_VERSION_MAJOR}.${${PROJECT_NAME}_VERSION_MINOR}.${${PROJECT_NAME}_VERSION_PATCH}.${${PROJECT_NAME}_VERSION_TWEAK}
-  )
+if (NOT ${${PROJECT_NAME}_VERSION_TWEAK} STREQUAL "")
+  set(${PROJECT_NAME}_VERSION 
+    ${${PROJECT_NAME}_VERSION_MAJOR}.${${PROJECT_NAME}_VERSION_MINOR}.${${PROJECT_NAME}_VERSION_PATCH}.${${PROJECT_NAME}_VERSION_TWEAK}
+    )
+else()
+  set(${PROJECT_NAME}_VERSION
+    ${${PROJECT_NAME}_VERSION_MAJOR}.${${PROJECT_NAME}_VERSION_MINOR}.${${PROJECT_NAME}_VERSION_PATCH}
+    )
+endif()
 
 option(USE_GITHUB_SSH 
   "Use by default Git SSH addresses, requires public key set on github" OFF
