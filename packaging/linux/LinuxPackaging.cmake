@@ -18,14 +18,14 @@
 
 execute_process(COMMAND lsb_release -a
   COMMAND grep "^Distributor ID:" 
-  COMMAND sed -e "s/Distributor ID://ig"
+  COMMAND sed -e "s/Distributor ID:[ \t]*//ig"
   OUTPUT_VARIABLE DISTRIBUTOR_ID
   OUTPUT_STRIP_TRAILING_WHITESPACE
   )
   
 execute_process(COMMAND lsb_release -a
   COMMAND grep "^Release:"
-  COMMAND sed -e "s/Release://ig"
+  COMMAND sed -e "s/Release:[ \t]*//ig"
   OUTPUT_VARIABLE RELEASE
   OUTPUT_STRIP_TRAILING_WHITESPACE
   )
