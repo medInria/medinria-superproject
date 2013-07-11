@@ -20,7 +20,17 @@ project(medInria_launcher)
 configure_file(${CMAKE_SOURCE_DIR}/packaging/linux/medInria_launcher.sh.in 
   ${CMAKE_BINARY_DIR}/packaging/linux/medInria_launcher.sh
   )
+  
+configure_file(${CMAKE_SOURCE_DIR}/packaging/linux/medInria.desktop.in 
+  ${CMAKE_BINARY_DIR}/packaging/linux/medInria.desktop
+  )
 
-install(PROGRAMS ${CMAKE_BINARY_DIR}/packaging/linux/medInria_launcher.sh 
+install(PROGRAMS 
+  ${CMAKE_BINARY_DIR}/packaging/linux/medInria_launcher.sh
   DESTINATION bin
+  )
+  
+  install(FILES 
+  ${CMAKE_BINARY_DIR}/packaging/linux/medInria.desktop  
+  DESTINATION share/applications
   )
