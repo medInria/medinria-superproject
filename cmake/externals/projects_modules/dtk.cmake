@@ -96,6 +96,7 @@ set(cmake_args
 ExternalProject_Add(${ep}
   ${location}
   ${ep_dirs}
+  UPDATE_COMMAND ${git_update_cmd}
   CMAKE_GENERATOR ${gen}
   CMAKE_ARGS ${cmake_args}
   DEPENDS ${${ep}_dependencies}

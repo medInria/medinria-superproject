@@ -38,6 +38,13 @@ else()
   set(gen "${CMAKE_GENERATOR}")
 endif()
 
+# Command for the update of git based projects
+set(git_update_cmd git pull --ff-only ALWAYS 1)
+
+# Command for the update of svn based projects
+set(svn_update_cmd svn update ALWAYS 1)
+
+# Prefix used to retreive projects on github
 if(${USE_GITHUB_SSH})
   set(GITHUB_PREFIX git@github.com:)
 else()
