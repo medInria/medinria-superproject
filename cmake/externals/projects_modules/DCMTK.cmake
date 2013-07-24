@@ -57,6 +57,16 @@ endif()
 
 
 ## #############################################################################
+## Define update command
+## #############################################################################
+
+set (update_cmd ${default_update_cmd})
+if(UPDATE_EXTERNALS_PROJECT)
+  set(update_cmd ${git_update_cmd})
+endif()
+
+
+## #############################################################################
 ## Add specific cmake arguments for configuration step of the project
 ## #############################################################################
 
@@ -64,7 +74,7 @@ if (WIN32)
   set(BUILD_SHARED_LIBS_${ep} OFF)
 endif()
 
-set(ep_optional_args)
+set(ep_optional_args) #TODO is this really usefull for us ?
 if (CTEST_USE_LAUNCHERS)
   set(ep_optional_args
     "-DCMAKE_PROJECT_DCMTK_INCLUDE:FILEPATH=${CMAKE_ROOT}/Modules/CTestUseLaunchers.cmake"
@@ -101,6 +111,7 @@ set(cmake_args
 ExternalProject_Add(${ep}
   ${ep_dirs}
   ${location}
+  UPDATE_COMMAND ${update_cmd}  
   CMAKE_GENERATOR ${gen}
   CMAKE_ARGS ${cmake_args}
   )

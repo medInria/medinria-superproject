@@ -65,7 +65,15 @@ if (NOT DEFINED ${ep}_SOURCE_DIR)
   set(location GIT_REPOSITORY "${GITHUB_PREFIX}medInria/medInria-public.git")
 endif()
 
-set(custom_update_cmd git pull --ff-only ALWAYS 1)
+
+## #############################################################################
+## Define update command
+## #############################################################################
+
+set (update_cmd ${default_update_cmd})
+if(UPDATE_EXTERNALS_PROJECT)
+  set(update_cmd ${git_update_cmd})
+endif()
 
 
 ## #############################################################################
@@ -107,7 +115,7 @@ set(cmake_args
 ExternalProject_Add(${ep}
   ${ep_dirs}
   ${location}
-  UPDATE_COMMAND ${custom_update_cmd}
+  UPDATE_COMMAND ${update_cmd}
   CMAKE_GENERATOR ${gen}
   CMAKE_ARGS ${cmake_args}
   DEPENDS ${${ep}_dependencies}

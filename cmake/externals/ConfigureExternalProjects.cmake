@@ -38,6 +38,30 @@ else()
   set(gen "${CMAKE_GENERATOR}")
 endif()
 
+option(UPDATE_EXTERNALS_PROJECT 
+  "If set to ON, external projects will be updated"
+  OFF
+  )
+if(UPDATE_EXTERNALS_PROJECT)
+  message(WARNING 
+  "Be sure to be on the master of the git based projects, or you may loose your work"
+  )
+endif()
+
+set(default_update_cmd 
+  ALWAYS 1 
+  COMMENT "No update step"
+  )
+set(git_update_cmd git pull --ff-only 
+  ALWAYS 1 
+  COMMENT "Updating using git"
+  )
+set(svn_update_cmd svn update 
+  ALWAYS 1
+  COMMENT "Updating using svn"
+  )
+
+# Prefix used to retreive projects on github
 if(${USE_GITHUB_SSH})
   set(GITHUB_PREFIX git@github.com:)
 else()
