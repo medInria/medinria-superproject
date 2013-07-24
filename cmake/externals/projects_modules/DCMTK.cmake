@@ -101,7 +101,7 @@ set(cmake_args
 ExternalProject_Add(${ep}
   ${ep_dirs}
   ${location}
-  UPDATE_COMMAND ${default_update_cmd}
+  UPDATE_COMMAND ""
   CMAKE_GENERATOR ${gen}
   CMAKE_ARGS ${cmake_args}
   )
@@ -119,14 +119,7 @@ set(${ep}_DIR ${install_dir} PARENT_SCOPE)
 ## Add an update target
 ## #############################################################################
 
-ExternalProject_Get_Property(${ep} source_dir)
-
-add_custom_target(update-${ep} 
-  COMMAND ${git_update_cmd}
-  WORKING_DIRECTORY ${source_dir}
-  COMMENT "Updating '${ep}' with '${git_update_cmd}'"
-  )
-set(update-${ep} ON PARENT_SCOPE)
+EP_AddUpdateTarget(${ep})
 
 
 endif() #NOT USE_SYSTEM_ep
