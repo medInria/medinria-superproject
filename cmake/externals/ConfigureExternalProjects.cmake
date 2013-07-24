@@ -86,10 +86,10 @@ endmacro()
 foreach (external_project ${external_projects})
     call(${external_project}_project)
     if(update-${external_project})
-      set(update_dependecies ${update_dependecies} update-${external_project})
+      set(update_dependencies ${update_dependencies} update-${external_project})
     endif()
 endforeach()
 
 add_custom_target(update
-  DEPENDS ${update_dependecies}
+  DEPENDS ${update_dependencies}
   )
