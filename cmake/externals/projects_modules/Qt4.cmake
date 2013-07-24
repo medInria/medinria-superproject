@@ -126,8 +126,15 @@ ExternalProject_Add(${ep}
   ${ep_dirs}
   ${location}
   ${ConfigCommand}
-  UPDATE_COMMAND ${default_update_cmd}
+  UPDATE_COMMAND ""
   )
+
+
+## #############################################################################
+## Add an update target
+## #############################################################################
+
+EP_AddUpdateTarget(${ep})
 
 
 endif() #NOT USE_SYSTEM_ep

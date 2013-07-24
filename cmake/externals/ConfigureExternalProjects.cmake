@@ -38,17 +38,6 @@ else()
   set(gen "${CMAKE_GENERATOR}")
 endif()
 
-
-# Update commands
-set(default_update_cmd ""
-  ALWAYS 1 
-  COMMENT ""
-  )
-set(git_update_cmd git pull --ff-only
-  )
-set(svn_update_cmd svn update
-  )
-
 if(${USE_GITHUB_SSH})
   set(GITHUB_PREFIX git@github.com:)
 else()
@@ -68,6 +57,7 @@ include(ExternalProject)
 
 include(EP_Initialisation)
 include(EP_SetDirectories)
+include(EP_AddUpdateTarget) 
 
 
 ## #############################################################################

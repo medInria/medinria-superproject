@@ -88,7 +88,7 @@ set(cmake_args
 ExternalProject_Add(${ep}
   ${ep_dirs}
   ${location}
-  UPDATE_COMMAND ${default_update_cmd}
+  UPDATE_COMMAND ""
   CMAKE_GENERATOR ${gen}
   CMAKE_ARGS ${cmake_args}
   DEPENDS ${${ep}_dependencies}
@@ -103,6 +103,14 @@ ExternalProject_Add(${ep}
 ExternalProject_Get_Property(${ep} binary_dir)
 set(${ep}_DIR ${binary_dir} PARENT_SCOPE)
 
-endif()
+
+## #############################################################################
+## Add an update target
+## #############################################################################
+
+EP_AddUpdateTarget(${ep})
+
+
+endif() #NOT USE_SYSTEM_ep
 
 endfunction()
