@@ -57,6 +57,16 @@ endif()
 
 
 ## #############################################################################
+## Define update command
+## #############################################################################
+
+set (update_cmd ${default_update_cmd})
+if(UPDATE_EXTERNALS_PROJECT)
+  set(update_cmd ${git_update_cmd})
+endif()
+
+
+## #############################################################################
 ## Add specific cmake arguments for configuration step of the project
 ## #############################################################################
 
@@ -96,7 +106,7 @@ set(cmake_args
 ExternalProject_Add(${ep}
   ${location}
   ${ep_dirs}
-  UPDATE_COMMAND ${git_update_cmd}
+  UPDATE_COMMAND ${update_cmd}
   CMAKE_GENERATOR ${gen}
   CMAKE_ARGS ${cmake_args}
   DEPENDS ${${ep}_dependencies}
