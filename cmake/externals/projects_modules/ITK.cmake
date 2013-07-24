@@ -95,7 +95,7 @@ set(cmake_args
 ExternalProject_Add(${ep}
   ${ep_dirs}
   ${location}
-  UPDATE_COMMAND ""
+  UPDATE_COMMAND ${default_update_cmd}
   CMAKE_GENERATOR ${gen}
   CMAKE_ARGS ${cmake_args}
   INSTALL_COMMAND ""
@@ -109,6 +109,7 @@ ExternalProject_Add(${ep}
 ExternalProject_Get_Property(ITK binary_dir)
 set(${ep}_DIR ${binary_dir} PARENT_SCOPE)
 
-endif()
+
+endif() #NOT USE_SYSTEM_ep
 
 endfunction()

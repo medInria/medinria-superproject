@@ -53,8 +53,6 @@ endif()
 
 set(SOURCE_DIR ${CMAKE_SOURCE_DIR}/${ep})
 set(dirs ${dirs} SOURCE_DIR ${SOURCE_DIR})
-
-set(SOURCE_DIR ${SOURCE_DIR} PARENT_SCOPE)
 set(${ep_dirs} ${dirs} PARENT_SCOPE) 
 
 endfunction()
