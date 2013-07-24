@@ -58,7 +58,7 @@ set(git_update_cmd git pull --ff-only
   )
 set(svn_update_cmd svn update 
   ALWAYS 1
-  COMMENT "Updating using git"
+  COMMENT "Updating using svn"
   )
 
 # Prefix used to retreive projects on github
