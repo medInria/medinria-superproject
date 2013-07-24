@@ -126,10 +126,11 @@ ExternalProject_Add(${ep}
   ${ep_dirs}
   ${location}
   ${ConfigCommand}
-  UPDATE_COMMAND ""
+  UPDATE_COMMAND ${default_update_cmd}
   )
 
-endif()
+
+endif() #NOT USE_SYSTEM_ep
 
 
 ## #############################################################################

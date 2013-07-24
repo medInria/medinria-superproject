@@ -134,7 +134,6 @@ mark_as_advanced(PRIVATE_PLUGINS_DIRS)
 
 set(global_targets 
   configure 
-  update
   build 
   install
   )
@@ -168,4 +167,6 @@ include(LauncherScripts)
 ## Package
 ## #############################################################################
 
-include(Packaging)    
+include(Packaging)
+
+    
