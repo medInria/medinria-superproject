@@ -53,7 +53,7 @@ if(${DISTRIBUTOR_ID} MATCHES fc|fedora|Fedora|Centos|centos|SUSE|Suse|suse)
   set(CPACK_RPM_PACKAGE_REQUIRES "qt, qtwebkit")
 else()
   set(CPACK_GENERATOR DEB)
-  set(CPACK_DEBIAN_PACKAGE_DEPENDS "libqt4-sql-sqlite, libqt4-webkit)
+  set(CPACK_DEBIAN_PACKAGE_DEPENDS "libqt4-sql-sqlite, libqt4-webkit")
 endif()
 
 set(CPACK_GENERATOR "${CPACK_GENERATOR}" CACHE STRING "Type of package to build")
