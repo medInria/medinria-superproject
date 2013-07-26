@@ -51,11 +51,13 @@ set(CPACK_PACKAGE_FILE_NAME
 if(${DISTRIBUTOR_ID} MATCHES fc|fedora|Fedora|Centos|centos|SUSE|Suse|suse)
   set(CPACK_GENERATOR RPM)
   set(CPACK_RPM_PACKAGE_REQUIRES "qt, qtwebkit")
-  set(CPACK_RPM_PACKAGE_OBSOLETES "medinria-all, dcmtk-inria, itk-inria-build, medinria, medinria-plugins, medinria-plugins-asclepios, medinria-visages-plugins, vtk-inria-build") 
+  set(CPACK_RPM_PACKAGE_OBSOLETES "medinria-all, dcmtk-inria, itk-inria-build, medinria, medinria-plugins, medinria-plugins-asclepios, medinria-visages-plugins, vtk-inria-build")
+  #TODO When we will not support old fedora it will not be necessary anymore. 
 else()
   set(CPACK_GENERATOR DEB)
   set(CPACK_DEBIAN_PACKAGE_DEPENDS "libqt4-sql-sqlite, libqt4-webkit")
   set(CPACK_DEBIAN_PACKAGE_REPLACES "medinria-all, dcmtk-inria, itk-inria-build, medinria, medinria-plugins, medinria-plugins-asclepios, medinria-visages-plugins, vtk-inria-build")
+  #TODO When we will not support old ubuntu it will not be necessary anymore.
 endif()
 set(CPACK_GENERATOR "${CPACK_GENERATOR}" CACHE STRING "Type of package to build")
 mark_as_advanced(CPACK_GENERATOR)
