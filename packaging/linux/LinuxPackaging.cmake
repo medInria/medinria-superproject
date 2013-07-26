@@ -51,9 +51,11 @@ set(CPACK_PACKAGE_FILE_NAME
 if(${DISTRIBUTOR_ID} MATCHES fc|fedora|Fedora|Centos|centos|SUSE|Suse|suse)
   set(CPACK_GENERATOR RPM)
   set(CPACK_RPM_PACKAGE_REQUIRES "qt, qtwebkit")
+  set(CPACK_RPM_PACKAGE_OBSOLETES medinria-all)
 else()
   set(CPACK_GENERATOR DEB)
   set(CPACK_DEBIAN_PACKAGE_DEPENDS "libqt4-sql-sqlite, libqt4-webkit")
+  set(CPACK_DEBIAN_PACKAGE_REPLACES medinria-all)
 endif()
 
 set(CPACK_GENERATOR "${CPACK_GENERATOR}" CACHE STRING "Type of package to build")
