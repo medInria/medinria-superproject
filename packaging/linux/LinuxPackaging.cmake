@@ -51,13 +51,27 @@ set(CPACK_PACKAGE_FILE_NAME
 if(${DISTRIBUTOR_ID} MATCHES fc|fedora|Fedora|Centos|centos|SUSE|Suse|suse)
   set(CPACK_GENERATOR RPM)
   set(CPACK_RPM_PACKAGE_REQUIRES "qt, qtwebkit")
-  set(CPACK_RPM_PACKAGE_OBSOLETES "medinria-all, dcmtk-inria, itk-inria-build, medinria, medinria-plugins, medinria-plugins-asclepios, medinria-visages-plugins, vtk-inria-build")
-  #TODO When we will not support old fedora it will not be necessary anymore. 
+  set(CPACK_RPM_PACKAGE_OBSOLETES 
+    "dcmtk-inria, itk-inria-build, medinria-plugins, medinria-plugins-asclepios, medinria-visages-plugins, vtk-inria-build"
+    )#TODO When we will not support old fedora it will not be necessary anymore. 
+  set(CPACK_RPM_PACKAGE_PROVIDES 
+    "${CPACK_PACKAGE_NAME} \(=${CPACK_PACKAGE_VERSION}\)"
+    )
+  file(READ ${CPACK_RESOURCE_FILE_LICENSE} LICENSE)
+  set(CPACK_RPM_PACKAGE_LICENSE ${LICENSE})
+  set (CPACK_RPM_PACKAGE_ARCHITECTURE ${ARCH})
 else()
   set(CPACK_GENERATOR DEB)
   set(CPACK_DEBIAN_PACKAGE_DEPENDS "libqt4-sql-sqlite, libqt4-webkit")
-  set(CPACK_DEBIAN_PACKAGE_REPLACES "medinria-all, dcmtk-inria, itk-inria-build, medinria, medinria-plugins, medinria-plugins-asclepios, medinria-visages-plugins, vtk-inria-build")
-  #TODO When we will not support old ubuntu it will not be necessary anymore.
+  set(CPACK_DEBIAN_PACKAGE_REPLACES 
+    "dcmtk-inria, itk-inria-build, medinria-plugins, medinria-plugins-asclepios, medinria-visages-plugins, vtk-inria-build"
+    )#TODO When we will not support old ubuntu it will not be necessary anymore.
+  set(CPACK_DEBIAN_PACKAGE_HOMEPAGE http://med.inria.fr/)
+  set(CPACK_DEBIAN_PACKAGE_NAME ${CPACK_PACKAGE_NAME})
+  set(CPACK_DEBIAN_PACKAGE_PROVIDES 
+    "${CPACK_PACKAGE_NAME} = ${CPACK_PACKAGE_VERSION}"
+    )
+  set(CPACK_DEBIAN_PACKAGE_VERSION ${CPACK_PACKAGE_VERSION})
 endif()
 set(CPACK_GENERATOR "${CPACK_GENERATOR}" CACHE STRING "Type of package to build")
 mark_as_advanced(CPACK_GENERATOR)

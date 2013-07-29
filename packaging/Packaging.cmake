@@ -28,7 +28,7 @@ set(CPACK_PACKAGE_DESCRIPTION
   "${CPACK_PACKAGE_NAME} is a medical image visualisation and processing tool developed at Inria by the teams Asclepios, Athena, Parietal and Visages."
   )
 
-set(CPACK_PACKAGE_VENDOR "http://med.inria.fr/")
+set(CPACK_PACKAGE_VENDOR  http://med.inria.fr/)
 set(CPACK_PACKAGE_CONTACT "medInria Team <medinria-userfeedback@inria.fr>")
 
 set(CPACK_PACKAGE_VERSION_MAJOR ${${PROJECT_NAME}_VERSION_MAJOR})
