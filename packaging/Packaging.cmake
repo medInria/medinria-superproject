@@ -15,7 +15,7 @@
 ## Set common CPACK variables
 ## #############################################################################
 
-set(CPACK_PACKAGE_NAME medInria CACHE 
+set(CPACK_PACKAGE_NAME medinria CACHE 
   STRING "Name of the package for medInria superproject"
   )
 mark_as_advanced(CPACK_PACKAGE_NAME)
@@ -25,10 +25,10 @@ set(CPACK_PACKAGE_DESCRIPTION_SUMMARY
   )
 
 set(CPACK_PACKAGE_DESCRIPTION 
-  "${CPACK_PACKAGE_NAME} is a medical image visualisation and processing tool developed at Inria by the teams Asclepios, Athena, Parietal and Visages."
+  "${CPACK_PACKAGE_NAME} is a medical image visualization and processing tool developed at Inria by the teams Asclepios, Athena, Parietal and Visages."
   )
 
-set(CPACK_PACKAGE_VENDOR "http://med.inria.fr/")
+set(CPACK_PACKAGE_VENDOR  http://med.inria.fr/)
 set(CPACK_PACKAGE_CONTACT "medInria Team <medinria-userfeedback@inria.fr>")
 
 set(CPACK_PACKAGE_VERSION_MAJOR ${${PROJECT_NAME}_VERSION_MAJOR})
@@ -37,7 +37,7 @@ set(CPACK_PACKAGE_VERSION_PATCH ${${PROJECT_NAME}_VERSION_PATCH})
 set(CPACK_PACKAGE_VERSION ${${PROJECT_NAME}_VERSION})
 
 set(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_SOURCE_DIR}/packaging/Description.txt")
-set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/packaging/License.txt")
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_SOURCE_DIR}/LICENSE.txt")
 set(CPACK_RESOURCE_FILE_README "${CMAKE_SOURCE_DIR}/packaging/Readme.txt")
 set(CPACK_RESOURCE_FILE_WELCOME "${CMAKE_SOURCE_DIR}/packaging/Welcome.txt")
 
