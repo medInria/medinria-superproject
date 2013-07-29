@@ -25,7 +25,7 @@ set(CPACK_PACKAGE_DESCRIPTION_SUMMARY
   )
 
 set(CPACK_PACKAGE_DESCRIPTION 
-  "${CPACK_PACKAGE_NAME} is a medical image visualisation and processing tool developed at Inria by the teams Asclepios, Athena, Parietal and Visages."
+  "${CPACK_PACKAGE_NAME} is a medical image visualization and processing tool developed at Inria by the teams Asclepios, Athena, Parietal and Visages."
   )
 
 set(CPACK_PACKAGE_VENDOR  http://med.inria.fr/)
