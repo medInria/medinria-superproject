@@ -52,8 +52,9 @@ EP_SetDirectories(${ep}
 ## #############################################################################
 
 set(url svn://scm.gforge.inria.fr/svnroot/ttk/trunk)
+set(tag 181)
 if (NOT DEFINED ${ep}_SOURCE_DIR)
-  set(location SVN_REPOSITORY ${url})
+  set(location SVN_REPOSITORY ${url}@${tag})
 endif()
 
 
@@ -107,7 +108,7 @@ set(${ep}_DIR ${binary_dir} PARENT_SCOPE)
 ## #############################################################################
 
 EP_AddCustomTargets(${ep}
-  TAG ""
+  TAG ${tag}
   )
   
 endif() #NOT USE_SYSTEM_ep

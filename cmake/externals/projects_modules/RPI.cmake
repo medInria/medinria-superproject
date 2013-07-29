@@ -50,8 +50,9 @@ EP_SetDirectories(${ep}
 ## #############################################################################
 
 set(url ${GITHUB_PREFIX}Inria-Asclepios/RPI.git)
+set(tag 86afab1ad0d358494a9e324e60e9c3ef4fe17371)
 if (NOT DEFINED ${ep}_SOURCE_DIR)
-  set(location GIT_REPOSITORY ${url})
+  set(location GIT_REPOSITORY ${url} GIT_TAG ${tag})
 endif()
 
 
@@ -104,7 +105,7 @@ set(${ep}_DIR ${binary_dir} PARENT_SCOPE)
 ## #############################################################################
 
 EP_AddCustomTargets(${ep}
-  TAG ""
+  TAG ${tag}
   )
 
 
