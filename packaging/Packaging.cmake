@@ -15,7 +15,7 @@
 ## Set common CPACK variables
 ## #############################################################################
 
-set(CPACK_PACKAGE_NAME medInria CACHE 
+set(CPACK_PACKAGE_NAME medinria CACHE 
   STRING "Name of the package for medInria superproject"
   )
 mark_as_advanced(CPACK_PACKAGE_NAME)
