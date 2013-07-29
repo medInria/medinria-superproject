@@ -51,7 +51,7 @@ EP_SetDirectories(${ep}
 
 if (NOT DEFINED ${ep}_SOURCE_DIR)
   set(location 
-  GIT_REPOSITORY "${GITHUB_PREFIX}medInria/dcmtk.git"
+  GIT_REPOSITORY "${GITHUB_PREFIX}medInria/dcmtk.git" GIT_TAG 5a4a8c49e95608b0ea59e04eeec3429ad22f7563
   )
 endif()
 

@@ -52,7 +52,7 @@ EP_SetDirectories(${ep}
 ## #############################################################################
 
 if (NOT DEFINED ${ep}_SOURCE_DIR)
-  set(location SVN_REPOSITORY "svn://scm.gforge.inria.fr/svnroot/ttk/trunk")
+  set(location SVN_REPOSITORY "svn://scm.gforge.inria.fr/svnroot/ttk/trunk@181")
 endif()
 
 
