@@ -55,7 +55,7 @@ if(${DISTRIBUTOR_ID} MATCHES fc|fedora|Fedora|Centos|centos|SUSE|Suse|suse)
     "dcmtk-inria, itk-inria-build, medinria-plugins, medinria-plugins-asclepios, medinria-visages-plugins, vtk-inria-build"
     )#TODO When we will not support old fedora it will not be necessary anymore. 
   set(CPACK_RPM_PACKAGE_PROVIDES 
-    "${CPACK_PACKAGE_NAME} =${CPACK_PACKAGE_VERSION}"
+    "${CPACK_PACKAGE_NAME} = ${CPACK_PACKAGE_VERSION}"
     )
   set(CPACK_RPM_PACKAGE_LICENSE BSD)
   set (CPACK_RPM_PACKAGE_ARCHITECTURE ${ARCH})
