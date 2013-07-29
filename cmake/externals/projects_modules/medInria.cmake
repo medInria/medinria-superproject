@@ -62,7 +62,7 @@ EP_SetDirectories(${ep}
 ## #############################################################################
 
 if (NOT DEFINED ${ep}_SOURCE_DIR)
-  set(location GIT_REPOSITORY "${GITHUB_PREFIX}medInria/medInria-public.git")
+  set(location GIT_REPOSITORY "${GITHUB_PREFIX}medInria/medInria-public.git" GIT_TAG 358c015bdb65446eafa42d1fb9fd53da93e9a40b)
 endif()
 
 set(custom_update_cmd git pull --ff-only ALWAYS 1)
@@ -107,7 +107,7 @@ set(cmake_args
 ExternalProject_Add(${ep}
   ${ep_dirs}
   ${location}
-  UPDATE_COMMAND ${custom_update_cmd}
+
   CMAKE_GENERATOR ${gen}
   CMAKE_ARGS ${cmake_args}
   DEPENDS ${${ep}_dependencies}
