@@ -62,7 +62,7 @@ EP_SetDirectories(${ep}
 ## #############################################################################
 
 set(url ${GITHUB_PREFIX}medInria/medInria-public.git)
-set(tag 358c015bdb65446eafa42d1fb9fd53da93e9a40b)
+set(tag 74c809c3fb7f20d8cd102a405974afb071b24ceb)
 if (NOT DEFINED ${ep}_SOURCE_DIR)
   set(location GIT_REPOSITORY ${url} GIT_TAG ${tag})
 endif()
