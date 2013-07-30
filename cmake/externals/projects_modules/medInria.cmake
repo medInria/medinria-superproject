@@ -62,7 +62,7 @@ EP_SetDirectories(${ep}
 ## #############################################################################
 
 if (NOT DEFINED ${ep}_SOURCE_DIR)
-  set(location GIT_REPOSITORY "${GITHUB_PREFIX}medInria/medInria-public.git" GIT_TAG 358c015bdb65446eafa42d1fb9fd53da93e9a40b)
+  set(location GIT_REPOSITORY "${GITHUB_PREFIX}medInria/medInria-public.git" GIT_TAG 74c809c3fb7f20d8cd102a405974afb071b24ceb)
 endif()
 
 set(custom_update_cmd git pull --ff-only ALWAYS 1)
