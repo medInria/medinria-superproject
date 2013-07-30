@@ -66,6 +66,7 @@ if (NOT DEFINED ${ep}_SOURCE_DIR)
   set(location GIT_REPOSITORY ${url})
 endif()
 
+set(custom_update_cmd "git checkout itk-4-migration;git pull --ff-only ALWAYS 1")
 
 ## #############################################################################
 ## Add specific cmake arguments for configuration step of the project
