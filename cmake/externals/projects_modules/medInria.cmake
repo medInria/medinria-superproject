@@ -139,10 +139,10 @@ endif()
 
 
 ## #############################################################################
-## Add an update target
+## Add custom targets
 ## #############################################################################
 
-EP_AddUpdateTarget(${ep})
+EP_AddCustomTargets(${ep})
 
 
 endif() #NOT USE_SYSTEM_ep

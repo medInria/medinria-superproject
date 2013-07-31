@@ -133,8 +133,7 @@ mark_as_advanced(PRIVATE_PLUGINS_DIRS)
 ## #############################################################################
 
 set(global_targets 
-  configure 
-  build 
+  configure  
   install
   )
   
