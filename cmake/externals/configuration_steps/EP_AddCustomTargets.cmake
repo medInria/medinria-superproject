@@ -31,7 +31,7 @@ endif()
 ## #############################################################################
 
 foreach (dependece ${${ep}_dependencies})
-    set(build-${ep}_dependences ${dependece} ${build-${ep}_dependences})
+    set(build-${ep}_dependences build-${dependece} ${build-${ep}_dependences})
 endforeach()
 
 add_custom_target(build-${ep} 
