@@ -116,10 +116,10 @@ set(${ep}_DIR ${install_dir} PARENT_SCOPE)
 
 
 ## #############################################################################
-## Add an update target
+## Add custom targets
 ## #############################################################################
 
-EP_AddUpdateTarget(${ep})
+EP_AddCustomTargets(${ep})
 
 
 endif() #NOT USE_SYSTEM_ep

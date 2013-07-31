@@ -1,4 +1,4 @@
-macro(EP_AddUpdateTarget ep)
+macro(EP_AddCustomTargets ep)
 
 ## #############################################################################
 ## Git update 
@@ -25,5 +25,21 @@ elseif(EXISTS ${source_dir}/.svn )
     )
   set(update-${ep} ON PARENT_SCOPE)
 endif()
+
+## #############################################################################
+## build
+## #############################################################################
+
+foreach (dependece ${${ep}_dependencies})
+    set(build-${ep}_dependences ${dependece} ${build-${ep}_dependences})
+endforeach()
+
+add_custom_target(build-${ep} 
+  COMMAND cmake --build . --config ${CMAKE_BUILD_TYPE}
+  WORKING_DIRECTORY ${binary_dir}
+  COMMENT "build '${ep}' with 'cmake --build . --config ${CMAKE_BUILD_TYPE}'"
+  DEPENDS ${build-${ep}_dependences}
+  )
+set(build-${ep} ON PARENT_SCOPE)
 
 endmacro()
