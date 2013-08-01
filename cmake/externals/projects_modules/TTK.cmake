@@ -51,8 +51,9 @@ EP_SetDirectories(${ep}
 ## Define repository where get the sources
 ## #############################################################################
 
+set(url svn://scm.gforge.inria.fr/svnroot/ttk/trunk)
 if (NOT DEFINED ${ep}_SOURCE_DIR)
-  set(location SVN_REPOSITORY "svn://scm.gforge.inria.fr/svnroot/ttk/trunk")
+  set(location SVN_REPOSITORY ${url})
 endif()
 
 
@@ -105,7 +106,9 @@ set(${ep}_DIR ${binary_dir} PARENT_SCOPE)
 ## Add custom targets
 ## #############################################################################
 
-EP_AddCustomTargets(${ep})
+EP_AddCustomTargets(${ep}
+  TAG ""
+  )
   
 endif() #NOT USE_SYSTEM_ep
 

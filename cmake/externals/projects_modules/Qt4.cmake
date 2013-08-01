@@ -134,7 +134,9 @@ ExternalProject_Add(${ep}
 ## Add custom targets
 ## #############################################################################
 
-EP_AddCustomTargets(${ep})
+EP_AddCustomTargets(${ep}
+  TAG ""
+  )
 
 
 endif() #NOT USE_SYSTEM_ep
