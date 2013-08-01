@@ -61,11 +61,10 @@ EP_SetDirectories(${ep}
 ## Define repository where get the sources
 ## #############################################################################
 
+set(url ${GITHUB_PREFIX}medInria/medInria-public.git)
 if (NOT DEFINED ${ep}_SOURCE_DIR)
-  set(location GIT_REPOSITORY "${GITHUB_PREFIX}medInria/medInria-public.git")
+  set(location GIT_REPOSITORY ${url})
 endif()
-
-set(custom_update_cmd git pull --ff-only ALWAYS 1)
 
 
 ## #############################################################################
@@ -142,7 +141,9 @@ endif()
 ## Add custom targets
 ## #############################################################################
 
-EP_AddCustomTargets(${ep})
+EP_AddCustomTargets(${ep}
+  TAG ""
+  )
 
 
 endif() #NOT USE_SYSTEM_ep

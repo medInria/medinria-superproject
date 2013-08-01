@@ -49,8 +49,9 @@ EP_SetDirectories(${ep}
 ## Define repository where get the sources
 ## #############################################################################
 
+set(url ${GITHUB_PREFIX}Inria-Asclepios/RPI.git)
 if (NOT DEFINED ${ep}_SOURCE_DIR)
-  set(location GIT_REPOSITORY "${GITHUB_PREFIX}Inria-Asclepios/RPI.git")
+  set(location GIT_REPOSITORY ${url})
 endif()
 
 
@@ -102,7 +103,9 @@ set(${ep}_DIR ${binary_dir} PARENT_SCOPE)
 ## Add custom targets
 ## #############################################################################
 
-EP_AddCustomTargets(${ep})
+EP_AddCustomTargets(${ep}
+  TAG ""
+  )
 
 
 endif() #NOT USE_SYSTEM_ep
