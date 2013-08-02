@@ -67,9 +67,7 @@ else()
     )#TODO When we will not support old ubuntu it will not be necessary anymore.
   set(CPACK_DEBIAN_PACKAGE_HOMEPAGE http://med.inria.fr/)
   set(CPACK_DEBIAN_PACKAGE_NAME ${CPACK_PACKAGE_NAME})
-  set(CPACK_DEBIAN_PACKAGE_PROVIDES 
-    "${CPACK_PACKAGE_NAME} \(=${CPACK_PACKAGE_VERSION}\)"
-    )
+  set(CPACK_DEBIAN_PACKAGE_PROVIDES ${CPACK_PACKAGE_NAME})
   set(CPACK_DEBIAN_PACKAGE_VERSION ${CPACK_PACKAGE_VERSION})
 endif()
 set(CPACK_GENERATOR "${CPACK_GENERATOR}" CACHE STRING "Type of package to build")
