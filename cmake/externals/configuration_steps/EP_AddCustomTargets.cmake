@@ -7,7 +7,7 @@ set(GIT_COMMAND git pull --ff-only)
 set(SVN_COMMAND svn update)
 
 if(NOT ${tag} STREQUAL "")
-  set(GIT_COMMAND git fetch && git checkout ${tag})
+  set(GIT_COMMAND git fetch ${url} && git checkout ${tag})
   set(SVN_COMMAND svn checkout -r ${tag} ${url})
 endif()
 
