@@ -99,8 +99,16 @@ foreach (external_project ${external_projects})
     endif()
 endforeach()
 
+if(UNIX)
+  set(ECHO_COLORED_RED "\"\\\\033[1\;31m\"")
+  set(ECHO_COLORED_ORIG "\"\\\\033[0\;39m\"")
+endif()
+
 add_custom_target(update
   DEPENDS ${update_dependencies}
+  COMMAND echo ${ECHO_COLORED_RED}All project have been updated. 
+  && echo To build them, run the build target: 'cmake --build . --target build'
+  ${ECHO_COLORED_ORIG}
   )
   
 add_custom_target(build
