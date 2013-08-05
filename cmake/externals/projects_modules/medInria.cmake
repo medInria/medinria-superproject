@@ -61,11 +61,10 @@ EP_SetDirectories(${ep}
 ## Define repository where get the sources
 ## #############################################################################
 
+set(url ${GITHUB_PREFIX}medInria/medInria-public.git)
 if (NOT DEFINED ${ep}_SOURCE_DIR)
-  set(location GIT_REPOSITORY "${GITHUB_PREFIX}medInria/medInria-public.git")
+  set(location GIT_REPOSITORY ${url})
 endif()
-
-set(custom_update_cmd git pull --ff-only ALWAYS 1)
 
 
 ## #############################################################################
@@ -107,7 +106,7 @@ set(cmake_args
 ExternalProject_Add(${ep}
   ${ep_dirs}
   ${location}
-  UPDATE_COMMAND ${custom_update_cmd}
+  UPDATE_COMMAND ""
   CMAKE_GENERATOR ${gen}
   CMAKE_ARGS ${cmake_args}
   DEPENDS ${${ep}_dependencies}
@@ -136,6 +135,16 @@ elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")
     ${binary_dir}/bin/medInria PARENT_SCOPE
     )
 endif()
+
+
+## #############################################################################
+## Add custom targets
+## #############################################################################
+
+EP_AddCustomTargets(${ep}
+  TAG ""
+  )
+
 
 endif() #NOT USE_SYSTEM_ep
 

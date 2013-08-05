@@ -51,10 +51,9 @@ OR EXISTS ${CMAKE_CURRENT_SOURCE_DIR}/${ep}/configure)
   set(${ep}_SOURCE_DIR SOURCE_DIR ${CMAKE_SOURCE_DIR}/${ep} PARENT_SCOPE)    
 endif()
 
-set(SOURCE_DIR ${CMAKE_SOURCE_DIR}/${ep})
-set(dirs ${dirs} SOURCE_DIR ${SOURCE_DIR})
-
-set(SOURCE_DIR ${SOURCE_DIR} PARENT_SCOPE)
+set(source_dir ${CMAKE_SOURCE_DIR}/${ep})
+set(source_dir ${source_dir} PARENT_SCOPE) 
+set(dirs ${dirs} SOURCE_DIR ${source_dir})
 set(${ep_dirs} ${dirs} PARENT_SCOPE) 
 
 endfunction()
