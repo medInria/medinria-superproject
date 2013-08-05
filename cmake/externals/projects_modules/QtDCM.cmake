@@ -57,9 +57,10 @@ endif(QT4_FOUND)
 ## #############################################################################
 ## Define repository where get the sources
 ## #############################################################################
-
+set(url "${GITHUB_PREFIX}medInria/qtdcm.git")
+set(tag e5d2faa2f6058054001951a3e91d99561af001c0)
 if (NOT DEFINED ${ep}_SOURCE_DIR)
-  set(location GIT_REPOSITORY "${GITHUB_PREFIX}medInria/qtdcm.git" GIT_TAG e5d2faa2f6058054001951a3e91d99561af001c0)
+  set(location GIT_REPOSITORY ${url} GIT_TAG ${tag})
 endif()
 
 
@@ -112,7 +113,7 @@ set(${ep}_DIR ${binary_dir} PARENT_SCOPE)
 ## #############################################################################
 
 EP_AddCustomTargets(${ep}
-  TAG ""
+  TAG ${tag}
   )
 
 
