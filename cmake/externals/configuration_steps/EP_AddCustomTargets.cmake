@@ -1,12 +1,9 @@
-macro(EP_AddCustomTargets ep
-  TAG tag
-  )
-
+macro(EP_AddCustomTargets ep)
 
 set(GIT_COMMAND git pull --ff-only)
 set(SVN_COMMAND svn update)
 
-if(NOT ${tag} STREQUAL "")
+if(DEFINED tag)
   set(GIT_COMMAND git fetch ${url} && git checkout ${tag})
   set(SVN_COMMAND svn switch ${url} && svn update -r ${tag})
 endif()
