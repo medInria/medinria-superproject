@@ -88,7 +88,7 @@ foreach (external_project ${external_projects})
     
     
 ## #############################################################################
-## Add custom targets update, and build to explicitly updtae and rebuild all.
+## Add custom targets update, and build to explicitly update and rebuild all.
 ## #############################################################################
 
     if(update-${external_project})
