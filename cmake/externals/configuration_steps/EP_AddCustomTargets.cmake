@@ -1,6 +1,6 @@
 macro(EP_AddCustomTargets ep)
 
-set(GIT_COMMAND git pull --ff-only)
+set(GIT_COMMAND git checkout master && git pull --ff-only)
 set(SVN_COMMAND svn update)
 
 if(DEFINED tag)
