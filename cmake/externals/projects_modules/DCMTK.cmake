@@ -119,9 +119,7 @@ set(${ep}_DIR ${install_dir} PARENT_SCOPE)
 ## Add custom targets
 ## #############################################################################
 
-EP_AddCustomTargets(${ep}
-  TAG ${tag}
-  )
+EP_AddCustomTargets(${ep})
 
 
 endif() #NOT USE_SYSTEM_ep
