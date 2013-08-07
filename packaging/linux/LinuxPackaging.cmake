@@ -51,6 +51,9 @@ set(CPACK_PACKAGE_FILE_NAME
 if(${DISTRIBUTOR_ID} MATCHES fc|fedora|Fedora|Centos|centos|SUSE|Suse|suse)
   set(CPACK_GENERATOR RPM)
   set(CPACK_RPM_PACKAGE_REQUIRES "qt, qtwebkit")
+  if(${DISTRIBUTOR_ID} MATCHES 14|15)
+    set(CPACK_RPM_PACKAGE_REQUIRES "qt, qt-webkit")
+  endif()
   set(CPACK_RPM_PACKAGE_OBSOLETES 
     "dcmtk-inria, itk-inria-build, medinria-plugins, medinria-plugins-asclepios, medinria-visages-plugins, vtk-inria-build"
     )#TODO When we will not support old fedora it will not be necessary anymore. 
