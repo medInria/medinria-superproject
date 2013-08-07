@@ -57,6 +57,7 @@ include(ExternalProject)
 
 include(EP_Initialisation)
 include(EP_SetDirectories)
+include(EP_AddCustomTargets) 
 
 
 ## #############################################################################
@@ -84,4 +85,27 @@ endmacro()
 
 foreach (external_project ${external_projects})
     call(${external_project}_project)
+    
+    
+## #############################################################################
+## Add custom targets update, and build to explicitly update and rebuild all.
+## #############################################################################
+
+    if(update-${external_project})
+      set(update_dependencies ${update_dependencies} update-${external_project})
+    endif()
+    if(build-${external_project})
+      set(build_dependencies ${build_dependencies} build-${external_project})
+    endif()
 endforeach()
+
+
+add_custom_target(update
+  DEPENDS ${update_dependencies}
+  COMMAND echo All project have been updated. 
+  && echo To build them, run the build target: 'cmake --build . --target build'
+  )
+  
+add_custom_target(build
+  DEPENDS ${build_dependencies}
+  )

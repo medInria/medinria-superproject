@@ -103,6 +103,14 @@ ExternalProject_Add(${ep}
 ExternalProject_Get_Property(${ep} binary_dir)
 set(${ep}_DIR ${binary_dir} PARENT_SCOPE)
 
-endif()
+
+## #############################################################################
+## Add custom targets
+## #############################################################################
+
+EP_AddCustomTargets(${ep})
+
+
+endif() #NOT USE_SYSTEM_ep
 
 endfunction()
