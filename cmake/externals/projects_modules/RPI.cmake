@@ -49,12 +49,10 @@ EP_SetDirectories(${ep}
 ## Define repository where get the sources
 ## #############################################################################
 
-set(url ${GITHUB_PREFIX}Inria-Asclepios/RPI.git)
+set(url ${GITHUB_PREFIX}ocommowi/RPI.git)
 if (NOT DEFINED ${ep}_SOURCE_DIR)
-  set(location GIT_REPOSITORY ${url})
+  set(location GIT_REPOSITORY ${url} GIT_TAG itk4-rpi)
 endif()
-
-set(custom_update_cmd git checkout itk4-rpi)
 
 ## #############################################################################
 ## Add specific cmake arguments for configuration step of the project
