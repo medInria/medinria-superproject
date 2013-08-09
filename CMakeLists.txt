@@ -72,8 +72,9 @@ file(WRITE ${${PROJECT_NAME}_CONFIG_FILE}
   "set(CMAKE_MODULE_PATH 
     ${CMAKE_MODULE_PATH}
     \${CMAKE_MODULE_PATH}
-    )\n\n"
-  )  
+    )\n\n
+    set(USE_GITHUB_SSH ${USE_GITHUB_SSH})\n"
+ )  
 
 set(CMAKE_MODULE_PATH
   ${CMAKE_CURRENT_SOURCE_DIR}/cmake/externals/projects_modules
@@ -167,5 +168,3 @@ include(LauncherScripts)
 ## #############################################################################
 
 include(Packaging)
-
-    
