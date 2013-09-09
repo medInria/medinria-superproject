@@ -16,6 +16,7 @@ macro(ep_Initialisation ep
   BUILD_SHARED_LIBS build_shared_libs_def
   REQUIRED_FOR_PLUGINS required_for_plugins
   )
+  
 ## #############################################################################
 ## Add variable : do we want use the system version ?
 ## #############################################################################
@@ -27,6 +28,7 @@ option(USE_SYSTEM_${ep}
 
 if (USE_SYSTEM_${ep})
   find_package(${ep} REQUIRED)
+
 
 ## #############################################################################
 ## Complete superProjectConfig.cmake
@@ -90,7 +92,7 @@ else()
 
 
 ## #############################################################################
-## Resolve dependencies with other external-project
+## Remove dependencies with other external-project if a system version is used.
 ## #############################################################################
 
   foreach(dependence ${${ep}_dependencies})
