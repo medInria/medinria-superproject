@@ -50,8 +50,9 @@ EP_SetDirectories(${ep}
 ## #############################################################################
 
 set(url ${GITHUB_PREFIX}ocommowi/RPI.git)
+set(tag "itk4-rpi")
 if (NOT DEFINED ${ep}_SOURCE_DIR)
-  set(location GIT_REPOSITORY ${url} GIT_TAG itk4-rpi)
+  set(location GIT_REPOSITORY ${url} GIT_TAG ${tag})
 endif()
 
 ## #############################################################################

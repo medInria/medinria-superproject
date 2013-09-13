@@ -62,8 +62,9 @@ EP_SetDirectories(${ep}
 ## #############################################################################
 
 set(url ${GITHUB_PREFIX}ocommowi/medInria-public.git)
+set(tag "itk-4-migration")
 if (NOT DEFINED ${ep}_SOURCE_DIR)
-  set(location GIT_REPOSITORY ${url} GIT_TAG itk-4-migration)
+  set(location GIT_REPOSITORY ${url} GIT_TAG ${tag})
 endif()
 
 ## #############################################################################

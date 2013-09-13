@@ -59,8 +59,9 @@ endif(QT4_FOUND)
 ## #############################################################################
 
 set(url "${GITHUB_PREFIX}medInria/qtdcm.git")
+set(tag "itk-4")
 if (NOT DEFINED ${ep}_SOURCE_DIR)
-  set(location GIT_REPOSITORY ${url} GIT_TAG itk-4)
+  set(location GIT_REPOSITORY ${url} GIT_TAG ${tag})
 endif()
 
 ## #############################################################################
