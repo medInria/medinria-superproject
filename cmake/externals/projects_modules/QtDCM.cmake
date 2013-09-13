@@ -57,11 +57,12 @@ endif(QT4_FOUND)
 ## #############################################################################
 ## Define repository where get the sources
 ## #############################################################################
-set(url "${GITHUB_PREFIX}medInria/qtdcm.git")
-if (NOT DEFINED ${ep}_SOURCE_DIR)
-  set(location GIT_REPOSITORY ${url})
-endif()
 
+set(url "${GITHUB_PREFIX}medInria/qtdcm.git")
+set(tag "itk-4")
+if (NOT DEFINED ${ep}_SOURCE_DIR)
+  set(location GIT_REPOSITORY ${url} GIT_TAG ${tag})
+endif()
 
 ## #############################################################################
 ## Add specific cmake arguments for configuration step of the project

@@ -51,8 +51,8 @@ EP_SetDirectories(${ep}
 
 if (NOT DEFINED ${ep}_SOURCE_DIR)
   set(location
-    URL "http://sourceforge.net/projects/itk/files/itk/3.20/InsightToolkit-3.20.1.tar.gz"
-    URL_MD5 "90342ffa78bd88ae48b3f62866fbf050"
+    URL "http://sourceforge.net/projects/itk/files/itk/4.4/InsightToolkit-4.4.1.tar.gz"
+    URL_MD5 "bc739b834efa4c8c23aa73ad1cfb14e4"
     )
 endif()
 
@@ -82,9 +82,7 @@ set(cmake_args
   -DBUILD_SHARED_LIBS:BOOL=${BUILD_SHARED_LIBS_${ep}}
   -DBUILD_EXAMPLES:BOOL=OFF
   -DBUILD_TESTING:BOOL=OFF
-  -DITK_USE_REVIEW:BOOL=ON
-  -DITK_USE_REVIEW_STATISTICS:BOOL=ON
-  -DITK_USE_CONCEPT_CHECKING:BOOL=OFF
+  -DModule_ITKIOPhilipsREC:BOOL=ON
   )
 
 
