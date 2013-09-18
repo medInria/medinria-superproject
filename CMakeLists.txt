@@ -65,6 +65,10 @@ set(CMAKE_MODULE_PATH
   ${CMAKE_MODULE_PATH}
     )
 
+set(GET_REVISIONS_MODULE_PATH
+  ${CMAKE_CURRENT_SOURCE_DIR}/cmake/externals/get_revisions
+  )
+
 # Add CMAKE_MODULE_PATH to superProjectConfig.cmake, usefull for 
 # Asclepios and visages plugins
 set(${PROJECT_NAME}_CONFIG_FILE "${CMAKE_BINARY_DIR}/${PROJECT_NAME}Config.cmake")
@@ -73,7 +77,14 @@ file(WRITE ${${PROJECT_NAME}_CONFIG_FILE}
     ${CMAKE_MODULE_PATH}
     \${CMAKE_MODULE_PATH}
     )\n\n"
-  )  
+  )
+    
+# Add path of the get_revisions module to superProjectConfig.cmake
+file(APPEND ${${PROJECT_NAME}_CONFIG_FILE}
+  "set(GET_REVISIONS_MODULE_PATH 
+    ${GET_REVISIONS_MODULE_PATH}
+    )\n\n"
+  ) 
 
 set(CMAKE_MODULE_PATH
   ${CMAKE_CURRENT_SOURCE_DIR}/cmake/externals/projects_modules
@@ -128,7 +139,6 @@ set(PRIVATE_PLUGINS_DIRS "" CACHE PATH "Folders containing private plugins, sepa
 mark_as_advanced(PRIVATE_PLUGINS_DIRS)
 
 ## #############################################################################
-
 ## Add Targets
 ## #############################################################################
 

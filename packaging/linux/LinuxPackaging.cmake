@@ -76,6 +76,7 @@ endif()
 set(CPACK_GENERATOR "${CPACK_GENERATOR}" CACHE STRING "Type of package to build")
 mark_as_advanced(CPACK_GENERATOR)
 
+
 ## #############################################################################
 ## Set directory where the package will be installed
 ## #############################################################################
