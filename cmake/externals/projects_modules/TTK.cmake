@@ -53,7 +53,7 @@ EP_SetDirectories(${ep}
 
 set(url svn://scm.gforge.inria.fr/svnroot/ttk/trunk)
 if (NOT DEFINED ${ep}_SOURCE_DIR)
-  set(location SVN_REPOSITORY ${url})
+  set(location SVN_REPOSITORY ${url}@197)
 endif()
 
 
