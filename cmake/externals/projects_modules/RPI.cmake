@@ -50,8 +50,9 @@ EP_SetDirectories(${ep}
 ## #############################################################################
 
 set(url ${GITHUB_PREFIX}Inria-Asclepios/RPI.git)
+set(tag a267fb725fb93edb446a4eb921091646b0fe98a7)
 if (NOT DEFINED ${ep}_SOURCE_DIR)
-  set(location GIT_REPOSITORY ${url} GIT_TAG a267fb725fb93edb446a4eb921091646b0fe98a7)
+  set(location GIT_REPOSITORY ${url} GIT_TAG ${tag})
 endif()
 
 
