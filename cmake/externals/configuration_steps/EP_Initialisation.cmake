@@ -77,6 +77,7 @@ else()
   
   set(${ep}_c_flags ${ep_common_c_flags})
   set(${ep}_cxx_flags ${ep_common_cxx_flags})
+  set(${ep}_shared_linker_flags ${ep_common_shared_linker_flags})
   
   # Add PIC flag if Static build on UNIX with amd64 arch
   if (UNIX)
@@ -88,6 +89,11 @@ else()
     endif()
   endif()  
 
+  if (APPLE)
+    if (BUILD_SHARED_LIBS_${ep})
+      set(${ep}_shared_linker_flags "${${ep}_shared_linker_flags} -headerpad_max_install_names")
+    endif()
+  endif()
 
 ## #############################################################################
 ## Resolve dependencies with other external-project
