@@ -51,8 +51,8 @@ EP_SetDirectories(${ep}
 
 if (NOT DEFINED ${ep}_SOURCE_DIR)
   set(location
-    URL "http://sourceforge.net/projects/itk/files/itk/4.4/InsightToolkit-4.4.1.tar.gz"
-    URL_MD5 "bc739b834efa4c8c23aa73ad1cfb14e4"
+    URL "http://sourceforge.net/projects/itk/files/itk/4.4/InsightToolkit-4.4.2.tar.gz"
+    URL_MD5 "5fd91d6f72e07f51e1e9b27ff02f020a"
     )
 endif()
 
