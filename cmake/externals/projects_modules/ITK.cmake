@@ -84,6 +84,7 @@ set(cmake_args
   -DBUILD_EXAMPLES:BOOL=OFF
   -DBUILD_TESTING:BOOL=OFF
   -DModule_ITKIOPhilipsREC:BOOL=ON
+  -DModule_ITKReview:BOOL=ON
   )
 
 
