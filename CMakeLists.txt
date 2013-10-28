@@ -76,7 +76,8 @@ file(WRITE ${${PROJECT_NAME}_CONFIG_FILE}
   "set(CMAKE_MODULE_PATH 
     ${CMAKE_MODULE_PATH}
     \${CMAKE_MODULE_PATH}
-    )\n\n"
+    )\n\n
+    set(USE_GITHUB_SSH ${USE_GITHUB_SSH})\n"
   )
     
 # Add path of the get_revisions module to superProjectConfig.cmake
@@ -177,5 +178,3 @@ include(LauncherScripts)
 ## #############################################################################
 
 include(Packaging)
-
-    
