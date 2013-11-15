@@ -12,7 +12,11 @@
 ################################################################################
 
 foreach(dir ${PRIVATE_PLUGINS_DIRS})
-  set(DEV_PLUGINS_DIRS "${DEV_PLUGINS_DIRS}:${dir}/plugins")
+  if(WIN32)
+	set(DEV_PLUGINS_DIRS "${DEV_PLUGINS_DIRS}:${dir}/plugins/%1")
+  else()
+	set(DEV_PLUGINS_DIRS "${DEV_PLUGINS_DIRS}:${dir}/plugins")
+  endif()
 endforeach() 
 
 if (UNIX)
