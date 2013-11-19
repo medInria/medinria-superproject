@@ -50,10 +50,8 @@ EP_SetDirectories(${ep}
 ## #############################################################################
 
 if (NOT DEFINED ${ep}_SOURCE_DIR)
-    set(location 
-      URL "http://www.vtk.org/files/release/5.8/vtk-5.8.0.tar.gz"
-      URL_MD5 "37b7297d02d647cc6ca95b38174cb41f"
-      )
+    set(location GIT_REPOSITORY "git://vtk.org/VTK.git")
+    set(branch GIT_TAG "release-5.10")
 endif()
 
 
@@ -89,6 +87,7 @@ set(cmake_args
 ExternalProject_Add(${ep}
   ${ep_dirs}
   ${location}
+  ${branch}
   UPDATE_COMMAND ""
   CMAKE_GENERATOR ${gen}
   CMAKE_ARGS ${cmake_args}
