@@ -1,0 +1,29 @@
+diff --git a/Rendering/vtkInteractorStyleImage.cxx b/Rendering/vtkInteractorStyleImage.cxx
+index b7bcb27..7f0b079 100644
+--- a/Rendering/vtkInteractorStyleImage.cxx
++++ b/Rendering/vtkInteractorStyleImage.cxx
+@@ -482,7 +482,12 @@ void vtkInteractorStyleImage::WindowLevel()
+   this->WindowLevelCurrentPosition[0] = rwi->GetEventPosition()[0];
+   this->WindowLevelCurrentPosition[1] = rwi->GetEventPosition()[1];
+   
+-  if (this->CurrentImageProperty)
++  if (this->HandleObservers &&
++      this->HasObserver(vtkCommand::WindowLevelEvent))
++    {
++    this->InvokeEvent(vtkCommand::WindowLevelEvent, this);
++    }
++  else if (this->CurrentImageProperty)
+     {
+     int *size = this->CurrentRenderer->GetSize();
+ 
+@@ -541,10 +546,6 @@ void vtkInteractorStyleImage::WindowLevel()
+ 
+     this->Interactor->Render();
+     }
+-  else
+-    {
+-    this->InvokeEvent(vtkCommand::WindowLevelEvent, this);
+-    }
+ }
+ 
+ //----------------------------------------------------------------------------

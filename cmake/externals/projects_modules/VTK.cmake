@@ -89,6 +89,7 @@ ExternalProject_Add(${ep}
   ${location}
   ${branch}
   UPDATE_COMMAND ""
+  PATCH_COMMAND patch -p1 -t < ${CMAKE_SOURCE_DIR}/Patchs/VTK.patch
   CMAKE_GENERATOR ${gen}
   CMAKE_ARGS ${cmake_args}
   DEPENDS ${${ep}_dependencies}
