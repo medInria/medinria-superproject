@@ -79,6 +79,27 @@ set(cmake_args
   -DBUILD_TESTING:BOOL=OFF 
   )
 
+## #############################################################################
+## Check if patch has to be applied
+## #############################################################################
+
+set(VTK_PATCHES VTK_WindowLevel.patch)
+set(VTK_PATCHES_TO_APPLY)
+foreach (patch ${VTK_PATCHES})
+    execute_process(COMMAND git apply --check ${CMAKE_SOURCE_DIR}/patches/${patch}
+                    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/VTK
+                    RESULT_VARIABLE   PATCH_OK
+                    OUTPUT_QUIET
+                    ERROR_QUIET)
+    if (PATCH_OK EQUAL 0)
+        set(VTK_PATCHES_TO_APPLY ${VTK_PATCHES_TO_APPLY} ${CMAKE_SOURCE_DIR}/patches/${patch})
+    endif()
+endforeach()
+
+set(VTK_PATCH_COMMAND)
+if (NOT "${VTK_PATCHES_TO_APPLY}" STREQUAL "")
+    set(VTK_PATCH_COMMAND git apply ${VTK_PATCHES_TO_APPLY})
+endif()
 
 ## #############################################################################
 ## Add external-project
@@ -89,7 +110,7 @@ ExternalProject_Add(${ep}
   ${location}
   ${branch}
   UPDATE_COMMAND ""
-  PATCH_COMMAND patch -p1 -N < ${CMAKE_SOURCE_DIR}/patches/VTK.patch
+  ${VTK_PATCH_COMMAND}
   CMAKE_GENERATOR ${gen}
   CMAKE_ARGS ${cmake_args}
   DEPENDS ${${ep}_dependencies}
