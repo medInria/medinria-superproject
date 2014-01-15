@@ -18,3 +18,5 @@ build*
 *.autosave
 *.user
 *~
+.*.swp
+.*.swo
