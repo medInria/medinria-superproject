@@ -139,7 +139,7 @@ file(APPEND ${revisions_args}
 
 ExternalProject_Add_Step(${ep} get-revisions
     COMMAND cmake ${GET_REVISIONS_MODULE_PATH}
-    COMMENT Get projects revisionss    
+    COMMENT "Get projects revisions"
     DEPENDEES download    
     ALWAYS 1
     WORKING_DIRECTORY ${revisions_dir}
