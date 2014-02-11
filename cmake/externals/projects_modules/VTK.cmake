@@ -50,10 +50,9 @@ EP_SetDirectories(${ep}
 ## #############################################################################
 
 if (NOT DEFINED ${ep}_SOURCE_DIR)
-    set(location 
-      URL "http://www.vtk.org/files/release/5.8/vtk-5.8.0.tar.gz"
-      URL_MD5 "37b7297d02d647cc6ca95b38174cb41f"
-      )
+    set(location GIT_REPOSITORY "git://vtk.org/VTK.git")
+    # Set GIT_TAG to latest commit of origin/release-5.10 known to work
+    set(branch GIT_TAG "origin/release-5.10@{29/01/2014}")
 endif()
 
 
@@ -81,6 +80,27 @@ set(cmake_args
   -DBUILD_TESTING:BOOL=OFF 
   )
 
+## #############################################################################
+## Check if patch has to be applied
+## #############################################################################
+
+set(VTK_PATCHES VTK_WindowLevel.patch)
+set(VTK_PATCHES_TO_APPLY)
+foreach (patch ${VTK_PATCHES})
+    execute_process(COMMAND git apply --check ${CMAKE_SOURCE_DIR}/patches/${patch}
+                    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/VTK
+                    RESULT_VARIABLE   PATCH_OK
+                    OUTPUT_QUIET
+                    ERROR_QUIET)
+    if (PATCH_OK EQUAL 0)
+        set(VTK_PATCHES_TO_APPLY ${VTK_PATCHES_TO_APPLY} ${CMAKE_SOURCE_DIR}/patches/${patch})
+    endif()
+endforeach()
+
+set(VTK_PATCH_COMMAND)
+if (NOT "${VTK_PATCHES_TO_APPLY}" STREQUAL "")
+    set(VTK_PATCH_COMMAND git apply ${VTK_PATCHES_TO_APPLY})
+endif()
 
 ## #############################################################################
 ## Add external-project
@@ -89,7 +109,9 @@ set(cmake_args
 ExternalProject_Add(${ep}
   ${ep_dirs}
   ${location}
+  ${branch}
   UPDATE_COMMAND ""
+  ${VTK_PATCH_COMMAND}
   CMAKE_GENERATOR ${gen}
   CMAKE_ARGS ${cmake_args}
   DEPENDS ${${ep}_dependencies}
