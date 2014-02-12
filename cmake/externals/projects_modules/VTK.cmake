@@ -52,7 +52,7 @@ EP_SetDirectories(${ep}
 if (NOT DEFINED ${ep}_SOURCE_DIR)
     set(location GIT_REPOSITORY "git://vtk.org/VTK.git")
     # Set GIT_TAG to latest commit of origin/release-5.10 known to work
-    set(branch GIT_TAG "origin/release-5.10@{29/01/2014}")
+    set(branch GIT_TAG "release-5.10@{29/01/2014}")
 endif()
 
 
