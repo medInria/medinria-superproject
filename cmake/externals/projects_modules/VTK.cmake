@@ -49,10 +49,10 @@ EP_SetDirectories(${ep}
 ## Define repository where get the sources
 ## #############################################################################
 
+# Set GIT_TAG to latest commit of origin/release-5.10 known to work
+set(tag d3b66526624ba8e55addcddb0ec28c40982473ac)
 if (NOT DEFINED ${ep}_SOURCE_DIR)
-    set(location GIT_REPOSITORY "git://vtk.org/VTK.git")
-    # Set GIT_TAG to latest commit of origin/release-5.10 known to work
-    set(tag GIT_TAG d3b66526624ba8e55addcddb0ec28c40982473ac)
+    set(location GIT_REPOSITORY "git://vtk.org/VTK.git" GIT_TAG ${tag})
 endif()
 
 
@@ -109,7 +109,6 @@ endif()
 ExternalProject_Add(${ep}
   ${ep_dirs}
   ${location}
-  ${tag}
   UPDATE_COMMAND ""
   ${VTK_PATCH_COMMAND}
   CMAKE_GENERATOR ${gen}
