@@ -50,10 +50,8 @@ EP_SetDirectories(${ep}
 ## #############################################################################
 
 if (NOT DEFINED ${ep}_SOURCE_DIR)
-  set(location
-    URL "http://sourceforge.net/projects/itk/files/itk/4.5/InsightToolkit-4.5.0.tar.gz"
-    URL_MD5 "54ae97f62eea1d6f9deb67232c2115a7"
-    )
+    set(location GIT_REPOSITORY "git://itk.org/ITK.git")
+    set(branch GIT_TAG "v4.5.0")
 endif()
 
 
@@ -87,6 +85,11 @@ set(cmake_args
   -DModule_ITKReview:BOOL=ON
   )
 
+## #############################################################################
+## Check if patch has to be applied
+## #############################################################################
+
+ep_GeneratePatchCommand(ITK ITK_PATCH_COMMAND)
 
 ## #############################################################################
 ## Add external-project
@@ -96,6 +99,7 @@ ExternalProject_Add(${ep}
   ${ep_dirs}
   ${location}
   UPDATE_COMMAND ""
+  ${ITK_PATCH_COMMAND}
   CMAKE_GENERATOR ${gen}
   CMAKE_ARGS ${cmake_args}
   INSTALL_COMMAND ""

@@ -44,7 +44,6 @@ EP_SetDirectories(${ep}
   EP_DIRECTORIES ep_dirs
   )
 
-
 ## #############################################################################
 ## Define repository where get the sources
 ## #############################################################################
@@ -84,23 +83,7 @@ set(cmake_args
 ## Check if patch has to be applied
 ## #############################################################################
 
-set(VTK_PATCHES VTK_WindowLevel.patch)
-set(VTK_PATCHES_TO_APPLY)
-foreach (patch ${VTK_PATCHES})
-    execute_process(COMMAND git apply --ignore-whitespace --check ${CMAKE_SOURCE_DIR}/patches/${patch}
-                    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/VTK
-                    RESULT_VARIABLE   PATCH_OK
-                    OUTPUT_QUIET
-                    ERROR_QUIET)
-    if (PATCH_OK EQUAL 0)
-        set(VTK_PATCHES_TO_APPLY ${VTK_PATCHES_TO_APPLY} ${CMAKE_SOURCE_DIR}/patches/${patch})
-    endif()
-endforeach()
-
-set(VTK_PATCH_COMMAND)
-if (NOT "${VTK_PATCHES_TO_APPLY}" STREQUAL "")
-    set(VTK_PATCH_COMMAND git apply --ignore-whitespace ${VTK_PATCHES_TO_APPLY})
-endif()
+ep_GeneratePatchCommand(VTK VTK_PATCH_COMMAND VTK_WindowLevel.patch)
 
 ## #############################################################################
 ## Add external-project
