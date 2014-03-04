@@ -87,7 +87,7 @@ set(cmake_args
 set(VTK_PATCHES VTK_WindowLevel.patch)
 set(VTK_PATCHES_TO_APPLY)
 foreach (patch ${VTK_PATCHES})
-    execute_process(COMMAND git apply --check ${CMAKE_SOURCE_DIR}/patches/${patch}
+    execute_process(COMMAND git apply --ignore-whitespace --check ${CMAKE_SOURCE_DIR}/patches/${patch}
                     WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/VTK
                     RESULT_VARIABLE   PATCH_OK
                     OUTPUT_QUIET
@@ -99,7 +99,7 @@ endforeach()
 
 set(VTK_PATCH_COMMAND)
 if (NOT "${VTK_PATCHES_TO_APPLY}" STREQUAL "")
-    set(VTK_PATCH_COMMAND git apply ${VTK_PATCHES_TO_APPLY})
+    set(VTK_PATCH_COMMAND git apply --ignore-whitespace ${VTK_PATCHES_TO_APPLY})
 endif()
 
 ## #############################################################################
