@@ -62,7 +62,7 @@ include(ExternalProject)
 include(EP_Initialisation)
 include(EP_SetDirectories)
 include(EP_AddCustomTargets) 
-
+include(EP_GeneratePatchCommand) 
 
 ## #############################################################################
 ## Include specific module of each project
