@@ -52,6 +52,16 @@ else()
 ## ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   
   if (${required_for_plugins})  
+    if (${ep} STREQUAL medInria)
+     # TODO medInria should be MEDINRIA right from the root CMakeLists.txt of the SP.
+    file(APPEND ${${PROJECT_NAME}_CONFIG_FILE}
+      "find_package(MEDINRIA REQUIRED
+        PATHS \"${CMAKE_BINARY_DIR}/${ep}\" 
+        PATH_SUFFIXES install build
+        )\n"
+      )
+    else()
+	
     #  provide path of project needeed for Asclepios and visages plugins 
     file(APPEND ${${PROJECT_NAME}_CONFIG_FILE}
       "find_package(${ep} REQUIRED
@@ -59,6 +69,7 @@ else()
         PATH_SUFFIXES install build
         )\n"
       )
+    endif()
   endif()
 
 
