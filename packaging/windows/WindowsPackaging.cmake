@@ -34,7 +34,7 @@ endif()
 
 set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}-${MSVC_ARCH}")
 
-set(ICON_PATH "${PROJECT_SOURCE_DIR}/medInria/app/medInria/medInria.ico")
+set(ICON_PATH "${PROJECT_SOURCE_DIR}/medInria/app/medInria/resources/medInria.ico")
 
 # The icon to install the application.
 set(CPACK_NSIS_MUI_ICON ${ICON_PATH})
