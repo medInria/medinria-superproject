@@ -51,9 +51,9 @@ EP_SetDirectories(${ep}
 ## Define repository where get the sources
 ## #############################################################################
 
-set(url svn://scm.gforge.inria.fr/svnroot/ttk/trunk)
+set(url ${GITHUB_PREFIX}Inria-Asclepios/TTK-Public.git)
 if (NOT DEFINED ${ep}_SOURCE_DIR)
-  set(location SVN_REPOSITORY ${url})
+  set(location GIT_REPOSITORY ${url})
 endif()
 
 
