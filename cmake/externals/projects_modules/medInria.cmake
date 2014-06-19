@@ -29,7 +29,10 @@ list(APPEND ${ep}_dependencies
   QtDCM
   RPI
   )
-  
+
+if(WIN32)
+  find_package(Boost REQUIRED)
+endif()
 set(MEDINRIA_TEST_DATA_ROOT 
   ${CMAKE_SOURCE_DIR}/medInria-testdata CACHE PATH
   "Root directory of the data used for the test of medInria")
@@ -93,6 +96,7 @@ set(cmake_args
   -DTTK_DIR:FILEPATH=${TTK_DIR}
   -DVTK_DIR:FILEPATH=${VTK_DIR}
   -DBOOST_ROOT:PATH=${BOOST_ROOT}
+  -DBoost_INLUDE_DIR:PATH=${Boost_INLUDE_DIR}
   -DMEDINRIA-PLUGINS_BUILD_TOOLS:BOOL=ON
   -DMEDINRIA_VERSION_MAJOR:STRING=${${PROJECT_NAME}_VERSION_MAJOR}
   -DMEDINRIA_VERSION_MINOR:STRING=${${PROJECT_NAME}_VERSION_MINOR}

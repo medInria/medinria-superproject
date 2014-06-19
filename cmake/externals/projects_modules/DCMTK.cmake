@@ -90,7 +90,7 @@ set(cmake_args
   -DDCMTK_WITH_PNG:BOOL=OFF     
   -DDCMTK_WITH_TIFF:BOOL=OFF    
   -DDCMTK_WITH_XML:BOOL=OFF     
-  -DDCMTK_OVERWRITE_WIN32_COMPILER_FLAGS:BOOL=OFF
+  -DDCMTK_OVERWRITE_WIN32_COMPILER_FLAGS:BOOL=ON
   )
 
 
@@ -111,8 +111,8 @@ ExternalProject_Add(${ep}
 ## Set variable to provide infos about the project
 ## #############################################################################
 
-ExternalProject_Get_Property(${ep} install_dir)
-set(${ep}_DIR ${install_dir} PARENT_SCOPE)
+ExternalProject_Get_Property(${ep} binary_dir)
+set(${ep}_DIR ${binary_dir} PARENT_SCOPE)
 
 
 ## #############################################################################
