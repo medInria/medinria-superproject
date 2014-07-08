@@ -38,7 +38,12 @@ set(CPACK_PACKAGE_FILE_NAME
  
 # Set the right package generator
 
-set(CPACK_GENERATOR "TGZ;ZIP;${CPACK_GENERATOR}" CACHE STRING "Type of package to build")
+set(CPACK_GENERATOR DEB)
+if(${DISTRIBUTOR_ID} MATCHES fc|fedora|Fedora|Centos|centos|SUSE|Suse|suse)
+    set(CPACK_GENERATOR RPM)
+endif()
+
+set(CPACK_GENERATOR "${CPACK_GENERATOR}" CACHE STRING "Type of package to build")
 mark_as_advanced(CPACK_GENERATOR)
 
 # Set directory where the package will be installed
@@ -66,7 +71,8 @@ install(FILES ${CURRENT_BIN_DIR}/medInria.desktop
 
 # Add project to package
 
-set(CPACK_INSTALL_CMAKE_PROJECTS ${CPACK_INSTALL_CMAKE_PROJECTS} ${CMAKE_BINARY_DIR} ${CMAKE_PROJECT_NAME} ALL ${CMAKE_PROJECT_NAME})
+set(CPACK_INSTALL_CMAKE_PROJECTS ${CPACK_INSTALL_CMAKE_PROJECTS} ${CMAKE_BINARY_DIR}/packaging/linux medInria_launcher ALL medInria_launcher)
+   
 foreach(external_project ${external_projects}) 
 	if(NOT USE_SYSTEM_${external_project} AND BUILD_SHARED_LIBS_${external_project})
 		ExternalProject_Get_Property(${external_project} binary_dir)

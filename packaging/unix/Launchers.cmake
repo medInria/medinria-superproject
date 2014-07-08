@@ -38,6 +38,6 @@ set(MEDINRIA_DIR "$(locate)")
 set(MEDINRIA_BIN "\${MEDINRIA_DIR}/bin/medInria")
 set(MEDINRIA_PLUGINS_DIRS "\${MEDINRIA_DIR}/plugins:\${MEDINRIA_USER_PLUGINS_DIRS}")
 
-configure_file(${CURRENT_SRC_DIR}/medInria.sh.in ${CURRENT_BIN_DIR}/medInria_launcher.sh @ONLY)
+configure_file(${CURRENT_SRC_DIR}/medInria.sh.in      ${CURRENT_BIN_DIR}/medInria_launcher.sh @ONLY)
 install(PROGRAMS ${CURRENT_BIN_DIR}/medInria_launcher.sh
         DESTINATION bin)
