@@ -89,11 +89,7 @@ file(APPEND ${${PROJECT_NAME}_CONFIG_FILE}
 
 set(CMAKE_MODULE_PATH
   ${CMAKE_CURRENT_SOURCE_DIR}/cmake/externals/projects_modules
-  ${CMAKE_CURRENT_SOURCE_DIR}/cmake/launchers
   ${CMAKE_CURRENT_SOURCE_DIR}/packaging
-  ${CMAKE_CURRENT_SOURCE_DIR}/packaging/windows
-  ${CMAKE_CURRENT_SOURCE_DIR}/packaging/linux
-  ${CMAKE_CURRENT_SOURCE_DIR}/packaging/apple
   ${CMAKE_MODULE_PATH}
   )
 
@@ -166,12 +162,6 @@ include(CheckEnvironment)
 ## #############################################################################
 
 include(ConfigureExternalProjects)
-
-## #############################################################################
-## Write launcher script
-## #############################################################################
-
-include(LauncherScripts)
 
 ## #############################################################################
 ## Package
