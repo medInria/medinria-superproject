@@ -12,8 +12,8 @@
 ################################################################################
 
 function(medInria_project)
-set(ep medInria)
 
+set(ep medInria)
 
 ## #############################################################################
 ## List the dependencies of the project
@@ -145,7 +145,6 @@ ExternalProject_Add_Step(${ep} get-revisions
     WORKING_DIRECTORY ${revisions_dir}
     )
 
-
 ## #############################################################################
 ## Set variable to provide infos about the project
 ## #############################################################################
@@ -155,25 +154,11 @@ set(${ep}_DIR ${binary_dir} PARENT_SCOPE)
 ExternalProject_Get_Property(${ep} source_dir)
 set(${ep}_SOURCE_DIR ${source_dir} PARENT_SCOPE)
 
-
-if(APPLE)
-  set(${ep}_EXE_PATH 
-    ${binary_dir}/bin/medInria.app/Contents/MacOS/medInria PARENT_SCOPE
-    )
-
-elseif(${CMAKE_SYSTEM_NAME} STREQUAL "Linux")    
-  set(${ep}_EXE_PATH 
-    ${binary_dir}/bin/medInria PARENT_SCOPE
-    )
-endif()
-
-
 ## #############################################################################
 ## Add custom targets
 ## #############################################################################
 
 EP_AddCustomTargets(${ep})
-
 
 endif() #NOT USE_SYSTEM_ep
 
