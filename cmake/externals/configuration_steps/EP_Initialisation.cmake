@@ -39,6 +39,7 @@ if (USE_SYSTEM_${ep})
   file(APPEND ${${PROJECT_NAME}_CONFIG_FILE}
     "find_package(${ep} REQUIRED
       PATHS ${${ep}_DIR}
+      NO_DEFAULT_PATH
       )\n"
     )
   endif()
@@ -58,6 +59,7 @@ else()
       "find_package(MEDINRIA REQUIRED
         PATHS \"${CMAKE_BINARY_DIR}/${ep}\" 
         PATH_SUFFIXES install build
+        NO_DEFAULT_PATH
         )\n"
       )
     else()
@@ -67,6 +69,7 @@ else()
       "find_package(${ep} REQUIRED
         PATHS \"${CMAKE_BINARY_DIR}/${ep}\" 
         PATH_SUFFIXES install build
+        NO_DEFAULT_PATH
         )\n"
       )
     endif()
