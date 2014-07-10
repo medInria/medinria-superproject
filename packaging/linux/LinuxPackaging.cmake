@@ -38,12 +38,7 @@ set(CPACK_PACKAGE_FILE_NAME
  
 # Set the right package generator
 
-set(CPACK_GENERATOR DEB)
-if(${DISTRIBUTOR_ID} MATCHES fc|fedora|Fedora|Centos|centos|SUSE|Suse|suse)
-    set(CPACK_GENERATOR RPM)
-endif()
-
-set(CPACK_GENERATOR "${CPACK_GENERATOR}" CACHE STRING "Type of package to build")
+set(CPACK_GENERATOR "TGZ;ZIP;${CPACK_GENERATOR}" CACHE STRING "Type of package to build")
 mark_as_advanced(CPACK_GENERATOR)
 
 # Set directory where the package will be installed
