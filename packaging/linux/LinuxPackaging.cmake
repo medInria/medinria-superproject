@@ -66,8 +66,7 @@ install(FILES ${CURRENT_BIN_DIR}/medInria.desktop
 
 # Add project to package
 
-set(CPACK_INSTALL_CMAKE_PROJECTS ${CPACK_INSTALL_CMAKE_PROJECTS} ${CMAKE_BINARY_DIR}/packaging/linux medInria_launcher ALL medInria_launcher)
-   
+set(CPACK_INSTALL_CMAKE_PROJECTS ${CPACK_INSTALL_CMAKE_PROJECTS} ${CMAKE_BINARY_DIR} ${CMAKE_PROJECT_NAME} ALL ${CMAKE_PROJECT_NAME})
 foreach(external_project ${external_projects}) 
 	if(NOT USE_SYSTEM_${external_project} AND BUILD_SHARED_LIBS_${external_project})
 		ExternalProject_Get_Property(${external_project} binary_dir)
