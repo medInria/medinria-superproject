@@ -35,7 +35,7 @@ set(MEDINRIA_TEST_DATA_ROOT
   "Root directory of the data used for the test of medInria")
 mark_as_advanced(MEDINRIA_TEST_DATA_ROOT)
 
-if(WIN32)
+if (APPLE OR WIN32) # REQUIRED for medVtkInria.
   find_package(Boost REQUIRED)
   set(cmake_args
     -DBOOST_ROOT:PATH=${BOOST_ROOT}
