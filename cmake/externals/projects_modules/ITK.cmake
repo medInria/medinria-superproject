@@ -49,21 +49,15 @@ EP_SetDirectories(${ep}
 ## Define repository where get the sources
 ## #############################################################################
 
+set(tag "v4.5.0")
 if (NOT DEFINED ${ep}_SOURCE_DIR)
-    set(location GIT_REPOSITORY "git://itk.org/ITK.git")
-    set(branch GIT_TAG "v4.5.0")
+    set(location GIT_REPOSITORY "git://itk.org/ITK.git" GIT_TAG ${tag})
 endif()
 
 
 ## #############################################################################
 ## Add specific cmake arguments for configuration step of the project
 ## #############################################################################
-
-set(ep_optional_args)
-if (CTEST_USE_LAUNCHERS)
-  set(ep_optional_args
-    "-DCMAKE_PROJECT_ITK_INCLUDE:FILEPATH=${CMAKE_ROOT}/Modules/CTestUseLaunchers.cmake")
-endif()
 
 # set compilation flags
 if (UNIX)
@@ -73,7 +67,6 @@ endif()
 
 set(cmake_args
   ${ep_common_cache_args}
-  ${ep_optional_args}
   -DCMAKE_C_FLAGS:STRING=${${ep}_c_flags}
   -DCMAKE_CXX_FLAGS:STRING=${${ep}_cxx_flags}
   -DCMAKE_SHARED_LINKER_FLAGS:STRING=${${ep}_shared_linker_flags}  
