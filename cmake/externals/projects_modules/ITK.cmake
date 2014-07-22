@@ -49,7 +49,7 @@ EP_SetDirectories(${ep}
 ## Define repository where get the sources
 ## #############################################################################
 
-set(tag "v4.5.0")
+set(tag "v4.5.2")
 if (NOT DEFINED ${ep}_SOURCE_DIR)
     set(location GIT_REPOSITORY "git://itk.org/ITK.git" GIT_TAG ${tag})
 endif()
