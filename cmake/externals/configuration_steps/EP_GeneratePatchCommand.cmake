@@ -9,7 +9,7 @@ function(ep_GeneratePatchCommand ep OutVar)
                         RESULT_VARIABLE   PATCH_OK
                         OUTPUT_QUIET
                         ERROR_QUIET)
-        if (PATCH_OK EQUAL 0)
+        if (PATCH_OK EQUAL 0 OR NOT EXISTS ${CMAKE_SOURCE_DIR}/${ep})
             set(PATCHES_TO_APPLY ${PATCHES_TO_APPLY} ${CMAKE_SOURCE_DIR}/patches/${patch})
         endif()
     endforeach()

@@ -82,7 +82,7 @@ set(cmake_args
 ## Check if patch has to be applied
 ## #############################################################################
 
-ep_GeneratePatchCommand(ITK ITK_PATCH_COMMAND)
+ep_GeneratePatchCommand(ITK ITK_PATCH_COMMAND ITK_Mac_Rpath.patch)
 
 ## #############################################################################
 ## Add external-project
