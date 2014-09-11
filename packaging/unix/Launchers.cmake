@@ -26,7 +26,13 @@ ExternalProject_Get_Property(medInria binary_dir)
 
 set(LOCATE "")
 set(MEDINRIA_DIR ${CMAKE_BINARY_DIR})
-set(MEDINRIA_BIN ${binary_dir}/bin/medInria)
+
+if (APPLE)
+  set(MEDINRIA_BIN ${binary_dir}/bin/medInria.app/Contents/MacOS/medInria)
+else()
+  set(MEDINRIA_BIN ${binary_dir}/bin/medInria)
+endif()
+
 set(MEDINRIA_PLUGINS_DIRS "${binary_dir}/plugins:${DEV_PLUGINS_DIRS}")
 
 configure_file(${CURRENT_SRC_DIR}/medInria.sh.in medInria.sh @ONLY)
@@ -35,7 +41,13 @@ configure_file(${CURRENT_SRC_DIR}/medInria.sh.in medInria.sh @ONLY)
 
 file(READ "${CURRENT_SRC_DIR}/locate_bin.sh" LOCATE)
 set(MEDINRIA_DIR "$(locate)")
-set(MEDINRIA_BIN "\${MEDINRIA_DIR}/bin/medInria")
+
+if (APPLE)
+  set(MEDINRIA_BIN "\${MEDINRIA_DIR}/bin/medInria.app/Contents/MacOS/medInria")
+else()
+  set(MEDINRIA_BIN "\${MEDINRIA_DIR}/bin/medInria")
+endif()
+
 set(MEDINRIA_PLUGINS_DIRS "\${MEDINRIA_DIR}/plugins:\${MEDINRIA_USER_PLUGINS_DIRS}")
 
 configure_file(${CURRENT_SRC_DIR}/medInria.sh.in ${CURRENT_BIN_DIR}/medInria_launcher.sh @ONLY)
