@@ -11,6 +11,8 @@
 #
 ################################################################################
 
+set(CURRENT_SRC_DIR ${CMAKE_SOURCE_DIR}/packaging/windows)
+
 foreach (dir ${PRIVATE_PLUGINS_DIRS})
     set(DEV_PLUGINS_DIRS "${DEV_PLUGINS_DIRS}:${dir}/plugins/%1")
 endforeach() 
@@ -25,5 +27,5 @@ if (CMAKE_GENERATOR MATCHES "Visual Studio 10")
     set(VS_TYPE "VS100COMNTOOLS")
 endif()
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/medInria.bat.in     medInria.bat     @ONLY)
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/medInria-dev.bat.in medInria-dev.bat @ONLY)
+configure_file(${CURRENT_SRC_DIR}/medInria.bat.in     medInria.bat     @ONLY)
+configure_file(${CURRENT_SRC_DIR}/medInria-dev.bat.in medInria-dev.bat @ONLY)
