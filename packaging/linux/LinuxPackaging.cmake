@@ -29,10 +29,6 @@ execute_process(COMMAND arch
                 OUTPUT_VARIABLE ARCH 
                 OUTPUT_STRIP_TRAILING_WHITESPACE)
   
-execute_process(COMMAND arch 
-                OUTPUT_VARIABLE ARCH 
-                OUTPUT_STRIP_TRAILING_WHITESPACE)
-  
 set(CPACK_PACKAGE_FILE_NAME 
     "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}-${DISTRIBUTOR_ID}_${RELEASE}-${ARCH}")
  
@@ -42,26 +38,37 @@ set(CPACK_GENERATOR DEB)
 if(${DISTRIBUTOR_ID} MATCHES fc|fedora|Fedora|Centos|centos|SUSE|Suse|suse)
     set(CPACK_GENERATOR RPM)
 endif()
+set(CPACK_GENERATOR "${CPACK_GENERATOR};TGZ")
 
 set(CPACK_GENERATOR "${CPACK_GENERATOR}" CACHE STRING "Type of package to build")
 mark_as_advanced(CPACK_GENERATOR)
+
+# Remember the linux packaging source dir
+
+set(CURRENT_SRC_DIR ${CMAKE_SOURCE_DIR}/packaging/linux)
+set(CURRENT_BIN_DIR ${CMAKE_BINARY_DIR}/packaging/linux)
+
+# Generate CPACK_PROJECT_CONFIG_FILE
+
+configure_file(${CURRENT_SRC_DIR}/GeneratorConfig.cmake.in
+               ${CURRENT_BIN_DIR}/GeneratorConfig.cmake
+               @ONLY)
+set(CPACK_PROJECT_CONFIG_FILE ${CURRENT_BIN_DIR}/GeneratorConfig.cmake)
 
 # Set directory where the package will be installed
 
 set (CPACK_PACKAGING_INSTALL_PREFIX /usr/local/medInria CACHE STRING "Prefix where the package will be installed")
 mark_as_advanced(CPACK_PACKAGING_INSTALL_PREFIX) 
 
-# Remember the linux packging source dir
-
-set(CURRENT_SRC_DIR ${CMAKE_SOURCE_DIR}/packaging/linux)
-set(CURRENT_BIN_DIR ${CMAKE_BINARY_DIR}/packaging/linux)
-
 # Add postinst and prerm script
  
-configure_file(${CURRENT_SRC_DIR}/postinst.in ${CMAKE_BINARY_DIR}/packaging/linux/postinst)
-configure_file(${CURRENT_SRC_DIR}/prerm.in    ${CMAKE_BINARY_DIR}/packaging/linux/prerm)
+configure_file(${CURRENT_SRC_DIR}/postinst.in ${CURRENT_BIN_DIR}/postinst)
+configure_file(${CURRENT_SRC_DIR}/prerm.in    ${CURRENT_BIN_DIR}/prerm)
 
-include(${CURRENT_SRC_DIR}/${CPACK_GENERATOR}.cmake)
+# include settings specific to DEB and RPM
+
+include(${CURRENT_SRC_DIR}/RPM.cmake)
+include(${CURRENT_SRC_DIR}/DEB.cmake)
 
 # Generate desktop file.
 
