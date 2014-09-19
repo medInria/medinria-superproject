@@ -17,11 +17,11 @@
 # 
 # For more details see : http://www.cmake.org/cmake/help/v2.8.9/cmake.html#module:CPack
 
-if (CPACK_GENERATOR STREQUAL "TGZ")
+if (CPACK_GENERATOR STREQUAL "ZIP")
     # we install everything at the root of the archive
     set(CPACK_PACKAGING_INSTALL_PREFIX "")
 
     # we remove the distribution name from the archive name
-    set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}-@ARCH@")
+    set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}-Linux-@ARCH@")
 endif()
 

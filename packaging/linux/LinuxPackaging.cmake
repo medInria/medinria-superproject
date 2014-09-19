@@ -38,10 +38,11 @@ set(CPACK_GENERATOR DEB)
 if(${DISTRIBUTOR_ID} MATCHES fc|fedora|Fedora|Centos|centos|SUSE|Suse|suse)
     set(CPACK_GENERATOR RPM)
 endif()
-set(CPACK_GENERATOR "${CPACK_GENERATOR};TGZ")
 
-set(CPACK_GENERATOR "${CPACK_GENERATOR}" CACHE STRING "Type of package to build")
-mark_as_advanced(CPACK_GENERATOR)
+# For the 2.2 release, disable RPM/DEB as we're too far behind Ubuntu/Fedora
+# releases on the build farm, will re-enable if we ever manage to get up to date
+
+set(CPACK_GENERATOR "ZIP")
 
 # Remember the linux packaging source dir
 
