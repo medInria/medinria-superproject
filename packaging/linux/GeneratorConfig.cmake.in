@@ -25,3 +25,6 @@ if (CPACK_GENERATOR STREQUAL "ZIP")
     set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}-Linux-@ARCH@")
 endif()
 
+# we prepare the archive cleanup script
+configure_file(@CURRENT_SRC_DIR@/PostArchiveCleanupScript.cmake.in @CURRENT_BIN_DIR@/PostArchiveCleanupScript.cmake @ONLY)
+
