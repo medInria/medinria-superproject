@@ -59,7 +59,7 @@ endif(QT4_FOUND)
 ## #############################################################################
 set(url "${GITHUB_PREFIX}medInria/qtdcm.git")
 if (NOT DEFINED ${ep}_SOURCE_DIR)
-  set(location GIT_REPOSITORY ${url})
+  set(location GIT_REPOSITORY ${url} GIT_TAG feca7100caa17704a40292157d1af228db35e006)
 endif()
 
 
