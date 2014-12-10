@@ -33,6 +33,18 @@ MEDINRIA_BIN="@MEDINRIA_BIN@"
 export MEDINRIA_PLUGIN_PATH="@MEDINRIA_PLUGINS_DIRS@"
 export LD_LIBRARY_PATH=${MEDINRIA_DIR}/lib:${MEDINRIA_DIR}/lib/InsightToolkit:${MEDINRIA_DIR}/lib/vtk-5.10:$LD_LIBRARY_PATH
 
+# If on Linux, and running potentially buggy Mesa drivers, enable software rendering
+if which glxinfo >/dev/null 2>&1;
+then
+  if glxinfo|grep -i 'Mesa' >/dev/null 2>&1;
+  then
+    echo "WARNING: We detected Mesa OpenGL drivers, which have been known to cause crashes."
+    echo "WARNING: We have enabled an option which should workaround the problem."
+    echo "WARNING: If you file a bug regarding a medInria crash, please mention this message."
+    export LIBGL_ALWAYS_SOFTWARE=1
+  fi
+fi
+
 #   Call medInria
 
 exec ${med_prefix} "${MEDINRIA_BIN}" $*
