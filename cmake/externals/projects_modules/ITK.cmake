@@ -76,6 +76,7 @@ set(cmake_args
   -DBUILD_TESTING:BOOL=OFF
   -DModule_ITKIOPhilipsREC:BOOL=ON
   -DModule_ITKReview:BOOL=ON
+  -DModule_ITKVtkGlue:BOOL=ON
   )
 
 ## #############################################################################
