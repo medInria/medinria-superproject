@@ -61,9 +61,9 @@ EP_SetDirectories(${ep}
 ## Define repository where get the sources
 ## #############################################################################
 
-set(url ${GITHUB_PREFIX}medInria/medInria-public.git)
+set(url ${GITHUB_PREFIX}NicolasSchnitzler/medInria-public.git)
 if (NOT DEFINED ${ep}_SOURCE_DIR)
-  set(location GIT_REPOSITORY ${url})
+  set(location GIT_REPOSITORY ${url} GIT_TAG VTK6_rebase_2)
 endif()
 
 
@@ -93,7 +93,6 @@ set(cmake_args
   -DTTK_DIR:FILEPATH=${TTK_DIR}
   -DVTK_DIR:FILEPATH=${VTK_DIR}
   -DBOOST_ROOT:PATH=${BOOST_ROOT}
-  -DMEDINRIA-PLUGINS_BUILD_TOOLS:BOOL=ON
   -DMEDINRIA_VERSION_MAJOR:STRING=${${PROJECT_NAME}_VERSION_MAJOR}
   -DMEDINRIA_VERSION_MINOR:STRING=${${PROJECT_NAME}_VERSION_MINOR}
   -DMEDINRIA_VERSION_PATCH:STRING=${${PROJECT_NAME}_VERSION_PATCH}

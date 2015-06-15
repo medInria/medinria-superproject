@@ -74,7 +74,6 @@ set(cmake_args
   -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>  
   -DBUILD_SHARED_LIBS:BOOL=${BUILD_SHARED_LIBS_${ep}}
   -DQT_QMAKE_EXECUTABLE:FILEPATH=${QT_QMAKE_EXECUTABLE}
-  -DVTK_USE_QT:BOOL=ON
   -DVTK_WRAP_TCL:BOOL=OFF
   -DBUILD_TESTING:BOOL=OFF 
   -DVTK_Group_Imaging:BOOL=ON
@@ -99,7 +98,7 @@ ExternalProject_Add(${ep}
   ${ep_dirs}
   ${location}
   UPDATE_COMMAND ""
-  ${VTK_PATCH_COMMAND}
+#  ${VTK_PATCH_COMMAND}
   CMAKE_GENERATOR ${gen}
   CMAKE_ARGS ${cmake_args}
   DEPENDS ${${ep}_dependencies}
