@@ -20,7 +20,7 @@ set(ep ITK)
 ## #############################################################################
 
 list(APPEND ${ep}_dependencies 
-  ""
+  VTK
   )
   
   
@@ -77,6 +77,7 @@ set(cmake_args
   -DModule_ITKIOPhilipsREC:BOOL=ON
   -DModule_ITKReview:BOOL=ON
   -DModule_ITKVtkGlue:BOOL=ON
+  -DVTK_DIR:PATH=${VTK_DIR}
   )
 
 ## #############################################################################
@@ -92,6 +93,7 @@ ep_GeneratePatchCommand(ITK ITK_PATCH_COMMAND ITK_Mac_Rpath.patch)
 ExternalProject_Add(${ep}
   ${ep_dirs}
   ${location}
+  DEPENDS ${${ep}_dependencies}
   UPDATE_COMMAND ""
   ${ITK_PATCH_COMMAND}
   CMAKE_GENERATOR ${gen}
