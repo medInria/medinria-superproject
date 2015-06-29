@@ -40,6 +40,7 @@ if (USE_SYSTEM_${ep})
     "find_package(${ep} REQUIRED
       PATHS ${${ep}_DIR}
       NO_CMAKE_BUILDS_PATH
+      ${${PROJECT_NAME}_FIND_PARAMETERS}
       )\n"
     )
   endif()
