@@ -20,7 +20,7 @@ set(ep QtDCM)
 ## #############################################################################
 
 list(APPEND ${ep}_dependencies 
-  Qt4 
+  Qt5
   ITK 
   DCMTK
   )
@@ -47,19 +47,14 @@ EP_SetDirectories(${ep}
   EP_DIRECTORIES ep_dirs
   )
 
-# Active QTNETWORK
-if (QT4_FOUND)
-  set(QT_USE_QTNETWORK TRUE)
-  include(${QT_USE_FILE})
-endif(QT4_FOUND)
-
 
 ## #############################################################################
 ## Define repository where get the sources
 ## #############################################################################
-set(url "${GITHUB_PREFIX}medInria/qtdcm.git")
+
+set(url "${GITHUB_PREFIX}NicolasSchnitzler/qtdcm.git ")     
 if (NOT DEFINED ${ep}_SOURCE_DIR)
-  set(location GIT_REPOSITORY ${url})
+  set(location GIT_REPOSITORY ${url} GIT_TAG qt5)
 endif()
 
 

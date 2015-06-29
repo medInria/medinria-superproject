@@ -20,7 +20,7 @@ set(ep medInria)
 ## #############################################################################
 
 list(APPEND ${ep}_dependencies 
-  Qt4 
+  Qt5
   dtk 
   DCMTK 
   ITK 
@@ -63,7 +63,7 @@ EP_SetDirectories(${ep}
 
 set(url ${GITHUB_PREFIX}NicolasSchnitzler/medInria-public.git)
 if (NOT DEFINED ${ep}_SOURCE_DIR)
-  set(location GIT_REPOSITORY ${url} GIT_TAG VTK6_rebase_2)
+  set(location GIT_REPOSITORY ${url} GIT_TAG QT5_dtk1)
 endif()
 
 
