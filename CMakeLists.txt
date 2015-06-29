@@ -43,7 +43,7 @@ project(medInria-superProject)
 #     module.
 
 list(APPEND external_projects 
-  Qt4 
+  Qt5 
   dtk 
   VTK 
   ITK 
