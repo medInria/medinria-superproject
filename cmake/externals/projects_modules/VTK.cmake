@@ -80,6 +80,7 @@ set(cmake_args
   -DVTK_Group_Rendering:BOOL=ON
   -DVTK_Group_Views:BOOL=ON
   -DVTK_Group_Qt:BOOL=ON
+  -DVTK_QT_VERSION:STRING="5"
   -DModule_vtkRenderingVolumeOpenGLNew:BOOL=ON
   -DModule_vtkglew:BOOL=ON
   )

@@ -43,9 +43,9 @@ function(dtk_project)
         ## Define repository where get the sources
         ## #############################################################################
 
-        set(url git://github.com/d-tk/dtk.git)
+        set(url ${GITHUB_PREFIX}rdebroiz/dtk.git)
         if (NOT DEFINED ${ep}_SOURCE_DIR)
-          set(location GIT_REPOSITORY ${url})
+          set(location GIT_REPOSITORY ${url} GIT_TAG no_SP_in_reader_writer )
         endif()
 
         ## #############################################################################
@@ -76,8 +76,15 @@ function(dtk_project)
           -DCMAKE_SHARED_LINKER_FLAGS:STRING=${${ep}_shared_linker_flags}  
           -DCMAKE_INSTALL_PREFIX:PATH=<INSTALL_DIR>
           -DBUILD_SHARED_LIBS:BOOL=${BUILD_SHARED_LIBS_${ep}}
-          -DQT_QMAKE_EXECUTABLE:FILEPATH=${QT_QMAKE_EXECUTABLE}
+          -DQT_QMAKE_EXECUTABLE:FILEPATH=${QT_QMAKE_EXECUTABLE}          
           -DDTK_BUILD_COMPOSER:BOOL=${BUILD_DTK_COMPOSER}
+          -DDTK_BUILD_DISTRIBUTED:BOOL=ON
+          -DDTK_BUILD_SCRIPT:BOOL=ON
+          -DDTK_BUILD_SUPPORT_CORE:BOOL=ON
+          -DDTK_BUILD__SUPPORT_CONTAINER:BOOL=ON
+          -DDTK_BUILD_GUI:BOOL=ON
+          -DDTK_BUILD_MATH:BOOL=ON
+          -DDTK_BUILD_VR:BOOL=ON
           -DDTK_HAVE_NITE:BOOL=OFF
           )
 
