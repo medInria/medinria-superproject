@@ -64,7 +64,7 @@ function(Qt5_project)
           )
           
         set(ConfigCommonOptions 
-          --prefix=${CMAKE_CURRENT_BINARY_DIR}/Qt4/install
+          --prefix=${CMAKE_CURRENT_BINARY_DIR}/Qt5/install
           -confirm-license 
           -opensource 
           -optimized-qmake 
