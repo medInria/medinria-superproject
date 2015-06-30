@@ -48,9 +48,9 @@ EP_SetDirectories(${ep}
 ## #############################################################################
 
 # Set GIT_TAG to latest commit of origin/release-6.2.0 known to work
-set(tag 95aea46c32ab995f3359cf6d9c5b9691e73e4ae9)
+set(tag "v6.2.0")
 if (NOT DEFINED ${ep}_SOURCE_DIR)
-    set(location GIT_REPOSITORY "git://vtk.org/VTK.git" GIT_TAG ${tag})
+    set(location GIT_REPOSITORY "https://gitlab.kitware.com/vtk/vtk.git" GIT_TAG ${tag})
 endif()
 
 
