@@ -43,9 +43,9 @@ function(dtk_project)
         ## Define repository where get the sources
         ## #############################################################################
 
-        set(url ${GITHUB_PREFIX}rdebroiz/dtk.git)
+        set(url ${GITHUB_PREFIX}d-tk/dtk.git)
         if (NOT DEFINED ${ep}_SOURCE_DIR)
-          set(location GIT_REPOSITORY ${url} GIT_TAG no_SP_in_reader_writer )
+          set(location GIT_REPOSITORY ${url})
         endif()
 
         ## #############################################################################
