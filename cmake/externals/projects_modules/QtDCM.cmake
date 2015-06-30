@@ -52,9 +52,9 @@ EP_SetDirectories(${ep}
 ## Define repository where get the sources
 ## #############################################################################
 
-set(url "${GITHUB_PREFIX}NicolasSchnitzler/qtdcm.git ")     
+set(url "${GITHUB_PREFIX}NicolasSchnitzler/qtdcm.git")     
 if (NOT DEFINED ${ep}_SOURCE_DIR)
-  set(location GIT_REPOSITORY ${url} GIT_TAG qt5)
+  set(location GIT_REPOSITORY ${url} GIT_TAG "qt5")
 endif()
 
 
