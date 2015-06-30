@@ -27,7 +27,7 @@ option(USE_SYSTEM_${ep}
   )
 
 if (USE_SYSTEM_${ep})
-  find_package(${ep} REQUIRED)
+  find_package(${ep} REQUIRED ${${ep}_FIND_PARAMETERS})
 
 
 ## #############################################################################
@@ -40,7 +40,7 @@ if (USE_SYSTEM_${ep})
     "find_package(${ep} REQUIRED
       PATHS ${${ep}_DIR}
       NO_CMAKE_BUILDS_PATH
-      ${${PROJECT_NAME}_FIND_PARAMETERS}
+      ${${ep}_FIND_PARAMETERS}
       )\n"
     )
   endif()
