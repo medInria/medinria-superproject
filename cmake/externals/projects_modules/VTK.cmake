@@ -20,6 +20,7 @@ set(ep VTK)
 ## #############################################################################
 
 list(APPEND ${ep}_dependencies 
+	Qt5
   )
   
 
@@ -80,6 +81,7 @@ set(cmake_args
   -DVTK_Group_Views:BOOL=ON
   -DVTK_Group_Qt:BOOL=ON
   -DVTK_QT_VERSION:STRING=5
+  -DCMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}
   -DModule_vtkRenderingVolumeOpenGLNew:BOOL=ON
   -DModule_vtkglew:BOOL=ON
   )
