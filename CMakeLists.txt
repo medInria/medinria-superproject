@@ -17,15 +17,13 @@ cmake_minimum_required(VERSION 2.8.10)
 ## Set CMAKE_BUILD_TYPE to Release by default.
 ## #############################################################################
 
+set(MEDINRIA_BUILD_TYPE Release)
 if (DEFINED CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE} CACHE STRING 
-    "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel."
-    )
-else()
-  set(CMAKE_BUILD_TYPE Release CACHE STRING 
-    "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel."
-    )
+    set(MEDINRIA_BUILD_TYPE ${CMAKE_BUILD_TYPE})
 endif()
+set(CMAKE_BUILD_TYPE ${MEDINRIA_BUILD_TYPE} CACHE
+    STRING "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel."
+)
 
 project(medInria-superProject)
 
@@ -42,17 +40,8 @@ project(medInria-superProject)
 #   * otherwise use download and compile locally the package as an external 
 #     module.
 
-list(APPEND external_projects 
-  Qt5 
-  dtk 
-  VTK 
-  ITK 
-  DCMTK 
-  TTK 
-  QtDCM 
-  RPI 
-  medInria
-  )
+set(CMAKE_FIND_DEBUG_MODE 1)
+set(external_projects Qt5 dtk VTK ITK DCMTK TTK QtDCM RPI medInria)
 
 ## #############################################################################
 ## Add modules
@@ -63,11 +52,9 @@ set(CMAKE_MODULE_PATH
   ${CMAKE_CURRENT_SOURCE_DIR}/cmake/externals
   ${CMAKE_CURRENT_SOURCE_DIR}/cmake/externals/configuration_steps
   ${CMAKE_MODULE_PATH}
-    )
+)
 
-set(GET_REVISIONS_MODULE_PATH
-  ${CMAKE_CURRENT_SOURCE_DIR}/cmake/externals/get_revisions
-  )
+set(GET_REVISIONS_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/externals/get_revisions)
 
 # Add CMAKE_MODULE_PATH to superProjectConfig.cmake, usefull for 
 # Asclepios and visages plugins
@@ -91,7 +78,7 @@ set(CMAKE_MODULE_PATH
   ${CMAKE_CURRENT_SOURCE_DIR}/cmake/externals/projects_modules
   ${CMAKE_CURRENT_SOURCE_DIR}/packaging
   ${CMAKE_MODULE_PATH}
-  )
+)
 
 ## #############################################################################
 ## Add variables
