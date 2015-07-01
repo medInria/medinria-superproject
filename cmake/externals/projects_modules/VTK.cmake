@@ -62,7 +62,7 @@ endif()
 # set compilation flags
 if (UNIX)
   set(${ep}_c_flags "${${ep}_c_flags} -w")
-  set(${ep}_cxx_flags "${${ep}_cxx_flags} -w")
+  set(${ep}_cxx_flags "${${ep}_cxx_flags} -w -std=c++11")
   set(unix_additional_args -DVTK_USE_NVCONTROL:BOOL=ON)
 endif()
 
