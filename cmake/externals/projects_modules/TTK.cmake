@@ -65,7 +65,7 @@ endif()
 # set compilation flags
 if (UNIX)
   set(${ep}_c_flags "${${ep}_c_flags} -Wall")
-  set(${ep}_cxx_flags "${${ep}_cxx_flags} -Wall")
+  set(${ep}_cxx_flags "${${ep}_cxx_flags} -Wall -std=c++11")
 endif()
 
 set(cmake_args

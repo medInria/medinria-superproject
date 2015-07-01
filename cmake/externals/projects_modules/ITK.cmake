@@ -62,7 +62,7 @@ endif()
 # set compilation flags
 if (UNIX)
   set(${ep}_c_flags "${${ep}_c_flags} -w")
-  set(${ep}_cxx_flags "${${ep}_cxx_flags} -w -fpermissive")
+  set(${ep}_cxx_flags "${${ep}_cxx_flags} -w -std=c++11")
 endif()
 
 set(cmake_args

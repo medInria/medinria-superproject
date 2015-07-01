@@ -55,7 +55,7 @@ function(dtk_project)
         # set compilation flags
         if (UNIX)
           set(${ep}_c_flags "${${ep}_c_flags} -Wall")
-          set(${ep}_cxx_flags "${${ep}_cxx_flags} -Wall")
+          set(${ep}_cxx_flags "${${ep}_cxx_flags} -Wall -std=c++11")
         endif()
 
         # Disable the dtk composer if QtDeclarative is missing.
@@ -86,9 +86,6 @@ function(dtk_project)
           -DDTK_BUILD_SUPPORT_MATH:BOOL=ON
           -DDTK_BUILD_SUPPORT_GUI:BOOL=ON
           -DDTK_BUILD_SUPPORT_VR:BOOL=ON
-          -DDTK_BUILD_GUI:BOOL=ON
-          -DDTK_BUILD_MATH:BOOL=ON
-          -DDTK_BUILD_VR:BOOL=ON
           -DDTK_HAVE_NITE:BOOL=OFF
           )
 
