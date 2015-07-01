@@ -61,7 +61,7 @@ EP_SetDirectories(${ep}
 ## Define repository where get the sources
 ## #############################################################################
 
-set(url ${GITHUB_PREFIX}rdebroiz/medInria-public.git)
+set(url ${GITHUB_PREFIX}/medInria-public.git)
 if (NOT DEFINED ${ep}_SOURCE_DIR)
   set(location GIT_REPOSITORY ${url} GIT_TAG QT5_dtk1)
 endif()
