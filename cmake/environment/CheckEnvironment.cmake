@@ -23,10 +23,10 @@ set(HOME_PATH $ENV{HOME})
 ## #############################################################################
 
 if (WIN32)
-  # Check for Visual Studio 2008 or 2010 or 2012
-  if (NOT MSVC9 AND NOT MSVC10 AND NOT MSVC11)
+  # Check for Visual Studio 2012
+  if (NOT MSVC12)
     message(SEND_ERROR 
-      "MedInria can only be compiled with Visual Studio 2008 or 2010 or 2012 at this time." 
+      "MedInria can only be compiled with Visual Studio 2012 or 2013 at this time." 
       )
   endif()
 
