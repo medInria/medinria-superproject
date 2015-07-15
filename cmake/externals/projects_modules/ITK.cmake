@@ -49,9 +49,9 @@ EP_SetDirectories(${ep}
 ## Define repository where get the sources
 ## #############################################################################
 
-set(tag "v4.6.0")
+set(tag "v4.8.0")
 if (NOT DEFINED ${ep}_SOURCE_DIR)
-    set(location GIT_REPOSITORY "git://itk.org/ITK.git" GIT_TAG ${tag})
+    set(location GIT_REPOSITORY "${GITHUB_PREFIX}InsightSoftwareConsortium/ITK.git" GIT_TAG ${tag})
 endif()
 
 
