@@ -11,7 +11,8 @@
 #
 ################################################################################
 
-cmake_minimum_required(VERSION 2.8.10)
+cmake_minimum_required(VERSION 3.0.0)
+cmake_policy(SET CMP0048 NEW)
 
 ## #############################################################################
 ## Set CMAKE_BUILD_TYPE to Release by default.
@@ -27,7 +28,16 @@ else()
     )
 endif()
 
-project(medInria-superProject)
+## #############################################################################
+## Add variables
+## #############################################################################
+
+set(medInria-superProject_VERSION_NUMBER "2.2.1.0" CACHE STRING
+  "medInria version number."
+  )
+mark_as_advanced(medInria-superProject_VERSION_NUMBER)
+
+project(medInria-superProject VERSION ${medInria-superProject_VERSION_NUMBER})
 
 ## #############################################################################
 ## Add packages
@@ -93,40 +103,6 @@ set(CMAKE_MODULE_PATH
   ${CMAKE_MODULE_PATH}
   )
 
-## #############################################################################
-## Add variables
-## #############################################################################
-
-set(${PROJECT_NAME}_VERSION_MAJOR 2 CACHE STRING 
-  "medInria major version number."
-  )
-mark_as_advanced(${PROJECT_NAME}_VERSION_MAJOR)
-
-set(${PROJECT_NAME}_VERSION_MINOR 2 CACHE STRING 
-  "medInria minor version number."
-  )
-mark_as_advanced(${PROJECT_NAME}_VERSION_MINOR)
-
-set(${PROJECT_NAME}_VERSION_PATCH 1 CACHE STRING 
-  "medInria build version number."
-  )
-mark_as_advanced(${PROJECT_NAME}_VERSION_PATCH)
-
-set(${PROJECT_NAME}_VERSION_TWEAK git CACHE STRING 
-  "medInria development marker."
-  )
-mark_as_advanced(${PROJECT_NAME}_VERSION_TWEAK)
-
-if (NOT ${${PROJECT_NAME}_VERSION_TWEAK} STREQUAL "")
-  set(${PROJECT_NAME}_VERSION 
-    ${${PROJECT_NAME}_VERSION_MAJOR}.${${PROJECT_NAME}_VERSION_MINOR}.${${PROJECT_NAME}_VERSION_PATCH}.${${PROJECT_NAME}_VERSION_TWEAK}
-    )
-else()
-  set(${PROJECT_NAME}_VERSION
-    ${${PROJECT_NAME}_VERSION_MAJOR}.${${PROJECT_NAME}_VERSION_MINOR}.${${PROJECT_NAME}_VERSION_PATCH}
-    )
-endif()
-
 option(USE_GITHUB_SSH 
   "Use by default Git SSH addresses, requires public key set on github" OFF
   )
@@ -140,7 +116,7 @@ mark_as_advanced(PRIVATE_PLUGINS_DIRS)
 ## #############################################################################
 
 set(global_targets 
-  configure  
+  configure
   install
   )
   
@@ -148,7 +124,7 @@ set(global_targets
 set_property(DIRECTORY PROPERTY EP_STEP_TARGETS ${global_targets})
 
 foreach (target ${global_targets})
-  add_custom_target(${target})
+  add_custom_target(${target}-all)
 endforeach()
 
 ## #############################################################################

@@ -128,8 +128,8 @@ else()
 
   # Add dependencies between the target of this project 
   # and the global target from the superproject
-    foreach (target ${global_targets})
-    add_dependencies(${target} ${ep}-${target})
+  foreach (target ${global_targets})
+    add_dependencies(${target}-all ${ep}-${target})
   endforeach() 
 
 endif()
