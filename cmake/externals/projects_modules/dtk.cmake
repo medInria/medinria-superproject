@@ -50,8 +50,9 @@ EP_SetDirectories(${ep}
 ## #############################################################################
 
 set(url git://dtk.inria.fr/+medinria/dtk/dtk-clone-medinria.git)
+set(tag 11e0e3edc3fb5392f061c4ea47027d8ce3d8b038)
 if (NOT DEFINED ${ep}_SOURCE_DIR)
-  set(location GIT_REPOSITORY ${url})
+  set(location GIT_REPOSITORY ${url} GIT_TAG ${tag})
 endif()
 
 

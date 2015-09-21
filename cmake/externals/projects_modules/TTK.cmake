@@ -52,8 +52,9 @@ EP_SetDirectories(${ep}
 ## #############################################################################
 
 set(url ${GITHUB_PREFIX}Inria-Asclepios/TTK-Public.git)
+set(tag 9f468a63cbcd5dcaf5c803a96dbd90cb305b27fb)
 if (NOT DEFINED ${ep}_SOURCE_DIR)
-  set(location GIT_REPOSITORY ${url})
+  set(location GIT_REPOSITORY ${url} GIT_TAG ${tag})
 endif()
 
 

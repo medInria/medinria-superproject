@@ -58,8 +58,9 @@ endif(QT4_FOUND)
 ## Define repository where get the sources
 ## #############################################################################
 set(url "${GITHUB_PREFIX}medInria/qtdcm.git")
+set(tag feca7100caa17704a40292157d1af228db35e006)
 if (NOT DEFINED ${ep}_SOURCE_DIR)
-  set(location GIT_REPOSITORY ${url})
+  set(location GIT_REPOSITORY ${url} GIT_TAG ${tag})
 endif()
 
 
