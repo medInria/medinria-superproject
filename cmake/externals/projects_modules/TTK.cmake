@@ -51,8 +51,7 @@ EP_SetDirectories(${ep}
 ## Define repository where get the sources
 ## #############################################################################
 
-#set(url ${GITHUB_PREFIX}Inria-Asclepios/TTK-Public.git)
-set(url ${GITHUB_PREFIX}NicolasSchnitzler/TTK-Public.git)
+set(url ${GITHUB_PREFIX}Inria-Asclepios/TTK-Public.git)
 if (NOT DEFINED ${ep}_SOURCE_DIR)
   set(location GIT_REPOSITORY ${url})
 endif()

@@ -63,11 +63,7 @@ function(dtk_project)
         set(CMAKE_REQUIRED_INCLUDES ${QT_INCLUDES})
         Check_Include_File_CXX(QtDeclarative HasQtDeclarative)
 
-        if (NOT HasQtDeclarative)
-          set(BUILD_DTK_COMPOSER OFF)
-        else()
-          set(BUILD_DTK_COMPOSER ON)  
-        endif()
+        set(BUILD_DTK_COMPOSER ON)  
 
         set(cmake_args
           ${ep_common_cache_args}
