@@ -45,9 +45,9 @@ foreach (dependency ${${ep}_dependencies})
 endforeach()
 
 add_custom_target(build-${ep} 
-  COMMAND cmake --build . --config ${CMAKE_BUILD_TYPE}
+  COMMAND cmake ${source_dir} && cmake --build . --config ${CMAKE_BUILD_TYPE}
   WORKING_DIRECTORY ${binary_dir}
-  COMMENT "build '${ep}' with 'cmake --build . --config ${CMAKE_BUILD_TYPE}'"
+  COMMENT "reconfigure and build '${ep}' with 'cmake --build . --config ${CMAKE_BUILD_TYPE}'"
   DEPENDS ${build-${ep}_dependences}
   )
 set(build-${ep} ON PARENT_SCOPE)

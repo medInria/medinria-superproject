@@ -33,8 +33,15 @@ list(APPEND ${ep}_dependencies
 set(MEDINRIA_TEST_DATA_ROOT 
   ${CMAKE_SOURCE_DIR}/medInria-testdata CACHE PATH
   "Root directory of the data used for the test of medInria")
-mark_as_advanced(MEDINRIA_TEST_DATA_ROOT)  
-  
+mark_as_advanced(MEDINRIA_TEST_DATA_ROOT)
+
+if (APPLE OR WIN32) # REQUIRED for medVtkInria.
+  find_package(Boost REQUIRED)
+  set(cmake_args
+    -DBOOST_ROOT:PATH=${BOOST_ROOT}
+    -DBoost_INCLUDE_DIR:PATH=${Boost_INCLUDE_DIR}
+    )
+endif()  
   
 ## #############################################################################
 ## Prepare the project
@@ -92,12 +99,12 @@ set(cmake_args
   -DRPI_DIR:FILEPATH=${RPI_DIR}
   -DTTK_DIR:FILEPATH=${TTK_DIR}
   -DVTK_DIR:FILEPATH=${VTK_DIR}
-  -DBOOST_ROOT:PATH=${BOOST_ROOT}
   -DMEDINRIA-PLUGINS_BUILD_TOOLS:BOOL=ON
   -DMEDINRIA_VERSION_MAJOR:STRING=${${PROJECT_NAME}_VERSION_MAJOR}
   -DMEDINRIA_VERSION_MINOR:STRING=${${PROJECT_NAME}_VERSION_MINOR}
   -DMEDINRIA_VERSION_PATCH:STRING=${${PROJECT_NAME}_VERSION_PATCH}
   -DMEDINRIA_VERSION_TWEAK:STRING=${${PROJECT_NAME}_VERSION_TWEAK}
+  ${cmake_args}
   )
   
   
