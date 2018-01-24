@@ -51,6 +51,7 @@ list(APPEND external_projects
   TTK 
   QtDCM 
   RPI 
+  CTK
   medInria
   )
 
